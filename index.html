@@ -384,49 +384,69 @@
 
             <div class="section">
                 <h2>The Problem</h2>
-                <h3>The Real-World Constraint</h3>
+                <h3>The Real-World Context</h3>
                 <p>
-                    In surveillance and security, targets don't wait to be caught. A significant gap exists 
-                    in current robotics research: most simulations assume slow targets or centralized control.
+                    This problem is critical in applications like law enforcement pursuing a suspect vehicle, 
+                    or disaster response teams tracking a drifting vessel—scenarios where <strong>persistent tracking is paramount</strong>.
                 </p>
-                <h3>The Engineering Challenge</h3>
+                <h3>Problem Constraints</h3>
+                <ul>
+                    <li>Track a fast-moving, non-evasive target with a slow-moving swarm</li>
+                    <li>Agent speed = 50% of target speed (2:1 speed disadvantage)</li>
+                    <li>30 autonomous agents with no central controller</li>
+                    <li>Agents can only communicate with K nearest neighbours</li>
+                    <li>Goal: achieve 90%+ Line-of-Sight score over 1000 time steps</li>
+                    <li>Score averaged over multiple target paths</li>
+                </ul>
                 <p>
-                    We modeled a strictly decentralized system. Each agent is autonomous, limited to local 
-                    sensing, and unaware of the global picture. The goal: coordinate a swarm to track a 
-                    target moving 2x faster than any individual agent, using only local neighbour communication.
-                </p>
-                <p>
-                    <strong>Baseline algorithms failed here, achieving only 14% reliability.</strong>
+                    Building off the strongest existing research, we could only achieve a <strong>40% LOS score</strong> 
+                    with 30 agents using optimised parameters—far short of the 90% target.
                 </p>
             </div>
 
             <div class="section">
                 <h2>Methodology</h2>
-                <p>We didn't just guess; we evolved the solution.</p>
+                <p>
+                    <strong>Core Hypothesis:</strong> No single behaviour can achieve 90% LOS—we need an adaptive solution.
+                </p>
+                <h3>1. Build the Framework</h3>
+                <p>
+                    Created a 2D simulation optimization framework in Python, allowing rapid prototyping and testing of swarm behaviours.
+                </p>
+                <h3>2. Ideate</h3>
+                <p>
+                    Explored various tracking and searching algorithms for the swarm, drawing from existing research and novel approaches.
+                </p>
+                <h3>3. Optimise & Test</h3>
                 <ul>
-                    <li><strong>Custom Simulation:</strong> Built a modular 2D physics engine in Python/Pygame to rapidly prototype behaviours.</li>
-                    <li><strong>Rigorous Testing:</strong> Implemented a parallelized optimization framework to tune thousands of parameter combinations.</li>
-                    <li><strong>Gap-Driven Design:</strong> We combined systematic parameter tuning with "exploratory design"—coding purpose-built behaviours to solve specific tactical weaknesses observed in the simulation.</li>
+                    <li>Tested and optimised every combination of existing algorithms</li>
+                    <li>Evaluated one-state, two-state, and three-state strategies</li>
+                    <li>Built a Python framework to iteratively tune algorithm variables—each algorithm had handfuls of parameters to optimise (e.g., memory duration, prediction multipliers)</li>
                 </ul>
+                <h3>4. Exploratory Design</h3>
+                <p>
+                    Observed weaknesses in the simulation and designed entirely new, purpose-built behaviours to fill those strategic gaps.
+                </p>
             </div>
 
             <div class="section">
-                <h2>The Solution: Dynamic Role Architecture</h2>
+                <h2>The Solution: Three-State Architecture</h2>
                 <p>
-                    The breakthrough came from abandoning monolithic behaviours. We created a 
-                    <strong>Hybrid State Machine</strong> that adapts strategy based on the tactical situation:
+                    The breakthrough came from a <strong>three-state solution</strong>, with distinct algorithms for when an agent is 
+                    <em>in front</em>, <em>behind</em>, or has <em>no memory</em> of the target:
                 </p>
                 <div class="solution-step">
-                    <strong>1. The Wall (Interception)</strong><br>
-                    When ahead of the target, agents utilize a custom "Get-In-Front" algorithm to block the path rather than chasing the tail.
+                    <strong>1. In Front → Aggressive Prediction</strong><br>
+                    Prediction worked well all-round, but we observed that a more aggressive predict multiplier could be used when in front. 
+                    Standard prediction sometimes caused agents to miss the target's path—the aggressive variant kept agents positioned on the target's trajectory.
                 </div>
                 <div class="solution-step">
-                    <strong>2. The Chase (Pursuit)</strong><br>
-                    When behind, agents switch to a predictive multiplier to aggressively close the gap.
+                    <strong>2. Behind → Predictive Pursuit</strong><br>
+                    Testing showed prediction was the best-performing behaviour when behind the target. Agents use a predictive multiplier to anticipate where the target will be, rather than chasing where it was.
                 </div>
                 <div class="solution-step">
-                    <strong>3. The Net (Search)</strong><br>
-                    When the target is lost, an "Inverse Square Repulsion" kicks in, forcing immediate, efficient dispersion to maximize sensor coverage.
+                    <strong>3. No Memory → Inverse Square Repulsion</strong><br>
+                    When an agent loses sight of the target, separation kicks in using inverse square repulsion—forcing agents to spread equally far apart across the map, maximizing sensor coverage for reacquisition.
                 </div>
             </div>
 
@@ -435,7 +455,7 @@
                 <div class="results-box">
                     <div class="stat">94.41%</div>
                     <div>Line-of-Sight persistence score</div>
-                    <div class="comparison">Baseline: 14.6% → Final Solution: 94.41%</div>
+                    <div class="comparison">Previous Best: 40% → Our Solution: 94.41%</div>
                 </div>
                 <p>
                     By moving from static behaviours to dynamic role allocation, we demonstrated that 
@@ -451,7 +471,7 @@
                 </ul>
 
                 <div class="project-links">
-                    <a href="#">GitHub Repository →</a>
+                    <a href="https://github.com/gabefromvbucks/swarm_tracking_simulation_final" target="_blank">GitHub Repository →</a>
                     <a href="Project%20Thesis%20Report%20V2%20Final.pdf" download>Download Thesis →</a>
                     <a href="IEEE_ResearchPlan.pdf" download>Download Research Plan →</a>
                 </div>
