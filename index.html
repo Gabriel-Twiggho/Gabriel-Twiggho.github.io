@@ -263,6 +263,37 @@
             margin-bottom: 0;
         }
 
+        /* Download Buttons */
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--color-accent);
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #0052a3;
+            text-decoration: none;
+        }
+
+        .download-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
         /* Links */
         .project-links {
             display: flex;
@@ -380,6 +411,20 @@
                         <span class="value">A novel hybrid control system achieving <span class="highlight">94.41% tracking persistence</span></span>
                     </div>
                 </div>
+                <div class="download-buttons">
+                    <a href="Project%20Thesis%20Report%20V2%20Final.pdf" download class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Download Thesis
+                    </a>
+                    <a href="IEEE_ResearchPlan.pdf" download class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Download Research Plan
+                    </a>
+                </div>
             </div>
 
             <div class="section">
@@ -470,9 +515,7 @@
                 </ul>
 
                 <div class="project-links">
-                    <a href="https://github.com/gabefromvbucks/swarm_tracking_simulation_final" target="_blank">GitHub Repository →</a>
-                    <a href="Project%20Thesis%20Report%20V2%20Final.pdf" download>Download Thesis →</a>
-                    <a href="IEEE_ResearchPlan.pdf" download>Download Research Plan →</a>
+                    <a href="https://github.com/gabefromvbucks/swarm_tracking_simulation_final" target="_blank">View Code on GitHub →</a>
                 </div>
             </div>
         </section>
