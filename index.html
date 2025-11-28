@@ -387,7 +387,7 @@
                 <h3>The Real-World Context</h3>
                 <p>
                     This problem is critical in applications like law enforcement pursuing a suspect vehicle, 
-                    or disaster response teams tracking a drifting vessel—scenarios where <strong>persistent tracking is paramount</strong>.
+                    or disaster response teams tracking a drifting vessel, where <strong>persistent tracking is paramount</strong>.
                 </p>
                 <h3>Problem Constraints</h3>
                 <ul>
@@ -399,14 +399,14 @@
                 </ul>
                 <p>
                     Building off the strongest existing research, we could only achieve a <strong>40% LOS score</strong> 
-                    with 30 agents using optimised parameters—far short of the 90% target.
+                    with 30 agents using optimised parameters. Far short of the 90% target.
                 </p>
             </div>
 
             <div class="section">
                 <h2>Methodology</h2>
                 <p>
-                    <strong>Core Hypothesis:</strong> No single behaviour can achieve 90% LOS—we need an adaptive solution.
+                    <strong>Core Hypothesis:</strong> No single behaviour can achieve 90% LOS. We need an adaptive solution.
                 </p>
                 <h3>1. Build the Framework</h3>
                 <p>
@@ -420,7 +420,7 @@
                 <ul>
                     <li>Tested and optimised every combination of existing algorithms</li>
                     <li>Evaluated one-state, two-state, and three-state strategies</li>
-                    <li>Built a Python framework to iteratively tune algorithm variables—each algorithm had handfuls of parameters to optimise (e.g., memory duration, prediction multipliers)</li>
+                    <li>Built a Python framework to iteratively tune algorithm variables. Each algorithm had handfuls of parameters to optimise (e.g., memory duration, prediction multipliers)</li>
                 </ul>
                 <h3>4. Exploratory Design</h3>
                 <p>
@@ -437,7 +437,7 @@
                 <div class="solution-step">
                     <strong>1. In Front → Aggressive Prediction</strong><br>
                     Prediction worked well all-round, but we observed that a more aggressive predict multiplier could be used when in front. 
-                    Standard prediction sometimes caused agents to miss the target's path—the aggressive variant kept agents positioned on the target's trajectory.
+                    Standard prediction sometimes caused agents to miss the target's path. The aggressive variant kept agents positioned on the target's trajectory.
                 </div>
                 <div class="solution-step">
                     <strong>2. Behind → Predictive Pursuit</strong><br>
@@ -445,7 +445,7 @@
                 </div>
                 <div class="solution-step">
                     <strong>3. No Memory → Inverse Square Repulsion</strong><br>
-                    When an agent loses sight of the target, separation kicks in using inverse square repulsion—forcing agents to spread equally far apart across the map, maximizing sensor coverage for reacquisition.
+                    When an agent loses sight of the target, separation kicks in using inverse square repulsion. This forces agents to spread equally far apart across the map, maximizing sensor coverage for reacquisition.
                 </div>
             </div>
 
