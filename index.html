@@ -434,18 +434,23 @@
                     This problem is critical in applications like law enforcement pursuing a suspect vehicle, 
                     or disaster response teams tracking a drifting vessel, where <strong>persistent tracking is paramount</strong>.
                 </p>
+                <h3>The Gap in Existing Research</h3>
+                <p>
+                    The best Line-of-Sight score from existing research was only <strong>40%</strong>. At this reliability, 
+                    the swarm loses sight of the target more than half the time. For real-world applications like 
+                    search and rescue or surveillance, this simply isn't usable. A target that disappears 60% of the time isn't being tracked.
+                </p>
+                <p>
+                    That's why we set out to develop a solution capable of achieving <strong>90%+ LOS</strong>, 
+                    a threshold where persistent tracking becomes viable for practical deployment.
+                </p>
                 <h3>Problem Constraints</h3>
                 <ul>
                     <li>Track a fast-moving, non-evasive target with a slow-moving swarm</li>
                     <li>Agent speed = 50% of target speed (2:1 speed disadvantage)</li>
                     <li>Agents can only communicate with K nearest neighbours</li>
-                    <li>Goal: achieve 90%+ Line-of-Sight score over 1000 time steps</li>
                     <li>Score averaged over multiple target paths</li>
                 </ul>
-                <p>
-                    Building off the strongest existing research, we could only achieve a <strong>40% LOS score</strong> 
-                    with 30 agents using optimised parameters. Far short of the 90% target.
-                </p>
             </div>
 
             <div class="section">
