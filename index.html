@@ -191,7 +191,6 @@
             z-index: 2;
             width: 90%;
             max-width: 1000px;
-            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 30px 80px rgba(0,0,0,0.8);
         }
@@ -201,24 +200,6 @@
             display: block;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
 
         /* Dark Sections */
         .dark-section {
@@ -258,18 +239,18 @@
             align-items: center;
             gap: 0.5rem;
             padding: 1rem 1.75rem;
-            background: #1d1d1f;
+            background: transparent;
             color: #fff;
             font-weight: 500;
             font-size: 0.95rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 980px;
+            border: 1px solid rgba(255,255,255,0.3);
             transition: all 0.2s;
         }
 
         .download-btn:hover {
-            background: #2d2d2f;
-            border-color: rgba(255,255,255,0.4);
+            background: #fff;
+            color: #000;
+            border-color: #fff;
             text-decoration: none;
         }
 
@@ -281,7 +262,6 @@
         /* Content Cards - Dark */
         .dark-card {
             background: #1d1d1f;
-            border-radius: 18px;
             padding: 2.5rem;
             margin-bottom: 1.5rem;
         }
@@ -328,7 +308,6 @@
         /* Solution Steps - Dark */
         .solution-step-dark {
             background: #2d2d2f;
-            border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 1rem;
         }
@@ -351,7 +330,6 @@
         /* Results - Dark */
         .results-highlight {
             background: linear-gradient(135deg, #1d1d1f 0%, #2d2d2f 100%);
-            border-radius: 18px;
             padding: 3rem;
             text-align: center;
             margin: 2rem 0;
@@ -392,7 +370,6 @@
             background: #2d2d2f;
             border: 1px solid rgba(255,255,255,0.1);
             padding: 0.5rem 1rem;
-            border-radius: 980px;
             font-family: var(--font-mono);
             font-size: 0.85rem;
             color: #a1a1a6;
@@ -627,7 +604,6 @@
                         <source src="Swarm%20Tracking%20Demo%20Video%202.mp4" type="video/mp4">
                     </video>
                 </div>
-                <div class="scroll-indicator">Scroll to explore</div>
             </div>
 
             <!-- Download Section -->
