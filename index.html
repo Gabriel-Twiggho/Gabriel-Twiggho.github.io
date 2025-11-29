@@ -514,6 +514,103 @@
             margin-bottom: 1rem;
         }
 
+        /* Project 3 - Blue Theme */
+        .project3-content {
+            min-height: calc(100vh - 48px);
+            background: linear-gradient(180deg, #0a1628 0%, #0f2847 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+        }
+
+        .project3-inner {
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .project3-inner h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .project3-subtitle {
+            font-size: 1.1rem;
+            color: #4da6ff;
+            font-weight: 500;
+            margin-bottom: 3rem;
+        }
+
+        .project3-text {
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .project3-text p {
+            color: #b8c5d6;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .project3-text strong {
+            color: #fff;
+        }
+
+        .project3-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #4da6ff;
+            color: #000;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .project3-link:hover {
+            background: #7bbfff;
+            text-decoration: none;
+        }
+
+        .project3-footer {
+            background: #061220;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(77, 166, 255, 0.2);
+        }
+
+        .project3-footer h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .project3-footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project3-footer-links a {
+            color: #b8c5d6;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .project3-footer-links a:hover {
+            color: #4da6ff;
+            text-decoration: none;
+        }
+
+        .project3-footer p {
+            font-size: 0.85rem;
+            color: #5a6a7a;
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .nav-links {
@@ -548,7 +645,7 @@
                 <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
                 <li><a href="#" onclick="showPage('project1')" id="nav-project1">Project 1</a></li>
                 <li><a href="#" onclick="showPage('project2')" id="nav-project2">Project 2</a></li>
-                <li><a href="https://icc.inductiveautomation.com/discover-gallery-detail/2024/carlton-and-united-breweries" target="_blank" id="nav-project3">Project 3</a></li>
+                <li><a href="#" onclick="showPage('project3')" id="nav-project3">Project 3</a></li>
             </ul>
         </div>
     </nav>
@@ -806,6 +903,42 @@
                     <p class="copyright">© 2025 Gabriel Twigg-Ho</p>
                 </div>
             </footer>
+        </section>
+
+        <!-- Project 3: CO2 Model -->
+        <section id="project3" class="page">
+            <div class="project3-content">
+                <div class="project3-inner">
+                    <h1>CO2 Prediction Model</h1>
+                    <p class="project3-subtitle">Inductive Automation Conference 2024 Finalist</p>
+                    <div class="project3-text">
+                        <p>
+                            During my university placement at Carlton & United Breweries, I was given the opportunity 
+                            to complete and deploy a CO2 prediction model for the brewery.
+                        </p>
+                        <p>
+                            The project utilised Inductive Automation's Ignition SCADA platform to build a predictive 
+                            system that forecasts CO2 storage levels hour-by-hour, replacing an unreliable Excel-based solution.
+                        </p>
+                        <p>
+                            This work was submitted to the Ignition Community Conference's annual Discover Gallery, 
+                            where it was selected as a <strong>finalist</strong> among the best projects of the year.
+                        </p>
+                    </div>
+                    <a href="https://icc.inductiveautomation.com/discover-gallery-detail/2024/carlton-and-united-breweries" target="_blank" class="project3-link">
+                        View Project on ICC Discover Gallery →
+                    </a>
+                </div>
+            </div>
+            <div class="project3-footer">
+                <h3>Let's Connect</h3>
+                <div class="project3-footer-links">
+                    <a href="mailto:gabrieljyth@gmail.com">Email</a>
+                    <a href="https://github.com/Gabriel-Twiggho" target="_blank">GitHub</a>
+                    <a href="https://www.linkedin.com/in/gabriel-twigg-ho-96579b1b8/" target="_blank">LinkedIn</a>
+                </div>
+                <p>© 2025 Gabriel Twigg-Ho</p>
+            </div>
         </section>
 
     </main>
