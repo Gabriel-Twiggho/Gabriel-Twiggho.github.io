@@ -198,6 +198,31 @@
         .video-container video {
             width: 100%;
             display: block;
+            background: #1d1d1f;
+        }
+
+        /* Video loading state */
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            margin: -20px 0 0 -20px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--color-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 1;
+        }
+
+        .video-container.loaded::before {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
 
@@ -805,8 +830,8 @@
             <!-- Fullscreen Video Hero -->
             <div class="video-hero">
                 <h1>How can a swarm of slow drones maintain persistent contact with a target moving twice their speed?</h1>
-                <div class="video-container">
-                    <video autoplay loop muted playsinline>
+                <div class="video-container" id="video-container">
+                    <video autoplay loop muted playsinline preload="auto" oncanplay="document.getElementById('video-container').classList.add('loaded')">
                         <source src="Swarm%20Tracking%20Demo%20Video%202.mp4" type="video/mp4">
                     </video>
                 </div>
