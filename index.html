@@ -901,6 +901,289 @@
             color: #5a6a7a;
         }
 
+        /* ==================== */
+        /* PROJECT 4 IRON BROWN THEME */
+        /* ==================== */
+
+        .project4-content {
+            min-height: calc(100vh - 48px);
+            background: linear-gradient(180deg, #1a1512 0%, #231c16 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+
+        .project4-inner {
+            max-width: 750px;
+            width: 100%;
+        }
+
+        .project4-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .project4-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(194, 120, 62, 0.2);
+            border: 1px solid rgba(194, 120, 62, 0.5);
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #c2783e;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .project4-status-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #c2783e;
+            border-radius: 50%;
+            animation: pulse-iron 2s infinite;
+        }
+
+        @keyframes pulse-iron {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .project4-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .project4-subtitle {
+            font-size: 1.1rem;
+            color: #c2783e;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .project4-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .project4-tech-stack span {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.4rem 0.8rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #8a7a6a;
+        }
+
+        .project4-description {
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .project4-description h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .project4-description p {
+            color: #b8a898;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .project4-description p:last-child {
+            margin-bottom: 0;
+        }
+
+        .project4-description strong {
+            color: #fff;
+            font-weight: 400;
+        }
+
+        .project4-description em {
+            color: #b8a898;
+            font-style: normal;
+        }
+
+        /* Phase Roadmap */
+        .project4-roadmap {
+            margin-bottom: 3rem;
+        }
+
+        .project4-roadmap h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .phase-table th {
+            text-align: left;
+            padding: 0.85rem 1rem;
+            background: rgba(194, 120, 62, 0.1);
+            color: #c2783e;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(194, 120, 62, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+        }
+
+        .phase-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #b8a898;
+        }
+
+        .phase-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .phase-table .phase-id {
+            font-family: var(--font-mono);
+            color: #8a7a6a;
+            font-weight: 500;
+            width: 60px;
+        }
+
+        .phase-table .phase-goal {
+            color: #d0c4b8;
+        }
+
+        .phase-status {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .phase-status.completed {
+            background: rgba(34, 197, 94, 0.12);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.25);
+        }
+
+        .phase-status.current {
+            background: rgba(194, 120, 62, 0.2);
+            color: #c2783e;
+            border: 1px solid rgba(194, 120, 62, 0.4);
+        }
+
+        .phase-status.next {
+            background: rgba(100, 149, 237, 0.12);
+            color: #6495ed;
+            border: 1px solid rgba(100, 149, 237, 0.25);
+        }
+
+        .phase-status.planned {
+            background: rgba(100, 100, 100, 0.1);
+            color: #777;
+            border: 1px solid rgba(100, 100, 100, 0.2);
+        }
+
+        /* Current Focus Card */
+        .project4-focus {
+            background: rgba(194, 120, 62, 0.08);
+            border: 1px solid rgba(194, 120, 62, 0.25);
+            padding: 2rem;
+        }
+
+        .project4-focus h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #c2783e;
+            margin-bottom: 1rem;
+        }
+
+        .project4-focus p {
+            color: #b8a898;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .project4-focus strong {
+            color: #fff;
+            font-weight: 400;
+        }
+
+        .project4-footer {
+            background: #12100d;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(194, 120, 62, 0.15);
+        }
+
+        .project4-footer h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .project4-footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project4-footer-links a {
+            color: #a89080;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .project4-footer-links a:hover {
+            color: #c2783e;
+            text-decoration: none;
+        }
+
+        .project4-footer p {
+            font-size: 0.85rem;
+            color: #5a5048;
+        }
+
+        @media (max-width: 600px) {
+            .project4-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .phase-table {
+                font-size: 0.85rem;
+            }
+
+            .phase-table th,
+            .phase-table td {
+                padding: 0.65rem 0.5rem;
+            }
+
+            .project4-tech-stack span {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .nav-links {
@@ -936,6 +1219,7 @@
                 <li><a href="#" onclick="showPage('project1')" id="nav-project1">Project 1</a></li>
                 <li><a href="#" onclick="showPage('project2')" id="nav-project2">Project 2</a></li>
                 <li><a href="#" onclick="showPage('project3')" id="nav-project3">Project 3</a></li>
+                <li><a href="#" onclick="showPage('project4')" id="nav-project4">Project 4</a></li>
             </ul>
         </div>
     </nav>
@@ -1278,6 +1562,99 @@
             </div>
         </section>
 
+        <!-- Project 4: AI-Powered Mobile Robot -->
+        <section id="project4" class="page">
+            <div class="project4-content">
+                <div class="project4-inner">
+                    <div class="project4-header">
+                        <span class="project4-status-badge">In Progress</span>
+                        <h1>AI-Powered Mobile Robot</h1>
+                        <p class="project4-subtitle">ROS 2 / Raspberry Pi / Voice-Controlled Autonomous Platform</p>
+                    </div>
+
+                    <div class="project4-description">
+                        <h2>Project Overview</h2>
+                        <p>
+                            I'm building a mobile robot designed to bridge the gap between natural language and physical action. 
+                            The goal is a system that understands context-aware commands like "follow the person in the red shirt" 
+                            or "go to the kitchen," combining perception, language understanding, and autonomous navigation 
+                            on a Raspberry Pi.
+                        </p>
+                    </div>
+
+                    <div class="project4-roadmap">
+                        <h2>Development Roadmap</h2>
+                        <table class="phase-table">
+                            <thead>
+                                <tr>
+                                    <th>Phase</th>
+                                    <th>Goal</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="phase-id">A–C</td>
+                                    <td class="phase-goal">Core System: Pi OS, ROS 2 environment, and low-latency camera streaming.</td>
+                                    <td><span class="phase-status completed">Done</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="phase-id">D</td>
+                                    <td class="phase-goal">Voice Interface: On-board offline speech recognition (Vosk).</td>
+                                    <td><span class="phase-status completed">Done</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="phase-id">E</td>
+                                    <td class="phase-goal">Simulation: Voice-to-motion logic and virtual drive kinematics.</td>
+                                    <td><span class="phase-status completed">Done</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="phase-id">F</td>
+                                    <td class="phase-goal">Vision: Off-board GPU object detection (YOLOv8) & person tracking over Wi-Fi.</td>
+                                    <td><span class="phase-status completed">Done</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="phase-id">G</td>
+                                    <td class="phase-goal">Electronics: Motor driver integration, PWM signal generation, and bench testing.</td>
+                                    <td><span class="phase-status current">In Progress</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="phase-id">H</td>
+                                    <td class="phase-goal">Motion: Closed-loop motor control and "follow-me" logic implementation.</td>
+                                    <td><span class="phase-status next">Next</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="phase-id">I–J</td>
+                                    <td class="phase-goal">Intelligence: Obstacle safety systems and LLM-based visual reasoning.</td>
+                                    <td><span class="phase-status planned">Planned</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="project4-tech-stack">
+                        <span>ROS 2 Iron</span>
+                        <span>Raspberry Pi</span>
+                        <span>Python</span>
+                        <span>YOLOv8</span>
+                        <span>OpenCV</span>
+                        <span>LLM Integration</span>
+                        <span>Vosk</span>
+                        <span>pigpio</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project4-footer">
+                <h3>Let's Connect</h3>
+                <div class="project4-footer-links">
+                    <a href="mailto:gabrieljyth@gmail.com">Email</a>
+                    <a href="https://github.com/Gabriel-Twiggho" target="_blank">GitHub</a>
+                    <a href="https://www.linkedin.com/in/gabriel-twigg-ho-96579b1b8/" target="_blank">LinkedIn</a>
+                </div>
+                <p>© 2025 Gabriel Twigg-Ho</p>
+            </div>
+        </section>
+
     </main>
 
     <script>
@@ -1317,7 +1694,7 @@
             document.getElementById('nav-' + pageId).classList.add('active');
             
             // Toggle dark mode for body based on page
-            if (pageId === 'project1') {
+            if (pageId === 'project1' || pageId === 'project4') {
                 document.body.classList.add('dark-mode');
             } else {
                 document.body.classList.remove('dark-mode');
