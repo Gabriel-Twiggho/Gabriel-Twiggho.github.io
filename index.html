@@ -772,6 +772,113 @@
             height: 18px;
         }
 
+        /* Project 2 Research Section */
+        .project2-research-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .project2-diagram {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .project2-diagram img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .diagram-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #7a9a7a;
+            font-style: italic;
+        }
+
+        .project2-about-research {
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .project2-about-research h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4ade80;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .project2-about-research p {
+            color: #b8c5b8;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .project2-about-research strong {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .project2-research-links {
+            margin-top: 3rem;
+        }
+
+        .project2-research-links h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #4ade80;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .research-links-grid {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .research-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.75rem;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .research-link-btn:hover {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: #4ade80;
+            text-decoration: none;
+        }
+
+        .research-link-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (max-width: 600px) {
+            .project2-about-research h3,
+            .project2-research-links h3 {
+                font-size: 1.25rem;
+            }
+
+            .research-link-btn {
+                font-size: 0.85rem;
+                padding: 0.85rem 1.5rem;
+            }
+        }
+
         .project2-footer {
             background: #061208;
             padding: 3rem 0;
@@ -889,6 +996,70 @@
         .project3-link:hover {
             background: #7bbfff;
             text-decoration: none;
+        }
+
+        /* Project 3 Details Section */
+        .project3-details-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(77, 166, 255, 0.2);
+        }
+
+        .project3-image {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .project3-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid rgba(77, 166, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #7a9aaa;
+            font-style: italic;
+        }
+
+        .project3-about {
+            text-align: left;
+        }
+
+        .project3-about h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #4da6ff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .project3-about h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .project3-about p {
+            color: #b8c5d6;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .project3-about strong {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        @media (max-width: 600px) {
+            .project3-about h3 {
+                font-size: 1.15rem;
+            }
+
+            .project3-about p {
+                font-size: 1rem;
+            }
         }
 
         .project3-footer {
@@ -1574,55 +1745,34 @@
                     <div class="project2-research-section">
                         <div class="project2-diagram">
                             <img src="Pictures/Task_Scheduling.png" alt="Task Scheduling Visualization" />
-                            <p class="diagram-caption">Example task graph showing computational dependencies and scheduling complexity</p>
+                            <p class="diagram-caption">Task graph visualization from our publication showing computational dependencies and scheduling complexity</p>
                         </div>
 
                         <div class="project2-about-research">
                             <h3>Understanding the Task Scheduling Problem</h3>
                             <p>
-                                Task scheduling is a fundamental problem in distributed computing. The challenge is to assign 
-                                computational tasks to different machines in a way that minimizes total execution time (makespan) 
-                                while respecting task dependencies and resource constraints.
-                            </p>
-                            <p>
-                                In scientific workflows, machine learning pipelines, and cloud computing, tasks often have 
-                                complex dependencies—some must complete before others can begin. Traditional scheduling algorithms 
-                                assume we know exactly how long each task will take. In reality, execution times vary due to 
-                                hardware differences, network conditions, and workload unpredictability.
-                            </p>
-                            <p>
-                                This is where our research comes in: <strong>adapting classic scheduling heuristics to handle 
-                                uncertainty in real-time</strong>, allowing algorithms designed for offline planning to work 
-                                effectively in online, dynamic environments.
+                                Task scheduling aims to assign computational tasks to machines to minimize execution time 
+                                while respecting dependencies. Traditional algorithms assume known task durations, but real-world 
+                                systems face uncertainty from hardware variations, network conditions and workload unpredictability. 
+                                Our research <strong>adapts classic scheduling heuristics to handle this uncertainty in real-time</strong>, 
+                                making offline algorithms work effectively in dynamic, online environments.
                             </p>
                         </div>
 
                         <div class="project2-research-links">
                             <h3>Learn More About This Research</h3>
                             <div class="research-links-grid">
-                                <a href="https://research.kubishi.com/#research-topics" target="_blank" class="research-link">
-                                    <div class="research-link-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                        </svg>
-                                    </div>
-                                    <div class="research-link-content">
-                                        <h4>Kubishi Research Group</h4>
-                                        <p>Explore the broader research lab led by Professor Jared Coleman, covering topics 
-                                        from cooperative robotics to distributed computing and language revitalization.</p>
-                                    </div>
+                                <a href="https://research.kubishi.com/" target="_blank" class="research-link-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                    Kubishi Research Group
                                 </a>
-                                <a href="https://research.kubishi.com/Posts/Task-Scheduling-Algorithms" target="_blank" class="research-link">
-                                    <div class="research-link-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                    </div>
-                                    <div class="research-link-content">
-                                        <h4>Task Scheduling Deep Dive</h4>
-                                        <p>A comprehensive overview of the task scheduling problem, including problem definitions, 
-                                        classic algorithms like HEFT, and the latest research approaches in the field.</p>
-                                    </div>
+                                <a href="https://research.kubishi.com/Posts/Task-Scheduling-Algorithms" target="_blank" class="research-link-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                    Task Scheduling Deep Dive
                                 </a>
                             </div>
                         </div>
@@ -1678,6 +1828,40 @@
                     <a href="https://icc.inductiveautomation.com/discover-gallery-detail/2024/carlton-and-united-breweries" target="_blank" class="project3-link">
                         View Project on ICC Discover Gallery →
                     </a>
+
+                    <!-- Project Details Section -->
+                    <div class="project3-details-section">
+                        <div class="project3-image">
+                            <img src="Pictures/Co2_project.png" alt="CO2 Model Interface" />
+                            <p class="image-caption">The Ignition-based CO2 prediction model interface showing real-time storage levels and forecasting</p>
+                        </div>
+
+                        <div class="project3-about">
+                            <h3>The Challenge</h3>
+                            <p>
+                                Carlton & United Breweries' previous CO2 model ran on Excel with VBA macros, requiring constant 
+                                operator intervention and delivering only 70% hourly accuracy. With production drawing down 40 tonnes 
+                                of CO2 daily and deviations of 20-30 tonnes, the system was unreliable for managing the brewery's 
+                                230-tonne storage capacity.
+                            </p>
+
+                            <h3>The Solution</h3>
+                            <p>
+                                I developed a web-based Ignition Perspective model featuring a 3000-line Jython algorithm that predicts 
+                                CO2 levels with 95% accuracy. The <strong>Brew Plan page</strong> — the most complex component, taking 
+                                three months to complete — combines real-time PLC data with algorithm predictions to provide live 
+                                transparency into fermenter stages, CO2 collection efficiency and system performance.
+                            </p>
+
+                            <h3>The Impact</h3>
+                            <p>
+                                The new system supports unlimited simultaneous users, stores historical data indefinitely and provides 
+                                real-time insights that transformed decision-making. The utilities team now makes confident import/export 
+                                decisions, and the model reveals inefficiencies that were previously invisible, boosting production capacity 
+                                across multiple sites.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="project3-footer">
