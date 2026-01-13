@@ -225,6 +225,25 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Video Caption */
+        .video-caption {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 0 2rem;
+            font-size: 0.75rem;
+            color: #6e6e73;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        @media (max-width: 600px) {
+            .video-caption {
+                font-size: 0.7rem;
+                line-height: 1.6;
+            }
+        }
 
         /* Dark Sections */
         .dark-section {
@@ -1309,6 +1328,9 @@
                         <source src="Swarm%20Tracking%20Demo%20Video%202.mp4" type="video/mp4">
                     </video>
                 </div>
+                <div class="video-caption">
+                    Red dot = Target  •  Yellow dot = Swarm Agent  •  Yellow circumference = Swarm Agent LOS radius
+                </div>
             </div>
 
             <!-- Download Section -->
@@ -1546,6 +1568,64 @@
                             </svg>
                             Download PDF
                         </a>
+                    </div>
+
+                    <!-- Task Scheduling Visualization -->
+                    <div class="project2-research-section">
+                        <div class="project2-diagram">
+                            <img src="Pictures/Task_Scheduling.png" alt="Task Scheduling Visualization" />
+                            <p class="diagram-caption">Example task graph showing computational dependencies and scheduling complexity</p>
+                        </div>
+
+                        <div class="project2-about-research">
+                            <h3>Understanding the Task Scheduling Problem</h3>
+                            <p>
+                                Task scheduling is a fundamental problem in distributed computing. The challenge is to assign 
+                                computational tasks to different machines in a way that minimizes total execution time (makespan) 
+                                while respecting task dependencies and resource constraints.
+                            </p>
+                            <p>
+                                In scientific workflows, machine learning pipelines, and cloud computing, tasks often have 
+                                complex dependencies—some must complete before others can begin. Traditional scheduling algorithms 
+                                assume we know exactly how long each task will take. In reality, execution times vary due to 
+                                hardware differences, network conditions, and workload unpredictability.
+                            </p>
+                            <p>
+                                This is where our research comes in: <strong>adapting classic scheduling heuristics to handle 
+                                uncertainty in real-time</strong>, allowing algorithms designed for offline planning to work 
+                                effectively in online, dynamic environments.
+                            </p>
+                        </div>
+
+                        <div class="project2-research-links">
+                            <h3>Learn More About This Research</h3>
+                            <div class="research-links-grid">
+                                <a href="https://research.kubishi.com/#research-topics" target="_blank" class="research-link">
+                                    <div class="research-link-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </div>
+                                    <div class="research-link-content">
+                                        <h4>Kubishi Research Group</h4>
+                                        <p>Explore the broader research lab led by Professor Jared Coleman, covering topics 
+                                        from cooperative robotics to distributed computing and language revitalization.</p>
+                                    </div>
+                                </a>
+                                <a href="https://research.kubishi.com/Posts/Task-Scheduling-Algorithms" target="_blank" class="research-link">
+                                    <div class="research-link-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                        </svg>
+                                    </div>
+                                    <div class="research-link-content">
+                                        <h4>Task Scheduling Deep Dive</h4>
+                                        <p>A comprehensive overview of the task scheduling problem, including problem definitions, 
+                                        classic algorithms like HEFT, and the latest research approaches in the field.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
