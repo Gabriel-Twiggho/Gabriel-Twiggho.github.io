@@ -2001,7 +2001,13 @@
             });
         })();
 
-        function showPage(pageId) {
+        function showPage(pageId, updateHash = true) {
+            // Validate pageId
+            const validPages = ['home', 'project1', 'project2', 'project3', 'project4'];
+            if (!validPages.includes(pageId)) {
+                pageId = 'home';
+            }
+            
             // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
@@ -2022,9 +2028,33 @@
                 document.body.classList.remove('dark-mode');
             }
             
+            // Update URL hash (so users can share/bookmark direct links)
+            if (updateHash) {
+                window.location.hash = pageId;
+            }
+            
             // Scroll to top
             window.scrollTo(0, 0);
         }
+
+        // Handle direct links via URL hash
+        function handleHashChange() {
+            const hash = window.location.hash.slice(1); // Remove the # symbol
+            if (hash) {
+                showPage(hash, false);
+            }
+        }
+
+        // Check for hash on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                showPage(hash, false);
+            }
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('hashchange', handleHashChange);
     </script>
 </body>
 </html>
