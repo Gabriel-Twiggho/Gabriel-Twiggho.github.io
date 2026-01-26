@@ -107,3 +107,85 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Project sidebar navigation
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll for sidebar links
+    document.querySelectorAll('.project-nav-item').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('data-section');
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                const navHeight = 48; // Height of top nav
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Scroll spy for sidebar
+    function updateSidebarActive() {
+        const activePage = document.querySelector('.page.active');
+        if (!activePage) return;
+
+        const nav = activePage.querySelector('.project-nav');
+        if (!nav) return;
+
+        const navItems = nav.querySelectorAll('.project-nav-item');
+        const sections = [];
+        
+        navItems.forEach(item => {
+            const sectionId = item.getAttribute('data-section');
+            const section = document.getElementById(sectionId);
+            if (section) {
+                sections.push({ id: sectionId, element: section, navItem: item });
+            }
+        });
+
+        if (sections.length === 0) return;
+
+        const scrollPosition = window.scrollY + 150; // Offset for better detection
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        // Check if we're at the bottom of the page
+        const isAtBottom = (window.scrollY + windowHeight) >= (documentHeight - 100);
+
+        // If at bottom, activate the last section
+        if (isAtBottom && sections.length > 0) {
+            navItems.forEach(item => item.classList.remove('active'));
+            sections[sections.length - 1].navItem.classList.add('active');
+            return;
+        }
+
+        // Find the current section
+        let currentSection = sections[0];
+        for (let i = sections.length - 1; i >= 0; i--) {
+            if (sections[i].element.offsetTop <= scrollPosition) {
+                currentSection = sections[i];
+                break;
+            }
+        }
+
+        // Update active states
+        navItems.forEach(item => item.classList.remove('active'));
+        currentSection.navItem.classList.add('active');
+    }
+
+    // Throttled scroll listener
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) return;
+        scrollTimeout = setTimeout(function() {
+            updateSidebarActive();
+            scrollTimeout = null;
+        }, 50);
+    });
+
+    // Initial update
+    updateSidebarActive();
+});

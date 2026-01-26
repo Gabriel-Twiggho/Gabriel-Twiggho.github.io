@@ -55,7 +55,7 @@ a:hover {
 /* Navigation */
 /* ==================== */
 
-nav {
+nav:not(.project-nav) {
     background: var(--color-white);
     border-bottom: 1px solid var(--color-border);
     position: fixed;
@@ -66,7 +66,7 @@ nav {
     transition: background 0.3s, border-color 0.3s;
 }
 
-body.dark-mode nav {
+body.dark-mode nav:not(.project-nav) {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -462,6 +462,126 @@ main {
 
 .project-card:hover .card-link {
     text-decoration: underline;
+}
+
+/* ==================== */
+/* PROJECT SIDEBAR NAV */
+/* ==================== */
+
+.project-nav {
+    position: fixed;
+    left: 1.5rem;
+    right: auto;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    z-index: 50;
+    width: auto;
+    max-width: 150px;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    border-bottom: none;
+    padding: 0;
+    margin: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.project-nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0;
+    cursor: pointer;
+    text-decoration: none;
+    width: fit-content;
+    background: none;
+    border: none;
+}
+
+.project-nav-item:hover {
+    text-decoration: none;
+}
+
+.project-nav-line {
+    width: 20px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.35);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.project-nav-text {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    opacity: 0;
+    display: inline-block;
+}
+
+/* Show text on hover */
+.project-nav:hover .project-nav-text {
+    opacity: 1;
+}
+
+/* Hover state */
+.project-nav-item:hover .project-nav-line {
+    width: 28px;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.project-nav-item:hover .project-nav-text {
+    color: rgba(255, 255, 255, 0.6);
+    opacity: 1;
+}
+
+/* Active state */
+.project-nav-item.active .project-nav-line {
+    width: 32px;
+    background: var(--color-accent);
+}
+
+.project-nav-item.active .project-nav-text {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Project-specific accent colors */
+#project2 .project-nav-item.active .project-nav-line {
+    background: #4ade80;
+}
+
+#project2 .project-nav-item.active .project-nav-text {
+    color: rgba(74, 222, 128, 0.8);
+}
+
+#project3 .project-nav-item.active .project-nav-line {
+    background: #4da6ff;
+}
+
+#project3 .project-nav-item.active .project-nav-text {
+    color: rgba(77, 166, 255, 0.8);
+}
+
+#project4 .project-nav-item.active .project-nav-line {
+    background: #c2783e;
+}
+
+#project4 .project-nav-item.active .project-nav-text {
+    color: rgba(194, 120, 62, 0.8);
+}
+
+/* Hide on smaller screens */
+@media (max-width: 1200px) {
+    .project-nav {
+        display: none;
+    }
 }
 
 /* ==================== */
