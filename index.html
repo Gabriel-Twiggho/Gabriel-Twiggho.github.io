@@ -14,14 +14,14 @@
         <div class="container">
             <a href="#" onclick="showPage('home'); return false;" class="logo" id="logo-easter-egg">Gabriel Twigg-Ho</a>
             <ul class="nav-links">
-                <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+                <li><a href="#" onclick="showPage('home'); return false;" class="active" id="nav-home">Home</a></li>
                 <li class="nav-dropdown">
                     <a href="#" class="dropdown-trigger" id="nav-projects">Projects <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" onclick="showPage('project1')" id="nav-project1">Swarm Tracking</a></li>
-                        <li><a href="#" onclick="showPage('project2')" id="nav-project2">Task Scheduling</a></li>
-                        <li><a href="#" onclick="showPage('project3')" id="nav-project3">CO2 Prediction</a></li>
-                        <li><a href="#" onclick="showPage('project4')" id="nav-project4">Mobile Robot</a></li>
+                        <li><a href="#" onclick="showPage('project1'); return false;" id="nav-project1">Swarm Tracking</a></li>
+                        <li><a href="#" onclick="showPage('project2'); return false;" id="nav-project2">Task Scheduling</a></li>
+                        <li><a href="#" onclick="showPage('project3'); return false;" id="nav-project3">CO2 Prediction</a></li>
+                        <li><a href="#" onclick="showPage('project4'); return false;" id="nav-project4">Mobile Robot</a></li>
                     </ul>
                 </li>
             </ul>
@@ -678,6 +678,21 @@
                             <span>LLM Integration</span>
                             <span>Vosk</span>
                             <span>pigpio</span>
+                        </div>
+                    </div>
+
+                    <div class="project4-progress">
+                        <h2>Progress</h2>
+                        <p class="project4-progress-intro">From concept to physical build, here’s a glimpse of where things stand.</p>
+                        <div class="project4-progress-grid">
+                            <div class="project4-progress-item">
+                                <img src="Pictures/project4_concept.png" alt="Early concept design rendering of the mobile robot" />
+                                <p class="project4-progress-caption">Early concept design</p>
+                            </div>
+                            <div class="project4-progress-item">
+                                <img src="Pictures/project4_wip.png" alt="Work in progress: physical prototype with electronics and motor" />
+                                <p class="project4-progress-caption">WIP prototype</p>
+                            </div>
                         </div>
                     </div>
                 </div>
