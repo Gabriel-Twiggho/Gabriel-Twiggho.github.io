@@ -224,6 +224,29 @@ main {
 /* Home Page */
 /* ==================== */
 
+#home {
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+#home-wave-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#home .home-content,
+#home .home-projects,
+#home footer {
+    position: relative;
+    z-index: 1;
+}
+
 .home-content {
     min-height: calc(100vh - 48px);
     max-width: 900px;
@@ -240,6 +263,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 2rem 1.5rem 4rem;
 }
 
 .home-content h1 {
@@ -362,9 +386,8 @@ main {
     height: 18px;
 }
 
-/* Home Projects Section */
 .home-projects {
-    background: var(--color-bg);
+    position: relative;
     padding: 3rem 0 5rem;
 }
 
