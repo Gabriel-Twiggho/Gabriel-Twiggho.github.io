@@ -3,10 +3,12 @@ import time
 import os
 import threading
 import sys
+import cv2            # The Computer Vision library
+import numpy as np    # The Math library for image decoding
 
 # --- CONFIGURATION ---
-SERIAL_PORT = 'COM9'   # Check your Arduino IDE for the correct port
-BAUD_RATE = 921600     # Must match Arduino code
+SERIAL_PORT = 'COM9'   # Your specific COM port
+BAUD_RATE = 921600     # Match your Arduino code (115200 or 921600)
 SAVE_FOLDER = "captured_frames"
 
 # Global flag to stop the thread cleanly
@@ -31,12 +33,11 @@ def serial_listener(ser):
     if not os.path.exists(SAVE_FOLDER):
         os.makedirs(SAVE_FOLDER)
 
-    print(f"\n[Listener] Listening on {SERIAL_PORT}... (Images will save to '{SAVE_FOLDER}')")
+    print(f"\n[Listener] Listening on {SERIAL_PORT}...")
 
     while running:
         try:
             if ser.in_waiting > 0:
-                # Read a line
                 line = ser.readline()
 
                 # CASE 1: It's an Image Header (SIZE:12345)
@@ -45,32 +46,48 @@ def serial_listener(ser):
                         size_str = line.split(b':')[1].strip()
                         image_size = int(size_str)
                         
-                        print(f"\n[Incoming] Capturing Frame {frame_count} ({image_size} bytes)... ", end="")
+                        print(f"Frame: {frame_count} ({image_size} bytes)... ", end="")
                         
+                        # 1. Read the raw bytes
                         image_data = read_exact_bytes(ser, image_size)
                         
                         if image_data:
-                            filename = os.path.join(SAVE_FOLDER, f"img_{int(time.time())}_{frame_count}.jpg")
+                            # 2. SAVE IT TO DISK (Optional, keep if you want a record)
+                            filename = os.path.join(SAVE_FOLDER, f"frame_{frame_count}.jpg")
                             with open(filename, "wb") as f:
                                 f.write(image_data)
-                            print(f"Saved: {filename}")
+                            
+                            # 3. DISPLAY IT ON SCREEN (The new part!)
+                            # Convert raw bytes into a numpy array
+                            nparr = np.frombuffer(image_data, np.uint8)
+                            # Decode the JPEG data into an image
+                            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+                            # Check if decode worked (sometimes bytes get corrupted)
+                            if img is not None:
+                                cv2.imshow('ESP32 Live Stream', img)
+                                # Wait 1ms to allow the window to redraw
+                                cv2.waitKey(1) 
+                                print("Displayed.")
+                            else:
+                                print("Decode Error.")
+
                             frame_count += 1
                         else:
-                            print("Error: Incomplete data.")
+                            print("Incomplete data.")
                     except ValueError:
-                        print(f"[Error] Bad Size Header: {line}")
+                        print(f"Bad Header: {line}")
 
-                # CASE 2: It's just text (Debug messages like SYSTEM_READY)
+                # CASE 2: Text Debug
                 else:
                     try:
                         text = line.decode('utf-8', errors='ignore').strip()
                         if text:
-                            print(f"[ESP32 Says]: {text}")
+                            print(f"[ESP32]: {text}")
                     except:
                         pass
             else:
-                # Sleep briefly to not hog CPU
-                time.sleep(0.01)
+                time.sleep(0.005) # Check very frequently for smooth video
                 
         except Exception as e:
             print(f"Serial Error: {e}")
@@ -82,48 +99,44 @@ def main():
     
     try:
         ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
-        # Wait a moment for the reboot
+        ser.dtr = False 
+        ser.rts = False 
         time.sleep(0.5)
     except Exception as e:
         print(f"Could not open port {SERIAL_PORT}: {e}")
         return
 
-    # Start the background listener thread
+    # Start the background listener
     t = threading.Thread(target=serial_listener, args=(ser,))
     t.start()
 
     print("-" * 50)
-    print("COMMAND MENU:")
-    print(" S = Start Streaming")
-    print(" C = Capture Single Photo")
-    print(" E = End Streaming")
-    print(" Q = Quit Python Script")
+    print("LIVE STREAM CONTROL:")
+    print(" S = Start Video Stream")
+    print(" E = Stop Video Stream")
+    print(" C = Capture Single Frame")
+    print(" Q = Quit")
     print("-" * 50)
 
-    # Main loop: waits for your keyboard input
     try:
         while running:
-            cmd = input().upper() # Blocks here waiting for you to type
+            # We use input() to pause the main thread waiting for commands
+            cmd = input().upper() 
             
             if cmd == 'Q':
-                print("Quitting...")
-                ser.write(b'E') # Try to stop stream first
+                ser.write(b'E')
                 running = False
                 break
             elif cmd in ['S', 'C', 'E']:
-                print(f"Sending command: {cmd}...")
                 ser.write(cmd.encode())
-            else:
-                print("Unknown command. Use S, C, E, or Q.")
             
-            time.sleep(0.5) # Give ESP32 time to react
-
     except KeyboardInterrupt:
         running = False
         
-    print("Closing connection...")
+    print("Closing...")
     ser.close()
-    t.join() # Wait for thread to close
+    cv2.destroyAllWindows() # Close the video window
+    t.join()
     print("Done.")
 
 if __name__ == "__main__":
