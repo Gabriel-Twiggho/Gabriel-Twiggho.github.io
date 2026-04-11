@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Liquidity Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-left">
+                <a href="../index.html" class="back-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Portfolio
+                </a>
+                <h1 class="header-title">Global Liquidity Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <button id="refresh-btn" class="btn btn-outline" title="Force refresh all data">
+                    <svg id="refresh-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                    Refresh
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p class="loading-text">Fetching liquidity data...</p>
+            <p class="loading-sub" id="loading-status">Initialising</p>
+        </div>
+    </div>
+
+    <!-- API Key Setup Modal -->
+    <div id="api-key-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h2>FRED API Key Required</h2>
+            <p>This dashboard uses the Federal Reserve Economic Data (FRED) API. You need a free API key to load data.</p>
+            <ol>
+                <li>Go to <a href="https://fred.stlouisfed.org/docs/api/api_key.html" target="_blank">fred.stlouisfed.org</a></li>
+                <li>Create a free account and request an API key</li>
+                <li>Paste it below</li>
+            </ol>
+            <input type="text" id="api-key-input" placeholder="Enter your FRED API key" autocomplete="off">
+            <button id="api-key-submit" class="btn btn-primary">Save & Load Dashboard</button>
+            <p class="modal-note">Your key is stored in your browser's localStorage only.</p>
+        </div>
+    </div>
+
+    <main class="main">
+        <!-- Data Status Panel -->
+        <section class="status-panel" id="status-panel">
+            <div class="status-header" id="status-toggle">
+                <h3>Data Status</h3>
+                <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <div class="status-grid" id="status-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Chart 1: Global Liquidity -->
+        <section class="chart-section">
+            <div class="chart-header">
+                <h2>Global Liquidity</h2>
+                <p class="chart-subtitle">Combined central bank balance sheets & M2 aggregates (USD)</p>
+            </div>
+            <div class="chart-controls">
+                <div class="toggle-group" id="global-toggles">
+                    <button class="toggle-btn active" data-series="us" style="--btn-color: #3B82F6">US</button>
+                    <button class="toggle-btn active" data-series="eu" style="--btn-color: #10B981">Europe</button>
+                    <button class="toggle-btn active" data-series="cn" style="--btn-color: #EF4444">China</button>
+                    <button class="toggle-btn active" data-series="jp" style="--btn-color: #F59E0B">Japan</button>
+                    <button class="toggle-btn active" data-series="total" style="--btn-color: #94A3B8">Total</button>
+                    <span class="toggle-divider"></span>
+                    <button class="toggle-btn" data-overlay="sp500" style="--btn-color: #A78BFA">S&P 500</button>
+                    <button class="toggle-btn" data-overlay="nasdaq" style="--btn-color: #FB923C">Nasdaq</button>
+                    <button class="toggle-btn" data-overlay="btc" style="--btn-color: #F97316">Bitcoin</button>
+                </div>
+                <div class="range-group" id="global-range">
+                    <button class="range-btn" data-range="1">1Y</button>
+                    <button class="range-btn" data-range="3">3Y</button>
+                    <button class="range-btn active" data-range="5">5Y</button>
+                    <button class="range-btn" data-range="10">10Y</button>
+                    <button class="range-btn" data-range="max">MAX</button>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="global-chart"></canvas>
+            </div>
+            <p class="chart-hint">Click + drag to zoom. Double-click to reset.</p>
+        </section>
+
+        <!-- Chart 2: US Liquidity -->
+        <section class="chart-section">
+            <div class="chart-header">
+                <h2>US Liquidity</h2>
+                <p class="chart-subtitle">Fed Balance Sheet + M2 Money Supply</p>
+            </div>
+            <div class="chart-controls">
+                <div class="toggle-group" id="us-toggles">
+                    <button class="toggle-btn active" data-series="walcl" style="--btn-color: #3B82F6">Fed Balance Sheet</button>
+                    <button class="toggle-btn active" data-series="m2" style="--btn-color: #60A5FA">M2 Supply</button>
+                    <span class="toggle-divider"></span>
+                    <button class="toggle-btn" data-overlay="sp500" style="--btn-color: #A78BFA">S&P 500</button>
+                    <button class="toggle-btn" data-overlay="nasdaq" style="--btn-color: #FB923C">Nasdaq</button>
+                    <button class="toggle-btn" data-overlay="btc" style="--btn-color: #F97316">Bitcoin</button>
+                </div>
+                <div class="range-group" id="us-range">
+                    <button class="range-btn" data-range="1">1Y</button>
+                    <button class="range-btn" data-range="3">3Y</button>
+                    <button class="range-btn active" data-range="5">5Y</button>
+                    <button class="range-btn" data-range="10">10Y</button>
+                    <button class="range-btn" data-range="max">MAX</button>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="us-chart"></canvas>
+            </div>
+            <p class="chart-hint">Click + drag to zoom. Double-click to reset.</p>
+        </section>
+
+        <!-- Chart 3: Australia Liquidity -->
+        <section class="chart-section">
+            <div class="chart-header">
+                <h2>Australia Liquidity</h2>
+                <p class="chart-subtitle">M2 Money Supply (AUD & USD-converted)</p>
+            </div>
+            <div class="chart-controls">
+                <div class="toggle-group" id="au-toggles">
+                    <button class="toggle-btn active" data-series="au_aud" style="--btn-color: #14B8A6">M2 (AUD)</button>
+                    <button class="toggle-btn" data-series="au_usd" style="--btn-color: #06B6D4">M2 (USD)</button>
+                    <span class="toggle-divider"></span>
+                    <button class="toggle-btn" data-overlay="sp500" style="--btn-color: #A78BFA">S&P 500</button>
+                    <button class="toggle-btn" data-overlay="nasdaq" style="--btn-color: #FB923C">Nasdaq</button>
+                    <button class="toggle-btn" data-overlay="btc" style="--btn-color: #F97316">Bitcoin</button>
+                </div>
+                <div class="range-group" id="au-range">
+                    <button class="range-btn" data-range="1">1Y</button>
+                    <button class="range-btn" data-range="3">3Y</button>
+                    <button class="range-btn active" data-range="5">5Y</button>
+                    <button class="range-btn" data-range="10">10Y</button>
+                    <button class="range-btn" data-range="max">MAX</button>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="au-chart"></canvas>
+            </div>
+            <p class="chart-hint">Click + drag to zoom. Double-click to reset.</p>
+            <p class="chart-note">Note: Australian M2 data is monthly and typically has a ~6-8 week reporting lag.</p>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="sources-section">
+            <h3>Data Sources & Notes</h3>
+            <div class="sources-grid">
+                <div class="source-item">
+                    <strong>FRED</strong>
+                    <span>Fed Balance Sheet, US M2, ECB Assets, BOJ Assets, China M2, Australia M2, Exchange Rates</span>
+                </div>
+                <div class="source-item">
+                    <strong>CoinGecko</strong>
+                    <span>Bitcoin price history</span>
+                </div>
+                <div class="source-item">
+                    <strong>Yahoo Finance</strong>
+                    <span>S&P 500 and Nasdaq 100 indices</span>
+                </div>
+            </div>
+            <div class="disclaimers">
+                <p>Data sourced from FRED (Federal Reserve), CoinGecko, and Yahoo Finance. Not financial advice.</p>
+                <p>Australia M2 data has a longer reporting lag than other regions (~6-8 weeks).</p>
+                <p>China M2 data reflects broad money supply, not strictly PBoC balance sheet assets.</p>
+                <p>Currency conversions use the most recent available exchange rate from FRED; historical conversions use period-matched rates where possible.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="dashboard-footer">
+        <p>&copy; 2025 Gabriel Twigg-Ho &middot; <a href="../index.html">Back to Portfolio</a></p>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

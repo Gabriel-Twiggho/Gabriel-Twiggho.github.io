@@ -1,0 +1,530 @@
+# Global Liquidity Dashboard — Design Document
+
+> **Purpose:** Pass this document to Cursor (or any AI coding assistant) to implement a fully working, self-updating web dashboard that visualises global central bank liquidity alongside S&P 500, Nasdaq, and Bitcoin.
+
+---
+
+## 1. Project Overview
+
+A single-page web application (vanilla HTML/CSS/JS or React — see Tech Stack) that displays:
+
+1. **Global Liquidity Chart** — combined central bank balance sheets / M2 aggregates, with toggleable breakdown by country
+2. **US Liquidity Chart** — dedicated US view with Fed balance sheet + M2
+3. **Australia Liquidity Chart** — RBA-related data via FRED
+4. **Asset Overlay** — toggle S&P 500, Nasdaq 100, and Bitcoin onto any chart
+5. **Auto-refresh** — data refreshes weekly, with a visible "Last Updated" badge
+
+---
+
+## 2. Tech Stack
+
+| Layer | Choice | Reason |
+|---|---|---|
+| Framework | **Vanilla HTML + JS** (or React if preferred) | No build step needed; Cursor handles either |
+| Charting | **Chart.js v4** (via CDN) | Lightweight, dual-axis support, good docs |
+| Data fetching | **Fetch API** + `localStorage` cache | No backend needed |
+| Styling | **Tailwind CSS** (via CDN) | Fast, dark-mode friendly |
+| Hosting | Any static host (Netlify, Vercel, GitHub Pages) | No server required |
+
+> **Note to Cursor:** Keep everything in as few files as possible. Ideal structure: `index.html`, `app.js`, `styles.css`. All API keys should live in a `config.js` file that is `.gitignore`d.
+
+---
+
+## 3. Data Sources & APIs
+
+### 3.1 FRED API (Federal Reserve Economic Data)
+- **Provider:** St. Louis Federal Reserve — free, reliable, well-documented
+- **Base URL:** `https://api.stlouisfed.org/fred/series/observations`
+- **Auth:** Free API key from https://fred.stlouisfed.org/docs/api/api_key.html
+- **Format:** JSON
+
+**Series to fetch:**
+
+| Series ID | Description | Frequency | Unit |
+|---|---|---|---|
+| `WALCL` | US Fed Balance Sheet (Total Assets) | Weekly | USD Millions |
+| `M2SL` | US M2 Money Supply | Monthly | USD Billions |
+| `ECBASSETSW` | ECB Total Assets | Weekly | EUR Millions |
+| `JPNASSETS` | Bank of Japan Total Assets | Monthly | JPY Billions |
+| `MYAGM2CNM189N` | China M2 Money Supply | Monthly | CNY Billions |
+| `MYAGM2AUM189N` | Australia M2 Money Supply | Monthly | AUD Millions |
+| `DEXUSEU` | USD/EUR Exchange Rate | Daily | Rate |
+| `DEXJPUS` | JPY/USD Exchange Rate | Daily | Rate |
+| `DEXCHUS` | CNY/USD Exchange Rate | Daily | Rate |
+| `DEXUSAL` | USD/AUD Exchange Rate | Daily | Rate |
+
+> **Currency Conversion Note:** All non-USD series must be converted to USD for the global chart. Fetch the most recent exchange rates from FRED and multiply. See Section 6 for implementation detail.
+
+### 3.2 CoinGecko API (Bitcoin)
+- **Base URL:** `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart`
+- **Auth:** Free tier — no key required (rate limited to ~30 req/min)
+- **Endpoint:** `GET /coins/bitcoin/market_chart?vs_currency=usd&days=1825&interval=weekly`
+- **Returns:** Array of `[timestamp, price]` pairs
+
+### 3.3 Yahoo Finance (via AllOrigins proxy — no API key needed)
+Yahoo Finance doesn't have an official API, but its chart endpoint is publicly accessible. Use a CORS proxy:
+
+```
+https://query1.finance.yahoo.com/v8/finance/chart/{SYMBOL}?interval=1wk&range=5y
+```
+
+Symbols:
+- S&P 500: `^GSPC`
+- Nasdaq 100: `^NDX`
+
+**CORS Workaround:** Use `https://api.allorigins.win/get?url=` as a prefix, or implement a tiny Cloudflare Worker as a proxy (Cursor can scaffold this).
+
+> **Alternative:** If Yahoo Finance is unreliable, use **Alpha Vantage** (free tier, API key required): `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=SPY`
+
+---
+
+## 4. Data Release Schedules (Official)
+
+Each data source has a fixed, predictable release schedule. The dashboard should know these and use them to drive all refresh logic — don't fetch early, don't fetch repeatedly, just wait for the right window.
+
+| Series | Release Day | Release Time | Frequency | Notes |
+|---|---|---|---|---|
+| Fed Balance Sheet (WALCL) | **Thursday** | **4:30 PM ET** | Weekly | Covers prior Wednesday; shifts to Friday on US federal holidays |
+| US M2 (M2SL / H.6) | **Tuesday** | **1:00 PM ET** | Weekly | Weekly data; FRED monthly series `M2SL` updates same day |
+| ECB Balance Sheet (ECBASSETSW) | **Tuesday** | ~**10:00 AM CET** | Weekly | Covers prior Friday's balance |
+| Bank of Japan Assets | ~20th–25th | varies | Monthly | ~3–4 weeks after reference month |
+| China M2 (PBoC) | ~10th–15th | varies | Monthly | ~2 weeks after reference month |
+| Australia M2 (RBA) | Last biz day of month+1 | varies | Monthly | ~5–6 week lag is normal; note in UI |
+
+**Key insight:** The two most important series for the global liquidity story — the Fed and ECB balance sheets — are weekly and released on **Thursday and Tuesday** respectively. This means in any given week, you have fresh data by Thursday evening. The monthly series (BOJ, China, Australia) don't change between releases, so re-fetching them more than once a month is pointless.
+
+---
+
+## 5. Smart Release-Aware Refresh Logic
+
+Rather than a naive 7-day timer, the dashboard should understand the release calendar and only fetch when new data is actually available. This is how Bloomberg terminals and economic data platforms behave.
+
+### Core concept: per-series "next expected release" date
+
+Each cached series stores:
+```js
+{
+  seriesId: "WALCL",
+  data: [...],
+  lastDataPointDate: "2025-04-10",   // Date of most recent observation
+  fetchedAt: 1744300000000,          // Unix ms when we last fetched
+  nextExpectedRelease: 1744671000000 // Unix ms of next scheduled release
+}
+```
+
+### Release schedule calculator
+
+```js
+// All times in ET (UTC-5 or UTC-4 with DST)
+const RELEASE_SCHEDULES = {
+  WALCL: {
+    frequency: 'weekly',
+    dayOfWeek: 4,         // Thursday (0=Sun)
+    hour: 16,
+    minute: 30,
+    timezone: 'America/New_York'
+  },
+  M2SL: {
+    frequency: 'weekly',
+    dayOfWeek: 2,         // Tuesday
+    hour: 13,
+    minute: 0,
+    timezone: 'America/New_York'
+  },
+  ECBASSETSW: {
+    frequency: 'weekly',
+    dayOfWeek: 2,         // Tuesday
+    hour: 10,
+    minute: 0,
+    timezone: 'Europe/Berlin'
+  },
+  JPNASSETS: {
+    frequency: 'monthly',
+    approxDayOfMonth: 22, // ~20th–25th of following month
+    timezone: 'Asia/Tokyo'
+  },
+  MYAGM2CNM189N: {
+    frequency: 'monthly',
+    approxDayOfMonth: 12, // ~10th–15th of following month
+    timezone: 'Asia/Shanghai'
+  },
+  MYAGM2AUM189N: {
+    frequency: 'monthly',
+    approxDayOfMonth: -1, // Last business day of following month
+    timezone: 'Australia/Sydney'
+  }
+};
+
+/**
+ * Returns the next expected release datetime for a series.
+ * For weekly series: next occurrence of that day+time after now.
+ * For monthly series: approximate date in following month.
+ */
+function getNextRelease(seriesId) {
+  const schedule = RELEASE_SCHEDULES[seriesId];
+  const now = new Date();
+  if (schedule.frequency === 'weekly') {
+    // Find next occurrence of schedule.dayOfWeek at schedule.hour:minute
+    // accounting for timezone
+    // ... (Cursor should implement using Intl.DateTimeFormat or luxon)
+  }
+  if (schedule.frequency === 'monthly') {
+    // Return approximate date in next calendar month
+  }
+}
+```
+
+### Fetch decision logic
+
+```js
+async function shouldFetch(seriesId) {
+  const cached = getCache(seriesId);
+
+  // No cache — always fetch
+  if (!cached) return true;
+
+  const now = Date.now();
+  const nextRelease = cached.nextExpectedRelease;
+
+  // New release hasn't happened yet — use cache, show countdown
+  if (now < nextRelease) return false;
+
+  // Release window has passed — fetch to see if new data is out
+  // (FRED may update slightly after the official time; add 30min buffer)
+  if (now > nextRelease + 30 * 60 * 1000) return true;
+
+  // We're in the 30min window — could go either way; use cache
+  return false;
+}
+```
+
+### Countdown display
+
+For each series, show its countdown to next release as part of the status bar. Think of how financial data terminals show "Next: Fed Balance Sheet in 2d 14h 22m".
+
+```
+┌─ Data Status ──────────────────────────────────────────────────────┐
+│  🟢 Fed Balance Sheet    Apr 10 · Next release: Thu Apr 17 4:30pm ET   │
+│  🟢 ECB Balance Sheet    Apr 8  · Next release: Tue Apr 15 10:00am CET │
+│  🟡 US M2                Apr 1  · Next release: Tue Apr 22 1:00pm ET   │
+│  🟠 Japan BOJ            Mar 20 · Next release: ~Apr 23               │
+│  🟠 China M2             Mar 12 · Next release: ~Apr 14               │
+│  🟠 Australia M2         Feb 28 · Next release: ~Apr 30  ⚠️ 6wk lag  │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+Status dot colours:
+- 🟢 Green — data is current (within expected release window)
+- 🟡 Yellow — data is approaching staleness (next release due within 24h)
+- 🟠 Amber — monthly series (always somewhat lagged; expected)
+- 🔴 Red — data is overdue (past next release time but no new data fetched)
+
+### Auto-fetch on page load
+
+```js
+async function initDashboard() {
+  const series = ['WALCL', 'M2SL', 'ECBASSETSW', 'JPNASSETS',
+                  'MYAGM2CNM189N', 'MYAGM2AUM189N', /* FX rates */];
+
+  // Check each series in parallel
+  const fetchPromises = series.map(async (id) => {
+    if (await shouldFetch(id)) {
+      const data = await fetchFred(id);
+      saveCache(id, data);
+    }
+    return getCache(id).data;
+  });
+
+  const allData = await Promise.all(fetchPromises);
+  renderDashboard(allData);
+  startCountdownTimers(); // Update countdown display every minute
+}
+```
+
+### Manual refresh
+
+A "Refresh Now" button bypasses the schedule check and forces a re-fetch of all series. It should show a spinner and re-render on completion. Include a soft warning: "Fetching early — new data may not be available yet."
+
+---
+
+---
+
+## 6. Page Layout
+
+```
+┌─────────────────────────────────────────────────────┐
+│  🌐 Global Liquidity Dashboard          [Dark Mode] │
+│  Data as of: Apr 2025  |  Refreshed: Apr 11 2025   │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  ┌── CHART 1: Global Liquidity ─────────────────┐  │
+│  │  [Toggle: US] [EU] [China] [Japan] [Total]   │  │
+│  │  [Overlay: S&P500] [NDQ] [BTC]               │  │
+│  │                                               │  │
+│  │         📈 Chart.js dual-axis chart           │  │
+│  │         Left axis: Liquidity (USD Trillions)  │  │
+│  │         Right axis: Asset Price               │  │
+│  └───────────────────────────────────────────────┘  │
+│                                                     │
+│  ┌── CHART 2: US Liquidity ─────────────────────┐  │
+│  │  [Toggle: Fed Balance Sheet] [M2]             │  │
+│  │  [Overlay: S&P500] [NDQ] [BTC]               │  │
+│  │                                               │  │
+│  │         📈 Chart.js dual-axis chart           │  │
+│  └───────────────────────────────────────────────┘  │
+│                                                     │
+│  ┌── CHART 3: Australia Liquidity ──────────────┐  │
+│  │  [Toggle: M2 AUD] [M2 USD-converted]         │  │
+│  │  [Overlay: S&P500] [NDQ] [BTC]               │  │
+│  │                                               │  │
+│  │         📈 Chart.js dual-axis chart           │  │
+│  └───────────────────────────────────────────────┘  │
+│                                                     │
+│  ┌── DATA NOTES & SOURCES ──────────────────────┐  │
+│  │  Fed (FRED), ECB (FRED), BOJ (FRED),         │  │
+│  │  PBoC (FRED), RBA (FRED), CoinGecko, Yahoo  │  │
+│  └───────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘
+```
+
+---
+
+## 7. Chart Specifications
+
+### Chart 1 — Global Liquidity (Combined)
+
+| Property | Detail |
+|---|---|
+| Type | Line chart |
+| X-axis | Date (weekly/monthly, last 5–10 years) |
+| Y-axis Left | Total Liquidity in USD Trillions |
+| Y-axis Right | Asset price (when overlay active) |
+| Date range selector | 1Y / 3Y / 5Y / 10Y / MAX buttons |
+| Default view | Stacked area showing all 4 regions |
+| Toggle behaviour | Each country is a separate dataset; clicking its button hides/shows it; a "Total" line always sums visible datasets |
+
+**Dataset colours:**
+- 🇺🇸 US Fed: `#3B82F6` (blue)
+- 🇪🇺 Europe ECB: `#10B981` (green)
+- 🇨🇳 China PBoC: `#EF4444` (red)
+- 🇯🇵 Japan BOJ: `#F59E0B` (amber)
+- **Total**: `#FFFFFF` or `#94A3B8` (white/slate, bold)
+
+**Asset overlay colours:**
+- S&P 500: `#A78BFA` (purple)
+- Nasdaq 100: `#FB923C` (orange)
+- Bitcoin: `#F97316` (bitcoin orange)
+
+### Chart 2 — US Liquidity (Dedicated)
+
+Same setup as Chart 1 but scoped to:
+- Fed Balance Sheet (`WALCL`)
+- US M2 (`M2SL`)
+
+Both plotted on left axis simultaneously. Asset overlays on right axis.
+
+### Chart 3 — Australia Liquidity
+
+- Australia M2 (`MYAGM2AUM189N`) in AUD on left axis
+- Optional USD-converted version using FRED exchange rate
+- Asset overlays on right axis
+- Note: Australian data is monthly and has a ~2 month reporting lag — display a note about this
+
+---
+
+## 8. Component Architecture (if using React)
+
+```
+src/
+├── App.jsx                  # Root, dark mode, layout
+├── config.js                # API keys (gitignored)
+├── hooks/
+│   ├── useFredSeries.js     # Generic FRED fetcher + cache
+│   ├── useBitcoin.js        # CoinGecko fetcher + cache
+│   └── useStockData.js      # Yahoo Finance fetcher + cache
+├── utils/
+│   ├── currencyConvert.js   # Convert foreign liquidity to USD
+│   ├── alignTimeSeries.js   # Normalise all series to same dates
+│   └── formatters.js        # Trillion/billion number formatting
+├── components/
+│   ├── LiquidityChart.jsx   # Reusable dual-axis Chart.js wrapper
+│   ├── ToggleGroup.jsx      # Dataset on/off buttons
+│   ├── DateRangePicker.jsx  # 1Y/3Y/5Y/10Y/MAX
+│   ├── LastUpdatedBadge.jsx # Shows cache date + refresh button
+│   └── DataSources.jsx      # Footer with source links
+└── pages/
+    └── Dashboard.jsx        # Assembles all three charts
+```
+
+---
+
+## 9. Key Implementation Notes for Cursor
+
+### 8.1 Aligning Time Series
+FRED data returns different frequencies (weekly vs monthly). Normalise everything to **monthly** by:
+1. Downsampling weekly data to end-of-month values
+2. Forward-filling gaps in monthly series for display purposes
+
+```js
+// Pseudocode
+function toMonthly(observations) {
+  const monthly = {};
+  for (const obs of observations) {
+    const key = obs.date.slice(0, 7); // "YYYY-MM"
+    monthly[key] = obs.value; // Last value in month wins
+  }
+  return monthly;
+}
+```
+
+### 8.2 Global Liquidity Calculation
+```js
+// Convert each country's central bank assets to USD, then sum
+globalLiquidity[date] =
+  usFed_USD[date] +
+  ecb_EUR[date] * usdPerEur[date] +
+  boj_JPY[date] / jpyPerUsd[date] +
+  pboc_CNY[date] / cnyPerUsd[date];
+```
+
+### 8.3 Dual-Axis Chart Setup (Chart.js)
+```js
+const config = {
+  type: 'line',
+  data: { datasets: [...liquidityDatasets, ...assetDatasets] },
+  options: {
+    scales: {
+      y: {
+        type: 'linear',
+        position: 'left',
+        title: { display: true, text: 'Liquidity (USD Trillions)' }
+      },
+      y1: {
+        type: 'linear',
+        position: 'right',
+        grid: { drawOnChartArea: false },
+        title: { display: true, text: 'Asset Price' }
+      }
+    }
+  }
+};
+// Assign yAxisID: 'y' for liquidity datasets, 'y1' for asset overlays
+```
+
+### 8.4 FRED API Call Template
+```js
+async function fetchFred(seriesId, apiKey) {
+  const url = new URL('https://api.stlouisfed.org/fred/series/observations');
+  url.searchParams.set('series_id', seriesId);
+  url.searchParams.set('api_key', apiKey);
+  url.searchParams.set('file_type', 'json');
+  url.searchParams.set('observation_start', '2010-01-01');
+  url.searchParams.set('units', 'lin'); // raw values
+  const res = await fetch(url);
+  const json = await res.json();
+  return json.observations; // [{ date, value }, ...]
+}
+```
+
+### 8.5 Missing / "." Values
+FRED sometimes returns `"."` for missing values. Filter these out:
+```js
+const clean = observations.filter(o => o.value !== '.');
+```
+
+### 8.6 Tooltip Formatting
+- Liquidity values: format as `$X.XX T` (trillions) or `$X,XXX B` (billions)
+- BTC: format as `$XX,XXX`
+- S&P / NDQ: format as `X,XXX`
+- Show all active datasets in the tooltip simultaneously
+
+### 8.7 Performance
+- All FRED fetches should run in parallel with `Promise.all()`
+- Show a loading skeleton/spinner while data loads
+- `localStorage` cache means subsequent loads are near-instant
+
+---
+
+## 10. UI/UX Design Details
+
+### Dark Mode (default)
+```css
+--bg-primary: #0F172A;     /* slate-900 */
+--bg-card: #1E293B;        /* slate-800 */
+--text-primary: #F1F5F9;   /* slate-100 */
+--text-muted: #64748B;     /* slate-500 */
+--border: #334155;         /* slate-700 */
+--accent: #3B82F6;         /* blue-500 */
+```
+
+### Toggle Buttons
+- Pill-shaped buttons, coloured to match their dataset
+- Active = filled; inactive = outlined
+- Include country flag emoji for visual clarity
+
+### Chart Interactions
+- Hover: crosshair + unified tooltip showing all active series
+- Click+drag: zoom into date range (use Chart.js zoom plugin)
+- Double-click: reset zoom
+
+### Responsive Layout
+- Desktop: all 3 charts full-width, stacked vertically
+- Tablet: same
+- Mobile: charts are horizontally scrollable; toggles wrap
+
+---
+
+## 11. Data Freshness & FRED Accuracy Notes
+
+| Source | Release Day/Time | Data Lag | FRED vs Primary Source |
+|---|---|---|---|
+| Fed Balance Sheet (WALCL) | **Thu 4:30 PM ET** | ~1 day (covers prior Wed) | FRED = primary source, no lag |
+| US M2 (M2SL) | **Tue 1:00 PM ET** | ~1 week | FRED = primary source, no lag |
+| ECB Balance Sheet (ECBASSETSW) | **Tue ~10:00 AM CET** | ~4 days (covers prior Fri) | FRED lags ECB Data Portal by ~1 day |
+| BOJ Assets (JPNASSETS) | ~20th–25th of month | ~3–4 weeks | FRED lags BOJ by ~2 days |
+| China M2 | ~10th–15th of month | ~2 weeks | FRED lags PBOC by ~2 days |
+| Australia M2 | ~Last biz day of month+1 | ~5–6 weeks | FRED lags RBA by ~1 day |
+| Bitcoin (CoinGecko) | Real-time | Minutes | CoinGecko is primary |
+| S&P 500 / NDQ | Real-time | Minutes | Yahoo Finance is primary |
+
+**On FRED being the best source:** Yes, for this dashboard. FRED is the primary publisher for all US data (there is no closer source). For international data (ECB, BOJ, etc.), the 1–2 day FRED lag vs going directly to each central bank's API is irrelevant for a macro dashboard updating weekly. The benefit of FRED as a single unified API with consistent formatting far outweighs the marginal lag.
+
+The dashboard "Last Updated" display should show **two** things:
+1. The date of the most recent **data point** in each series (data freshness)
+2. The next **scheduled release** with a live countdown (see Section 5)
+
+---
+
+## 12. Disclaimers (render in footer)
+
+- Data sourced from FRED (Federal Reserve), CoinGecko, and Yahoo Finance. Not financial advice.
+- Australia M2 data has a longer reporting lag than other regions (~6–8 weeks).
+- China M2 data reflects broad money supply, not strictly PBoC balance sheet assets.
+- Currency conversions use the most recent available exchange rate from FRED; historical conversions use period-matched rates where possible.
+
+---
+
+## 13. Possible Future Features (out of scope for v1)
+
+- [ ] Annotate chart with major macro events (Fed rate hikes, QE programs, COVID)
+- [ ] Rate-of-change view (YoY % change in liquidity vs asset returns)
+- [ ] Normalised index view (all series rebased to 100 at a chosen start date)
+- [ ] Export chart as PNG
+- [ ] RBA official cash rate overlay
+- [ ] ASX 200 overlay for Australian chart
+
+---
+
+## 14. File Checklist for Cursor
+
+Cursor should produce:
+
+- [ ] `index.html` — shell with CDN imports for Chart.js, Tailwind
+- [ ] `config.js` — API key constants (FRED key; note: add to `.gitignore`)
+- [ ] `app.js` — all logic: fetching, caching, chart setup, toggles
+- [ ] `styles.css` — any custom styles beyond Tailwind
+- [ ] `README.md` — setup instructions including how to get a free FRED API key
+
+---
+
+*Design document version 1.0 — prepared for Cursor implementation*
