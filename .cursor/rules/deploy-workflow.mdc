@@ -1,0 +1,17 @@
+---
+description: After dashboard changes — build, copy dist, commit and push main
+alwaysApply: true
+---
+
+# World Cup dashboard deploy workflow
+
+Source: `C:\Users\Gabriel\OneDrive\Documents\Resume\Worldcup_dashboard\client`  
+Deploy: `worldcup-dashboard/` in this repo (keep `data/state.json`)
+
+After implementing dashboard features:
+
+1. From `Worldcup_dashboard` root: `npm run build`
+2. Copy `client/dist/*` into `worldcup-dashboard/` (do not overwrite `data/state.json`)
+3. Commit and push to `origin main` unless push explicitly fails
+
+Use PowerShell-compatible git commands (multiple `-m` flags for commit body; no bash heredoc).
