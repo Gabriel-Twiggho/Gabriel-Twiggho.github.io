@@ -1,0 +1,17 @@
+---
+description: Deploy World Cup dashboard changes to GitHub Pages
+globs: worldcup-dashboard/**
+alwaysApply: false
+---
+
+# World Cup dashboard deploy
+
+Source repo: `Worldcup_dashboard` (Vite root `client/`).
+
+After any change under `worldcup-dashboard/` or when syncing dashboard source:
+
+1. In `Worldcup_dashboard`: `npm run build` (outputs `client/dist/`).
+2. Copy `client/dist/*` into this repo's `worldcup-dashboard/` — keep `data/state.json`.
+3. Commit and push to `main` so GitHub Pages serves the update at `/worldcup-dashboard/`.
+
+Do not skip the build step; never edit bundled `assets/` by hand.
