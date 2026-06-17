@@ -24,6 +24,11 @@ function replaceExact(name, from, to) {
   bundle = bundle.replace(from, to);
 }
 
+function replaceExactOptional(from, to) {
+  if (bundle.includes(to)) return;
+  if (bundle.includes(from)) bundle = bundle.replace(from, to);
+}
+
 replaceBetween(
   "match event participants",
   "const Ne=Object.keys(k.stats)",
@@ -95,10 +100,14 @@ replaceExact(
   '}const wcHeroLines=[["The world,","in one place."],["Every group,","every heartbeat."],["Sixteen cities,","one trophy."],["Nations rise,","stories unfold."],["From kickoff,","to history."]],wcHeroLiveLines=[["It\'s matchday.","Right now."],["The whistle blows,","the world watches."],["Live drama,","every minute."],["Ninety minutes,","endless noise."]];function Q0({state:U,onExplore:K,onOpenMatch:fe,tourPaused:W=!1})'
 );
 
-replaceExact(
-  "hero headline rotation state",
+replaceExactOptional(
   'const{matches:oe,venues:Oe}=U,[k,f]=Rt.useState(""),[se,ge]=Rt.useState(!1),Ne=Rt.useMemo',
-  'const{matches:oe,venues:Oe}=U,[k,f]=Rt.useState(""),[se,ge]=Rt.useState(!1),[Qe,Ze]=Rt.useState(()=>Math.floor(Math.random()*wcHeroLines.length));Rt.useEffect(()=>{const Fe=setInterval(()=>Ze(ot=>ot+1),12e3);return()=>clearInterval(Fe)},[]);const Ne=Rt.useMemo'
+  'const{matches:oe,venues:Oe}=U,[k,f]=Rt.useState(""),[se,ge]=Rt.useState(!1),[Qe]=Rt.useState(()=>Math.floor(Math.random()*wcHeroLines.length));const Ne=Rt.useMemo'
+);
+
+replaceExactOptional(
+  'const{matches:oe,venues:Oe}=U,[k,f]=Rt.useState(""),[se,ge]=Rt.useState(!1),[Qe,Ze]=Rt.useState(()=>Math.floor(Math.random()*wcHeroLines.length));Rt.useEffect(()=>{const Fe=setInterval(()=>Ze(ot=>ot+1),12e3);return()=>clearInterval(Fe)},[]);const Ne=Rt.useMemo',
+  'const{matches:oe,venues:Oe}=U,[k,f]=Rt.useState(""),[se,ge]=Rt.useState(!1),[Qe]=Rt.useState(()=>Math.floor(Math.random()*wcHeroLines.length));const Ne=Rt.useMemo'
 );
 
 replaceExact(
