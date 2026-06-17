@@ -7,8 +7,10 @@ const __dirname = path.dirname(__filename);
 const bundlePath = path.resolve(__dirname, "../assets/index-4Rub2ShJ.js");
 
 let bundle = fs.readFileSync(bundlePath, "utf8");
+const originalBundle = bundle;
 
 function replaceBetween(name, start, end, replacement) {
+  if (bundle.includes(replacement)) return;
   const startIndex = bundle.indexOf(start);
   if (startIndex === -1) throw new Error(`Missing start marker for ${name}`);
   const endIndex = bundle.indexOf(end, startIndex);
@@ -17,6 +19,7 @@ function replaceBetween(name, start, end, replacement) {
 }
 
 function replaceExact(name, from, to) {
+  if (bundle.includes(to)) return;
   if (!bundle.includes(from)) throw new Error(`Missing exact snippet for ${name}`);
   bundle = bundle.replace(from, to);
 }
@@ -60,6 +63,60 @@ replaceExact(
   '"FIFA #",Ne.fifaRank||"\u2014"," \u00b7 ",Ne.group.replace("Group ","Group ")," \u00b7 ",Ne.points," pts",se.has(Ne.name)?" \u00b7 \u2605":""]'
 );
 
-fs.writeFileSync(bundlePath, bundle, "utf8");
-console.log(`Patched ${bundlePath}`);
+replaceExact("stadium tour delay", "N0=1e4", "N0=3e3");
+
+replaceExact(
+  "hero score finished kickoff",
+  'fe==="finished"?"Full time":Ed(U)',
+  'fe==="finished"?X.jsxs(X.Fragment,{children:["Full time"," \u00b7 ",Ed(U)]}):Ed(U)'
+);
+
+replaceExact(
+  "score row finished kickoff",
+  'fe==="finished"?"FT":Ed(U)',
+  'fe==="finished"?X.jsxs(X.Fragment,{children:["FT"," \u00b7 ",Ed(U)]}):Ed(U)'
+);
+
+replaceExact(
+  "match modal finished kickoff",
+  'Ne==="finished"?"Full time":Ed(U)',
+  'Ne==="finished"?X.jsxs(X.Fragment,{children:["Full time"," \u00b7 ",Ed(U)]}):Ed(U)'
+);
+
+replaceExact(
+  "refresh everything each minute",
+  "try{K(await Zg())}",
+  "try{K(await uy(eg()||{}))}"
+);
+
+replaceExact(
+  "hero headline variants",
+  '}function Q0({state:U,onExplore:K,onOpenMatch:fe,tourPaused:W=!1})',
+  '}const wcHeroLines=[["The world,","in one place."],["Every group,","every heartbeat."],["Sixteen cities,","one trophy."],["Nations rise,","stories unfold."],["From kickoff,","to history."]],wcHeroLiveLines=[["It\'s matchday.","Right now."],["The whistle blows,","the world watches."],["Live drama,","every minute."],["Ninety minutes,","endless noise."]];function Q0({state:U,onExplore:K,onOpenMatch:fe,tourPaused:W=!1})'
+);
+
+replaceExact(
+  "hero headline rotation state",
+  'const{matches:oe,venues:Oe}=U,[k,f]=Rt.useState(""),[se,ge]=Rt.useState(!1),Ne=Rt.useMemo',
+  'const{matches:oe,venues:Oe}=U,[k,f]=Rt.useState(""),[se,ge]=Rt.useState(!1),[Qe,Ze]=Rt.useState(()=>Math.floor(Math.random()*wcHeroLines.length));Rt.useEffect(()=>{const Fe=setInterval(()=>Ze(ot=>ot+1),12e3);return()=>clearInterval(Fe)},[]);const Ne=Rt.useMemo'
+);
+
+replaceExact(
+  "hero headline active line",
+  'Ke=oe.some(Fe=>Hi(Fe)==="live");return X.jsxs("section"',
+  'Ke=oe.some(Fe=>Hi(Fe)==="live"),St=(Ke?wcHeroLiveLines:wcHeroLines)[Qe%(Ke?wcHeroLiveLines:wcHeroLines).length];return X.jsxs("section"'
+);
+
+replaceExact(
+  "hero headline render",
+  'X.jsxs("h1",{className:"display",children:[Ke?"It\'s matchday.":"The world,",X.jsx("br",{}),Ke?"Right now.":"in one place."]})',
+  'X.jsxs("h1",{className:"display",children:[St[0],X.jsx("br",{}),St[1]]})'
+);
+
+if (bundle !== originalBundle) {
+  fs.writeFileSync(bundlePath, bundle, "utf8");
+  console.log(`Patched ${bundlePath}`);
+} else {
+  console.log(`Already patched ${bundlePath}`);
+}
 
