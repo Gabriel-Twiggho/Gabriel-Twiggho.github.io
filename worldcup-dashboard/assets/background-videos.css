@@ -81,6 +81,13 @@
   }
 }
 
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
 .nav-countdown {
   display: flex;
   align-items: center;
@@ -119,6 +126,10 @@
 }
 
 @media (max-width: 880px) {
+  .nav-brand {
+    gap: 10px;
+  }
+
   .nav-countdown {
     gap: 6px;
     padding: 7px 10px;

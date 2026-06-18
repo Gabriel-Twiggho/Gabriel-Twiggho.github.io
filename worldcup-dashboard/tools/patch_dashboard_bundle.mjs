@@ -128,10 +128,15 @@ replaceExact(
   'function wcNextCountdown({matches:U}){const[K,fe]=Rt.useState(Date.now());Rt.useEffect(()=>{const Ye=setInterval(()=>fe(Date.now()),1e3);return()=>clearInterval(Ye)},[]);const W=Rt.useMemo(()=>[...U].filter(Ye=>new Date(Ye.dateUtc).getTime()>K).sort((Ye,Ke)=>new Date(Ye.dateUtc)-new Date(Ke.dateUtc))[0]||null,[U,K]);if(!W)return null;const oe=Math.max(0,new Date(W.dateUtc).getTime()-K),Oe=Math.floor(oe/864e5),k=Math.floor(oe%864e5/36e5),f=Math.floor(oe%36e5/6e4),se=Math.floor(oe%6e4/1e3),ge=Oe>0?`${Oe}d ${k}h`:`${String(k).padStart(2,"0")}:${String(f).padStart(2,"0")}:${String(se).padStart(2,"0")}`,Ne=[W.home?.abbrev||W.home?.shortName||W.home?.name,W.away?.abbrev||W.away?.shortName||W.away?.name].filter(Boolean).join(" vs ");return X.jsxs("div",{className:"nav-countdown","aria-label":`Next match ${Ne} starts in ${ge}`,title:`${Ne} · ${Ed(W)}`,children:[X.jsx("span",{children:"Next"}),X.jsx("strong",{className:"num",children:ge}),X.jsx("em",{children:Ne})]})}const Dv='
 );
 
+replaceExactOptional(
+  'X.jsxs("button",{className:"wordmark",onClick:()=>window.scrollTo({top:0,behavior:"smooth"}),children:["WC",X.jsx("span",{children:"26"})]}),X.jsx(wcNextCountdown,{matches:U.matches}),X.jsx("nav",{children:Dv.map(([vt,Se])=>X.jsx("button",{onClick:()=>Fe(vt),children:Se},vt))})',
+  'X.jsxs("div",{className:"nav-brand",children:[X.jsxs("button",{className:"wordmark",onClick:()=>window.scrollTo({top:0,behavior:"smooth"}),children:["WC",X.jsx("span",{children:"26"})]}),X.jsx(wcNextCountdown,{matches:U.matches})]}),X.jsx("nav",{children:Dv.map(([vt,Se])=>X.jsx("button",{onClick:()=>Fe(vt),children:Se},vt))})'
+);
+
 replaceExact(
   "next match countdown nav slot",
   'X.jsxs("button",{className:"wordmark",onClick:()=>window.scrollTo({top:0,behavior:"smooth"}),children:["WC",X.jsx("span",{children:"26"})]}),X.jsx("nav",{children:Dv.map(([vt,Se])=>X.jsx("button",{onClick:()=>Fe(vt),children:Se},vt))})',
-  'X.jsxs("button",{className:"wordmark",onClick:()=>window.scrollTo({top:0,behavior:"smooth"}),children:["WC",X.jsx("span",{children:"26"})]}),X.jsx(wcNextCountdown,{matches:U.matches}),X.jsx("nav",{children:Dv.map(([vt,Se])=>X.jsx("button",{onClick:()=>Fe(vt),children:Se},vt))})'
+  'X.jsxs("div",{className:"nav-brand",children:[X.jsxs("button",{className:"wordmark",onClick:()=>window.scrollTo({top:0,behavior:"smooth"}),children:["WC",X.jsx("span",{children:"26"})]}),X.jsx(wcNextCountdown,{matches:U.matches})]}),X.jsx("nav",{children:Dv.map(([vt,Se])=>X.jsx("button",{onClick:()=>Fe(vt),children:Se},vt))})'
 );
 
 if (bundle !== originalBundle) {
