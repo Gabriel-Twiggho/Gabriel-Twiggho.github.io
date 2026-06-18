@@ -3,17 +3,15 @@
     scores: {
       tone: "score",
       poster: "https://images.pexels.com/videos/15448985/pexels-photo-15448985.jpeg?auto=compress&cs=tinysrgb&w=1800",
-      video: "https://videos.pexels.com/video-files/15448985/15448985-hd_1920_1080_30fps.mp4",
     },
     groups: {
       tone: "groups",
-      poster: "https://images.pexels.com/videos/15448985/pexels-photo-15448985.jpeg?auto=compress&cs=tinysrgb&w=1800",
-      video: "https://videos.pexels.com/video-files/15448985/15448985-hd_1920_1080_30fps.mp4",
+      poster: "./assets/videos/pixabay-stadium-aerial-208387.jpg",
+      video: "./assets/videos/pixabay-stadium-aerial-208387.mp4",
     },
     teams: {
       tone: "teams",
       poster: "https://images.pexels.com/videos/9440064/pexels-photo-9440064.jpeg?auto=compress&cs=tinysrgb&w=1800",
-      video: "https://videos.pexels.com/video-files/9440064/9440064-hd_1920_1080_25fps.mp4",
     },
   };
 
@@ -31,20 +29,27 @@
 
     if (!prefersReducedMotion && config.video) {
       const video = document.createElement("video");
+      video.autoplay = true;
       video.muted = true;
+      video.defaultMuted = true;
       video.loop = true;
       video.playsInline = true;
-      video.preload = "metadata";
+      video.preload = "auto";
       video.poster = config.poster;
       video.src = config.video;
-      video.addEventListener("canplay", () => {
-        layer.classList.add("is-ready");
-        video.play().catch(() => {});
-      }, { once: true });
+
+      const startPlayback = () => {
+        video.play()
+          .then(() => layer.classList.add("is-ready"))
+          .catch(() => layer.classList.remove("is-ready"));
+      };
+
+      video.addEventListener("canplay", startPlayback, { once: true });
       video.addEventListener("error", () => {
         layer.classList.remove("is-ready");
       }, { once: true });
       layer.append(video);
+      video.load();
     }
 
     section.prepend(layer);
