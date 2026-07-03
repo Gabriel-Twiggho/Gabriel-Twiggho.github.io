@@ -215,6 +215,20 @@
   white-space: nowrap;
 }
 
+@media (min-width: 1001px) {
+  .wc-ko-col {
+    padding-top: 46px;
+  }
+
+  .wc-ko-col h4 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+  }
+}
+
 /* ---- tile ---- */
 .wc-ko-tile {
   position: relative;
