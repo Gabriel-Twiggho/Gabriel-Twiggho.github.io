@@ -530,6 +530,14 @@
 }
 
 /* ---- full-bleed the bracket so it fills the screen and stays centred ---- */
+#bracket.section {
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
 @media (min-width: 1001px) {
   #bracket .bracket-scroll {
     width: 94vw;
