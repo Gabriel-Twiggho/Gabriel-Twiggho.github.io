@@ -13,6 +13,11 @@
       tone: "teams",
       poster: "https://images.pexels.com/videos/9440064/pexels-photo-9440064.jpeg?auto=compress&cs=tinysrgb&w=1800",
     },
+    bracket: {
+      tone: "bracket",
+      poster: "./assets/videos/pixabay-stadium-aerial-208387.jpg",
+      video: "./assets/videos/pixabay-stadium-aerial-208387.mp4",
+    },
   };
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -68,6 +68,10 @@
   opacity: .26;
 }
 
+.wc-motion-bg.is-bracket {
+  opacity: .2;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .wc-motion-bg video {
     display: none;
