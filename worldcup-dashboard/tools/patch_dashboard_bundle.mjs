@@ -183,16 +183,34 @@ replaceExact(
   'Ne==="upcoming"&&!(oe!=null&&oe.hasStats)&&X.jsxs("p",{className:"md-note",children:["Kicks off ",Ed(U),". Live stats, the event timeline and lineups appear here once the match gets underway."]}),We.length>0&&X.jsx(Rv,{cards:We,match:U}),Fe.length>0&&X.jsxs("section",{className:"md-section",children:[X.jsx("h3",{className:"sub-head",children:"Timeline"}),X.jsx("div",{className:"md-timeline",children:Fe.map((Mt,vt)=>X.jsx(Mv,{event:Mt},vt))})]}),oe&&(oe.hasStats||oe.momentum||oe.shots)&&X.jsx(Cv,{summary:oe,match:U})'
 );
 
-replaceExact(
+replaceExactOptional(
   "team card cache functions",
   'clock:((Et=fe.status)==null?void 0:Et.displayClock)||""}}async function A0(U,K){',
   'clock:((Et=fe.status)==null?void 0:Et.displayClock)||""}}function wcCardKind(U){const K=(U||"").toLowerCase();return K.includes("red")?"red":K.includes("yellow")?"yellow":null}async function wcRefreshCards(U,K=18){const fe=ny("wc26.cards.v1",{matches:{},teams:{},updatedAt:null});fe.matches=fe.matches||{};const W=(U||[]).filter(oe=>Hi(oe)==="live"||Hi(oe)==="finished"),oe=W.filter(Oe=>Hi(Oe)==="live"||!fe.matches[Oe.id]).slice(0,K);for(const Oe of oe)try{const k=await ly(Oe.id),f=(k.events||[]).filter(se=>wcCardKind(se.type)).map(se=>{const ge=se.side==="home"?k.home:k.away,Ne=se.side==="home"?k.away:k.home;return{...se,card:wcCardKind(se.type),matchId:Oe.id,matchName:Oe.name,teamId:String(ge.teamId),teamName:ge.name,opponent:Ne.name,stage:Oe.stage,dateUtc:Oe.dateUtc}});fe.matches[Oe.id]=f}catch{}const Oe={};for(const k of Object.values(fe.matches))for(const f of k||[])f.teamId&&(Oe[f.teamId]||(Oe[f.teamId]=[]),Oe[f.teamId].push(f));for(const k of Object.values(Oe))k.sort((f,se)=>String(f.dateUtc||"").localeCompare(String(se.dateUtc||""))||Ug(f.clock)-Ug(se.clock));return fe.teams=Oe,fe.updatedAt=new Date().toISOString(),Qm("wc26.cards.v1",fe),Oe}async function A0(U,K){'
 );
 
-replaceExact(
+replaceExactOptional(
+  "team card cache prune active matches",
+  'async function wcRefreshCards(U,K=18){const fe=ny("wc26.cards.v1",{matches:{},teams:{},updatedAt:null});fe.matches=fe.matches||{};const W=(U||[]).filter(oe=>Hi(oe)==="live"||Hi(oe)==="finished"),oe=W.filter(Oe=>Hi(Oe)==="live"||!fe.matches[Oe.id]).slice(0,K);for(const Oe of oe)try{const k=await ly(Oe.id),f=(k.events||[]).filter(se=>wcCardKind(se.type)).map(se=>{',
+  'async function wcRefreshCards(U,K=18){const fe=ny("wc26.cards.v2",{matches:{},teams:{},updatedAt:null});fe.matches=fe.matches||{};const W=(U||[]).filter(oe=>Hi(oe)==="live"||Hi(oe)==="finished"),wcIds=new Set(W.map(oe=>String(oe.id)));for(const Oe of Object.keys(fe.matches))wcIds.has(String(Oe))||delete fe.matches[Oe];const oe=W.filter(Oe=>Hi(Oe)==="live"||!fe.matches[Oe.id]).slice(0,K);for(const Oe of oe)try{const k=await ly(Oe.id),f=(k.events||[]).filter(se=>wcCardKind(se.type)).filter((()=>{const se={home:{yellow:0,red:0},away:{yellow:0,red:0}};return ge=>{const Ne=wcCardKind(ge.type);if(!Ne||!ge.side)return!1;const Ye=ge.side==="home"?k.home:k.away,Ke=Ne==="yellow"?Ye.stats?.yellowCards?.value:Ye.stats?.redCards?.value;return Number.isFinite(Ke)&&se[ge.side][Ne]>=Ke?!1:(se[ge.side][Ne]++,!0)}})()).map(se=>{'
+);
+
+replaceExactOptional(
+  "team card cache save v2",
+  'Qm("wc26.cards.v1",fe)',
+  'Qm("wc26.cards.v2",fe)'
+);
+
+replaceExactOptional(
   "attach team cards to groups",
   'function Jm(U){const K=ry(),fe={};',
-  'function Jm(U){const K=ry(),Ke=ny("wc26.cards.v1",{teams:{}}).teams||{},fe={};'
+  'function Jm(U){const K=ry(),Ke=ny("wc26.cards.v2",{teams:{}}).teams||{},fe={};'
+);
+
+replaceExactOptional(
+  "team card cache read v2",
+  'ny("wc26.cards.v1",{teams:{}})',
+  'ny("wc26.cards.v2",{teams:{}})'
 );
 
 replaceExact(
