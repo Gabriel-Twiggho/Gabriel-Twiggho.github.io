@@ -213,10 +213,28 @@ replaceExactOptional(
   'ny("wc26.cards.v2",{teams:{}})'
 );
 
-replaceExact(
+replaceExactOptional(
+  "team card reset window helpers",
+  'function wcCardKind(U){const K=(U||"").toLowerCase();return K.includes("red")?"red":K.includes("yellow")?"yellow":null}async function wcRefreshCards',
+  'function wcCardKind(U){const K=(U||"").toLowerCase();return K.includes("red")?"red":K.includes("yellow")?"yellow":null}function wcCardPhase(U){return U==="group-stage"?0:U==="semifinals"||U==="3rd-place-match"||U==="final"?2:1}function wcTeamCardPhase(U,K){const fe=(U||[]).filter(W=>String(W.home?.teamId)===String(K)||String(W.away?.teamId)===String(K));if(fe.some(W=>wcCardPhase(W.stage)===2))return 2;if(fe.some(W=>wcCardPhase(W.stage)===1))return 1;const W=fe.filter(oe=>wcCardPhase(oe.stage)===0);return W.length&&W.every(oe=>Hi(oe)==="finished")?1:0}function wcActiveCards(U,K,fe){const W=wcTeamCardPhase(K,fe);return(U||[]).filter(oe=>oe.phase===W)}async function wcRefreshCards'
+);
+
+replaceExactOptional(
+  "team card event phase",
+  'stage:Oe.stage,dateUtc:Oe.dateUtc',
+  'stage:Oe.stage,phase:wcCardPhase(Oe.stage),dateUtc:Oe.dateUtc'
+);
+
+replaceExactOptional(
   "return groups with team cards",
   'return{matches:W,groups:U.groups||[],venues:Oe,players:oe,overrides:K,meta:U.meta||{sourceHealth:{},lastLiveUpdate:null,lastTournamentUpdate:null}}}',
   'return{matches:W,groups:(U.groups||[]).map(k=>({...k,entries:(k.entries||[]).map(f=>({...f,cards:Ke[String(f.teamId)]||[]}))})),venues:Oe,players:oe,overrides:K,meta:U.meta||{sourceHealth:{},lastLiveUpdate:null,lastTournamentUpdate:null}}}'
+);
+
+replaceExactOptional(
+  "active team cards in groups",
+  'cards:Ke[String(f.teamId)]||[]',
+  'cards:wcActiveCards(Ke[String(f.teamId)]||[],W,f.teamId)'
 );
 
 replaceExact(
