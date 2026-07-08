@@ -70,7 +70,7 @@ replaceExact(
   '[uv(pt.position),pt.club,pt.league].filter(Boolean).join(" \u00b7 ")'
 );
 
-replaceExact(
+replaceExactOptional(
   "team tile FIFA rank",
   'Ne.group.replace("Group ","Group ")," \u00b7 ",Ne.points," pts",se.has(Ne.name)?" \u00b7 \u2605":""]',
   '"FIFA #",Ne.fifaRank||"\u2014"," \u00b7 ",Ne.group.replace("Group ","Group ")," \u00b7 ",Ne.points," pts",se.has(Ne.name)?" \u00b7 \u2605":""]'
@@ -181,6 +181,54 @@ replaceExact(
   "match card tracker render",
   'Ne==="upcoming"&&!(oe!=null&&oe.hasStats)&&X.jsxs("p",{className:"md-note",children:["Kicks off ",Ed(U),". Live stats, the event timeline and lineups appear here once the match gets underway."]}),Fe.length>0&&X.jsxs("section",{className:"md-section",children:[X.jsx("h3",{className:"sub-head",children:"Timeline"}),X.jsx("div",{className:"md-timeline",children:Fe.map((We,Mt)=>X.jsx(Mv,{event:We},Mt))})]}),oe&&(oe.hasStats||oe.momentum||oe.shots)&&X.jsx(Cv,{summary:oe,match:U})',
   'Ne==="upcoming"&&!(oe!=null&&oe.hasStats)&&X.jsxs("p",{className:"md-note",children:["Kicks off ",Ed(U),". Live stats, the event timeline and lineups appear here once the match gets underway."]}),We.length>0&&X.jsx(Rv,{cards:We,match:U}),Fe.length>0&&X.jsxs("section",{className:"md-section",children:[X.jsx("h3",{className:"sub-head",children:"Timeline"}),X.jsx("div",{className:"md-timeline",children:Fe.map((Mt,vt)=>X.jsx(Mv,{event:Mt},vt))})]}),oe&&(oe.hasStats||oe.momentum||oe.shots)&&X.jsx(Cv,{summary:oe,match:U})'
+);
+
+replaceExact(
+  "team card cache functions",
+  'clock:((Et=fe.status)==null?void 0:Et.displayClock)||""}}async function A0(U,K){',
+  'clock:((Et=fe.status)==null?void 0:Et.displayClock)||""}}function wcCardKind(U){const K=(U||"").toLowerCase();return K.includes("red")?"red":K.includes("yellow")?"yellow":null}async function wcRefreshCards(U,K=18){const fe=ny("wc26.cards.v1",{matches:{},teams:{},updatedAt:null});fe.matches=fe.matches||{};const W=(U||[]).filter(oe=>Hi(oe)==="live"||Hi(oe)==="finished"),oe=W.filter(Oe=>Hi(Oe)==="live"||!fe.matches[Oe.id]).slice(0,K);for(const Oe of oe)try{const k=await ly(Oe.id),f=(k.events||[]).filter(se=>wcCardKind(se.type)).map(se=>{const ge=se.side==="home"?k.home:k.away,Ne=se.side==="home"?k.away:k.home;return{...se,card:wcCardKind(se.type),matchId:Oe.id,matchName:Oe.name,teamId:String(ge.teamId),teamName:ge.name,opponent:Ne.name,stage:Oe.stage,dateUtc:Oe.dateUtc}});fe.matches[Oe.id]=f}catch{}const Oe={};for(const k of Object.values(fe.matches))for(const f of k||[])f.teamId&&(Oe[f.teamId]||(Oe[f.teamId]=[]),Oe[f.teamId].push(f));for(const k of Object.values(Oe))k.sort((f,se)=>String(f.dateUtc||"").localeCompare(String(se.dateUtc||""))||Ug(f.clock)-Ug(se.clock));return fe.teams=Oe,fe.updatedAt=new Date().toISOString(),Qm("wc26.cards.v1",fe),Oe}async function A0(U,K){'
+);
+
+replaceExact(
+  "attach team cards to groups",
+  'function Jm(U){const K=ry(),fe={};',
+  'function Jm(U){const K=ry(),Ke=ny("wc26.cards.v1",{teams:{}}).teams||{},fe={};'
+);
+
+replaceExact(
+  "return groups with team cards",
+  'return{matches:W,groups:U.groups||[],venues:Oe,players:oe,overrides:K,meta:U.meta||{sourceHealth:{},lastLiveUpdate:null,lastTournamentUpdate:null}}}',
+  'return{matches:W,groups:(U.groups||[]).map(k=>({...k,entries:(k.entries||[]).map(f=>({...f,cards:Ke[String(f.teamId)]||[]}))})),venues:Oe,players:oe,overrides:K,meta:U.meta||{sourceHealth:{},lastLiveUpdate:null,lastTournamentUpdate:null}}}'
+);
+
+replaceExact(
+  "refresh team card cache on full refresh",
+  'return K.meta.lastTournamentUpdate=new Date().toISOString(),Qm(Km,K),Jm(K)}',
+  'return await wcRefreshCards(K.fixtures||[],32),K.meta.lastTournamentUpdate=new Date().toISOString(),Qm(Km,K),Jm(K)}'
+);
+
+replaceExact(
+  "refresh team card cache on live refresh",
+  'return Qm(Km,U),Jm(U)}async function z0',
+  'return await wcRefreshCards(U.fixtures||[]),Qm(Km,U),Jm(U)}async function z0'
+);
+
+replaceExact(
+  "team overlay card values",
+  '[Mt,U.teamId]),Se=Rt.useMemo(()=>{const qe=new Map(X_.map(gt=>[gt,[]]));',
+  '[Mt,U.teamId]),qe=Rt.useMemo(()=>[...(U.cards||[])].sort((St,Yt)=>String(St.dateUtc||"").localeCompare(String(Yt.dateUtc||""))||Ug(St.clock)-Ug(Yt.clock)),[U.cards]),gt=qe.filter(St=>St.card==="yellow"),pt=qe.filter(St=>St.card==="red"),Se=Rt.useMemo(()=>{const qe=new Map(X_.map(gt=>[gt,[]]));'
+);
+
+replaceExact(
+  "team overlay discipline block",
+  'X.jsx(fv,{lineup:Ne,state:Ke})]}),X.jsxs("section",{className:"overlay-block",children:[X.jsx("h4",{className:"sub-head",children:"Fixtures"}),Mt.map(qe=>{',
+  'X.jsx(fv,{lineup:Ne,state:Ke})]}),X.jsxs("section",{className:"overlay-block team-card-block",children:[X.jsx("h4",{className:"sub-head",children:"Discipline"}),X.jsxs("div",{className:"team-card-summary",children:[X.jsxs("span",{children:[X.jsx("i",{className:"md-card-chip yellow"}),gt.length," yellow"]}),X.jsxs("span",{children:[X.jsx("i",{className:"md-card-chip red"}),pt.length," red"]})]}),qe.length?X.jsx("ul",{className:"team-card-list",children:qe.map(St=>X.jsxs("li",{children:[X.jsx("i",{className:`md-card-chip ${St.card}`}),X.jsxs("span",{children:[X.jsx("strong",{children:St.label||St.text||((St.players||[]).length?St.players.join(" \\u00b7 "):St.type)}),X.jsxs("em",{children:[St.clock||"\\u00b7"," \\u00b7 ",St.type,St.opponent?` vs ${St.opponent}`:""]})]})]},`${St.matchId}-${St.clock}-${St.type}-${St.label}`))}):X.jsx("p",{className:"muted",children:"No cards tracked yet."})]}),X.jsxs("section",{className:"overlay-block",children:[X.jsx("h4",{className:"sub-head",children:"Fixtures"}),Mt.map(qe=>{'
+);
+
+replaceExact(
+  "team tile card counts",
+  'Ne.group.replace("Group ","Group ")," · ",Ne.points," pts",se.has(Ne.name)?" · ★":""]',
+  'Ne.group.replace("Group ","Group ")," · ",Ne.points," pts",(Ne.cards&&Ne.cards.length)?` · ${Ne.cards.filter(Ye=>Ye.card==="yellow").length}Y/${Ne.cards.filter(Ye=>Ye.card==="red").length}R`:"",se.has(Ne.name)?" · ★":""]'
 );
 
 
