@@ -79,7 +79,6 @@ Use these canonical project hashes in all new links:
 
 Legacy `#project1` through `#project4` links are supported in `js/main.js`. Do not remove that compatibility without migrating existing public links. New project IDs should be descriptive, lowercase, and hyphenated.
 
-The rover page follows a deliberate narrative order: Project Overview, the two final-build photos, Project Outcome, Workflow of project, the concept/electronics-development photos, and Tech Stack at the bottom. Preserve this sequence when adding rover content so the finished object appears before the supporting process material.
 
 ## Before handing off a change
 
