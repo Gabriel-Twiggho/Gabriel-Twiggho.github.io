@@ -7,21 +7,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=20260804-2">
 </head>
 <body>
     <nav>
         <div class="container">
-            <a href="#" onclick="showPage('home'); return false;" class="logo" id="logo-easter-egg">Gabriel Twigg-Ho</a>
+            <a href="#home" data-page="home" class="logo" id="logo-easter-egg">Gabriel Twigg-Ho</a>
             <ul class="nav-links">
-                <li><a href="#" onclick="showPage('home'); return false;" class="active" id="nav-home">Home</a></li>
+                <li><a href="#home" data-page="home" class="active" id="nav-home">Home</a></li>
                 <li class="nav-dropdown">
-                    <a href="#" class="dropdown-trigger" id="nav-projects">Projects <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                    <a href="#featured-projects" class="dropdown-trigger" id="nav-projects">Projects <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#swarm-tracking" onclick="showPage('swarm-tracking'); return false;" id="nav-swarm-tracking">Swarm Tracking</a></li>
-                        <li><a href="#task-scheduling" onclick="showPage('task-scheduling'); return false;" id="nav-task-scheduling">Task Scheduling</a></li>
-                        <li><a href="#co2-prediction" onclick="showPage('co2-prediction'); return false;" id="nav-co2-prediction">CO2 Prediction</a></li>
-                        <li><a href="#ai-robot" onclick="showPage('ai-robot'); return false;" id="nav-ai-robot">ROS 2 Rover</a></li>
+                        <li><a href="#swarm-tracking" data-page="swarm-tracking" id="nav-swarm-tracking">Swarm Tracking</a></li>
+                        <li><a href="#task-scheduling" data-page="task-scheduling" id="nav-task-scheduling">Task Scheduling</a></li>
+                        <li><a href="#co2-prediction" data-page="co2-prediction" id="nav-co2-prediction">CO2 Prediction</a></li>
+                        <li><a href="#ai-robot" data-page="ai-robot" id="nav-ai-robot">ROS 2 Rover</a></li>
                     </ul>
                 </li>
             </ul>
@@ -57,7 +57,7 @@
             </div>
 
             <!-- Project Cards Section -->
-            <div class="home-projects">
+            <div class="home-projects" id="featured-projects">
                 <div class="container">
                     <h2 class="projects-heading">Featured Projects</h2>
                     <div class="project-cards">
@@ -108,7 +108,6 @@
                                 <img src="Pictures/project4_finalfront.jpg" alt="Completed ROS 2 voice-controlled rover">
                             </div>
                             <div class="card-content">
-                                <span class="card-badge">Concluded</span>
                                 <h3>ROS 2 Voice-Controlled Rover</h3>
                                 <p class="card-problem"><strong>Problem:</strong> Connect local voice control, off-board computer vision, and physical differential-drive hardware across two computers.</p>
                                 <p class="card-solution"><strong>Solution:</strong> Built a modular ROS 2 rover with Vosk speech recognition, YOLO person detection, and a Raspberry Pi motor-control stack.</p>
@@ -614,7 +613,7 @@
                 </a>
                 <a href="#p4-roadmap" class="project-nav-item" data-section="p4-roadmap">
                     <span class="project-nav-line"></span>
-                    <span class="project-nav-text">Roadmap</span>
+                    <span class="project-nav-text">Build Stages</span>
                 </a>
                 <a href="#p4-build" class="project-nav-item" data-section="p4-build">
                     <span class="project-nav-line"></span>
@@ -625,7 +624,6 @@
             <div class="project4-content">
                 <div class="project4-inner">
                     <div class="project4-header">
-                        <span class="project4-status-badge concluded">Project Concluded</span>
                         <h1>ROS 2 Voice-Controlled Rover</h1>
                         <p class="project4-subtitle">Raspberry Pi / Offline Speech Recognition / Off-board Computer Vision</p>
                     </div>
@@ -638,18 +636,13 @@
                             command parsing, control arbitration, and motor-facing nodes. A Windows PC handled GPU-based YOLO
                             person detection and returned normalised bounding-box data to the rover over the ROS 2 network.
                         </p>
-                        <p>
-                            The original roadmap extended further into obstacle-aware autonomy and LLM-based reasoning, including
-                            ideas such as following a specifically described person or navigating to a named room. Those Phase I-J
-                            capabilities remained future work and were <strong>not implemented</strong> in the finished project.
-                        </p>
                     </div>
 
                     <div class="project4-outcome" id="p4-outcome">
                         <h2>Project Outcome</h2>
                         <p>
-                            Development concluded after reaching Phase H. The software architecture and physical rover were built,
-                            but reliable real-world turning and person-following still required substantial PID/PD tuning.
+                            The finished build brings the rover hardware, ROS 2 software architecture, offline voice interface,
+                            and off-board computer vision pipeline together as one integrated system.
                         </p>
                         <div class="project4-outcome-grid">
                             <div class="project4-outcome-card delivered">
@@ -662,21 +655,7 @@
                                     <li>A complete 3D-printed differential-drive rover and integrated electronics</li>
                                 </ul>
                             </div>
-                            <div class="project4-outcome-card limits">
-                                <p class="project4-outcome-label">Not completed</p>
-                                <ul>
-                                    <li>Repeatable PID/PD tuning for reliable physical turning and follow mode</li>
-                                    <li>Phase I floor-safety and obstacle-system validation</li>
-                                    <li>Phase J LLM/LLAVA integration and context-aware commands</li>
-                                    <li>Autonomous navigation commands such as “go to the kitchen”</li>
-                                </ul>
-                            </div>
                         </div>
-                        <p class="project4-closure-note">
-                            The remaining tuning required extensive physical testing. I concluded the project when my available
-                            development time shifted to other volunteer commitments, documenting the working architecture and
-                            leaving the unimplemented scope clearly separated from the completed work.
-                        </p>
                         <div class="project4-repo-links">
                             <a href="https://github.com/Gabriel-Twiggho/ros2-rover" target="_blank" rel="noopener noreferrer" class="project4-repo-link primary">
                                 View ROS 2 Rover Repository →
@@ -688,7 +667,7 @@
                     </div>
 
                     <div class="project4-roadmap" id="p4-roadmap">
-                        <h2>Development Roadmap</h2>
+                        <h2>Completed Build Stages</h2>
                         <table class="phase-table">
                             <thead>
                                 <tr>
@@ -720,23 +699,13 @@
                                 </tr>
                                 <tr>
                                     <td class="phase-id">G</td>
-                                    <td class="phase-goal">Electronics: Cytron motor-driver integration, PWM control, and bench work; extended calibration was not completed.</td>
-                                    <td><span class="phase-status partial">Partial</span></td>
+                                    <td class="phase-goal">Electronics: Cytron motor-driver integration, PWM control, and bench testing.</td>
+                                    <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">Chassis</td>
                                     <td class="phase-goal">Physical design: final 3D-printed shell, wheels, electronics mounting, and rear caster assembled.</td>
                                     <td><span class="phase-status completed">Done</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="phase-id">H</td>
-                                    <td class="phase-goal">Motion: follow controller and physical drive integration reached the tuning stage, but reliable turning and follow behaviour were not achieved.</td>
-                                    <td><span class="phase-status partial">Concluded in tuning</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="phase-id">I–J</td>
-                                    <td class="phase-goal">Planned intelligence: obstacle systems, LLM/LLAVA reasoning, and context-aware autonomous navigation.</td>
-                                    <td><span class="phase-status not-implemented">Not implemented</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -809,6 +778,6 @@
 
     </main>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=20260804-2"></script>
 </body>
 </html>

@@ -693,7 +693,6 @@ main {
 }
 
 /* Project 4 - Iron theme animations */
-.project4-status-badge,
 .project4-header h1,
 .project4-subtitle,
 .project4-description,
@@ -702,16 +701,11 @@ main {
     transform: translateY(15px);
 }
 
-.page.animate .project4-status-badge,
 .page.animate .project4-header h1,
 .page.animate .project4-subtitle,
 .page.animate .project4-description,
 .page.animate .project4-roadmap {
     animation: fadeInUp 0.4s ease forwards;
-}
-
-.page.animate .project4-status-badge {
-    animation-delay: 0.05s;
 }
 
 .page.animate .project4-header h1 {
@@ -1737,39 +1731,6 @@ footer h3 {
     margin-bottom: 3rem;
 }
 
-.project4-status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(194, 120, 62, 0.2);
-    border: 1px solid rgba(194, 120, 62, 0.5);
-    padding: 0.4rem 1rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #c2783e;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.project4-status-badge::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: #c2783e;
-    border-radius: 50%;
-    animation: pulse-iron 2s infinite;
-}
-
-.project4-status-badge.concluded::before {
-    animation: none;
-}
-
-@keyframes pulse-iron {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-}
-
 .project4-header h1 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -1921,7 +1882,7 @@ footer h3 {
 
 .project4-outcome-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
     margin: 1.5rem 0;
 }
@@ -1962,11 +1923,6 @@ footer h3 {
 
 .project4-outcome-card li:last-child {
     margin-bottom: 0;
-}
-
-.project4-closure-note {
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .project4-repo-links {
@@ -2091,18 +2047,6 @@ footer h3 {
     background: rgba(234, 179, 8, 0.12);
     color: #ca8a04;
     border: 1px solid rgba(234, 179, 8, 0.3);
-}
-
-.phase-status.partial {
-    background: rgba(234, 179, 8, 0.12);
-    color: #eab308;
-    border: 1px solid rgba(234, 179, 8, 0.3);
-}
-
-.phase-status.not-implemented {
-    background: rgba(148, 163, 184, 0.08);
-    color: #94a3b8;
-    border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 /* Current Focus Card */
