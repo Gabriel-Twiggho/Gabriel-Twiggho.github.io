@@ -1,3 +1,24 @@
+const VALID_PAGES = [
+    'home',
+    'swarm-tracking',
+    'task-scheduling',
+    'co2-prediction',
+    'ai-robot'
+];
+
+const LEGACY_PAGE_ALIASES = {
+    project1: 'swarm-tracking',
+    project2: 'task-scheduling',
+    project3: 'co2-prediction',
+    project4: 'ai-robot'
+};
+
+const DARK_PAGES = new Set(['swarm-tracking', 'ai-robot']);
+
+function canonicalPageId(pageId) {
+    return LEGACY_PAGE_ALIASES[pageId] || pageId;
+}
+
 // Easter egg: Click logo 5 times to go to LEGO
 (function() {
     let clickCount = 0;
@@ -22,9 +43,9 @@
 
 // Show page function - handles navigation between pages
 function showPage(pageId, updateHash = true) {
-    // Validate pageId
-    const validPages = ['home', 'project1', 'project2', 'project3', 'project4'];
-    if (!validPages.includes(pageId)) {
+    // Resolve old numbered links before validating the canonical route.
+    pageId = canonicalPageId(pageId);
+    if (!VALID_PAGES.includes(pageId)) {
         pageId = 'home';
     }
     
@@ -58,7 +79,7 @@ function showPage(pageId, updateHash = true) {
     }
     
     // Toggle dark mode for body based on page
-    if (pageId === 'project1' || pageId === 'project4') {
+    if (DARK_PAGES.has(pageId)) {
         document.body.classList.add('dark-mode');
     } else {
         document.body.classList.remove('dark-mode');
@@ -75,21 +96,23 @@ function showPage(pageId, updateHash = true) {
 
 // Handle direct links via URL hash
 function handleHashChange() {
-    const hash = window.location.hash.slice(1); // Remove the # symbol
-    // Only handle page-level hashes (home, project1, etc), not section hashes
-    const validPages = ['home', 'project1', 'project2', 'project3', 'project4'];
-    if (hash && validPages.includes(hash)) {
-        showPage(hash, false);
+    const requestedHash = window.location.hash.slice(1);
+    const pageId = canonicalPageId(requestedHash);
+
+    // Ignore section-level hashes and only handle known page routes.
+    if (requestedHash && VALID_PAGES.includes(pageId)) {
+        showPage(pageId, false);
+
+        // Keep legacy bookmarks working while exposing the descriptive URL.
+        if (requestedHash !== pageId) {
+            window.history.replaceState(null, '', '#' + pageId);
+        }
     }
 }
 
 // Check for hash on page load
 window.addEventListener('DOMContentLoaded', function() {
-    const hash = window.location.hash.slice(1);
-    const validPages = ['home', 'project1', 'project2', 'project3', 'project4'];
-    if (hash && validPages.includes(hash)) {
-        showPage(hash, false);
-    }
+    handleHashChange();
 });
 
 // Handle browser back/forward buttons

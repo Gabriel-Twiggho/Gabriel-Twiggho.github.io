@@ -18,10 +18,10 @@
                 <li class="nav-dropdown">
                     <a href="#" class="dropdown-trigger" id="nav-projects">Projects <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" onclick="showPage('project1'); return false;" id="nav-project1">Swarm Tracking</a></li>
-                        <li><a href="#" onclick="showPage('project2'); return false;" id="nav-project2">Task Scheduling</a></li>
-                        <li><a href="#" onclick="showPage('project3'); return false;" id="nav-project3">CO2 Prediction</a></li>
-                        <li><a href="#" onclick="showPage('project4'); return false;" id="nav-project4">Mobile Robot</a></li>
+                        <li><a href="#swarm-tracking" onclick="showPage('swarm-tracking'); return false;" id="nav-swarm-tracking">Swarm Tracking</a></li>
+                        <li><a href="#task-scheduling" onclick="showPage('task-scheduling'); return false;" id="nav-task-scheduling">Task Scheduling</a></li>
+                        <li><a href="#co2-prediction" onclick="showPage('co2-prediction'); return false;" id="nav-co2-prediction">CO2 Prediction</a></li>
+                        <li><a href="#ai-robot" onclick="showPage('ai-robot'); return false;" id="nav-ai-robot">ROS 2 Rover</a></li>
                     </ul>
                 </li>
             </ul>
@@ -62,7 +62,7 @@
                     <h2 class="projects-heading">Featured Projects</h2>
                     <div class="project-cards">
                         <!-- Project 1: Swarm Tracking -->
-                        <div class="project-card" onclick="showPage('project1')">
+                        <div class="project-card" onclick="showPage('swarm-tracking')">
                             <div class="card-media">
                                 <video autoplay loop muted playsinline>
                                     <source src="Swarm%20Tracking%20Demo%20Video%202.mp4" type="video/mp4">
@@ -77,7 +77,7 @@
                         </div>
 
                         <!-- Project 2: Task Scheduling -->
-                        <div class="project-card" onclick="showPage('project2')">
+                        <div class="project-card" onclick="showPage('task-scheduling')">
                             <div class="card-media">
                                 <img src="Pictures/Task_Scheduling.png" alt="Task Scheduling">
                             </div>
@@ -90,7 +90,7 @@
                         </div>
 
                         <!-- Project 3: CO2 Prediction -->
-                        <div class="project-card" onclick="showPage('project3')">
+                        <div class="project-card" onclick="showPage('co2-prediction')">
                             <div class="card-media">
                                 <img src="Pictures/Co2_project.png" alt="CO2 Prediction Model">
                             </div>
@@ -103,15 +103,15 @@
                         </div>
 
                         <!-- Project 4: Mobile Robot -->
-                        <div class="project-card" onclick="showPage('project4')">
+                        <div class="project-card" onclick="showPage('ai-robot')">
                             <div class="card-media">
-                                <img src="Pictures/project4_concept.png" alt="AI-Powered Mobile Robot">
+                                <img src="Pictures/project4_finalfront.jpg" alt="Completed ROS 2 voice-controlled rover">
                             </div>
                             <div class="card-content">
-                                <span class="card-badge">In Progress</span>
-                                <h3>AI-Powered Mobile Robot</h3>
-                                <p class="card-problem"><strong>Problem:</strong> Bridging natural language commands with physical robot actions requires complex perception pipelines.</p>
-                                <p class="card-solution"><strong>Solution:</strong> ROS 2 platform with YOLOv8 vision, voice control, and LLM integration on Raspberry Pi.</p>
+                                <span class="card-badge">Concluded</span>
+                                <h3>ROS 2 Voice-Controlled Rover</h3>
+                                <p class="card-problem"><strong>Problem:</strong> Connect local voice control, off-board computer vision, and physical differential-drive hardware across two computers.</p>
+                                <p class="card-solution"><strong>Solution:</strong> Built a modular ROS 2 rover with Vosk speech recognition, YOLO person detection, and a Raspberry Pi motor-control stack.</p>
                                 <span class="card-link">View Project →</span>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
         </section>
 
         <!-- Project 1: Robot Swarms -->
-        <section id="project1" class="page">
+        <section id="swarm-tracking" class="page">
             <!-- Sidebar Navigation -->
             <nav class="project-nav" data-project="1">
                 <a href="#p1-hero" class="project-nav-item active" data-section="p1-hero">
@@ -407,10 +407,10 @@
         </section>
 
         <!-- Project 2: Online Task Scheduling -->
-        <section id="project2" class="page">
+        <section id="task-scheduling" class="page">
             <!-- Sidebar Navigation -->
             <nav class="project-nav" data-project="2">
-                <a href="#project2" class="project-nav-item active" data-section="project2">
+                <a href="#task-scheduling" class="project-nav-item active" data-section="task-scheduling">
                     <span class="project-nav-line"></span>
                     <span class="project-nav-text">Overview</span>
                 </a>
@@ -528,10 +528,10 @@
         </section>
 
         <!-- Project 3: CO2 Model -->
-        <section id="project3" class="page">
+        <section id="co2-prediction" class="page">
             <!-- Sidebar Navigation -->
             <nav class="project-nav" data-project="3">
-                <a href="#project3" class="project-nav-item active" data-section="project3">
+                <a href="#co2-prediction" class="project-nav-item active" data-section="co2-prediction">
                     <span class="project-nav-line"></span>
                     <span class="project-nav-text">Overview</span>
                 </a>
@@ -600,36 +600,91 @@
             </div>
         </section>
 
-        <!-- Project 4: AI-Powered Mobile Robot -->
-        <section id="project4" class="page">
+        <!-- Project 4: ROS 2 Voice-Controlled Rover -->
+        <section id="ai-robot" class="page">
             <!-- Sidebar Navigation -->
-            <nav class="project-nav" data-project="4">
-                <a href="#project4" class="project-nav-item active" data-section="project4">
+            <nav class="project-nav" data-project="ai-robot">
+                <a href="#ai-robot" class="project-nav-item active" data-section="ai-robot">
                     <span class="project-nav-line"></span>
                     <span class="project-nav-text">Overview</span>
+                </a>
+                <a href="#p4-outcome" class="project-nav-item" data-section="p4-outcome">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Outcome</span>
                 </a>
                 <a href="#p4-roadmap" class="project-nav-item" data-section="p4-roadmap">
                     <span class="project-nav-line"></span>
                     <span class="project-nav-text">Roadmap</span>
+                </a>
+                <a href="#p4-build" class="project-nav-item" data-section="p4-build">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Final Build</span>
                 </a>
             </nav>
 
             <div class="project4-content">
                 <div class="project4-inner">
                     <div class="project4-header">
-                        <span class="project4-status-badge">In Progress</span>
-                        <h1>AI-Powered Mobile Robot</h1>
-                        <p class="project4-subtitle">ROS 2 / Raspberry Pi / Voice-Controlled Autonomous Platform</p>
+                        <span class="project4-status-badge concluded">Project Concluded</span>
+                        <h1>ROS 2 Voice-Controlled Rover</h1>
+                        <p class="project4-subtitle">Raspberry Pi / Offline Speech Recognition / Off-board Computer Vision</p>
                     </div>
 
                     <div class="project4-description">
                         <h2>Project Overview</h2>
                         <p>
-                            I'm building a mobile robot designed to bridge the gap between natural language and physical action. 
-                            The goal is a system that understands context-aware commands like "follow the person in the red shirt" 
-                            or "go to the kitchen," combining perception, language understanding, and autonomous navigation 
-                            on a Raspberry Pi.
+                            I built this rover as an end-to-end exploration of how speech, computer vision, and physical control
+                            can work together in ROS 2. The Raspberry Pi handled the camera, offline Vosk speech recognition,
+                            command parsing, control arbitration, and motor-facing nodes. A Windows PC handled GPU-based YOLO
+                            person detection and returned normalised bounding-box data to the rover over the ROS 2 network.
                         </p>
+                        <p>
+                            The original roadmap extended further into obstacle-aware autonomy and LLM-based reasoning, including
+                            ideas such as following a specifically described person or navigating to a named room. Those Phase I-J
+                            capabilities remained future work and were <strong>not implemented</strong> in the finished project.
+                        </p>
+                    </div>
+
+                    <div class="project4-outcome" id="p4-outcome">
+                        <h2>Project Outcome</h2>
+                        <p>
+                            Development concluded after reaching Phase H. The software architecture and physical rover were built,
+                            but reliable real-world turning and person-following still required substantial PID/PD tuning.
+                        </p>
+                        <div class="project4-outcome-grid">
+                            <div class="project4-outcome-card delivered">
+                                <p class="project4-outcome-label">Delivered</p>
+                                <ul>
+                                    <li>Native ROS 2 Iron environment and camera streaming on a Raspberry Pi 4</li>
+                                    <li>Offline voice recognition and command parsing with Vosk</li>
+                                    <li>Virtual differential-drive simulation, velocity arbitration, and motor-control nodes</li>
+                                    <li>PC-hosted YOLO person detection with bounding-box data returned over Wi-Fi</li>
+                                    <li>A complete 3D-printed differential-drive rover and integrated electronics</li>
+                                </ul>
+                            </div>
+                            <div class="project4-outcome-card limits">
+                                <p class="project4-outcome-label">Not completed</p>
+                                <ul>
+                                    <li>Repeatable PID/PD tuning for reliable physical turning and follow mode</li>
+                                    <li>Phase I floor-safety and obstacle-system validation</li>
+                                    <li>Phase J LLM/LLAVA integration and context-aware commands</li>
+                                    <li>Autonomous navigation commands such as “go to the kitchen”</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="project4-closure-note">
+                            The remaining tuning required extensive physical testing. I concluded the project when my available
+                            development time shifted to other volunteer commitments, documenting the working architecture and
+                            leaving the unimplemented scope clearly separated from the completed work.
+                        </p>
+                        <div class="project4-repo-links">
+                            <a href="https://github.com/Gabriel-Twiggho/ros2-rover" target="_blank" rel="noopener noreferrer" class="project4-repo-link primary">
+                                View ROS 2 Rover Repository →
+                            </a>
+                            <a href="https://github.com/Gabriel-Twiggho/ros2-rover/tree/PC_Branch" target="_blank" rel="noopener noreferrer" class="project4-repo-link">
+                                View Windows Vision Branch →
+                            </a>
+                        </div>
                     </div>
 
                     <div class="project4-roadmap" id="p4-roadmap">
@@ -645,7 +700,7 @@
                             <tbody>
                                 <tr>
                                     <td class="phase-id">A–C</td>
-                                    <td class="phase-goal">Core System: Pi OS, ROS 2 environment, and low-latency camera streaming.</td>
+                                    <td class="phase-goal">Core system: Pi OS, ROS 2 Iron built from source, and camera topic verified.</td>
                                     <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
@@ -660,28 +715,28 @@
                                 </tr>
                                 <tr>
                                     <td class="phase-id">F</td>
-                                    <td class="phase-goal">Vision: Off-board GPU object detection (YOLOv8) & person tracking over Wi-Fi.</td>
+                                    <td class="phase-goal">Vision: off-board GPU person detection and ROS 2 data exchange over Wi-Fi.</td>
                                     <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">G</td>
-                                    <td class="phase-goal">Electronics: Motor driver integration, PWM signal generation, and bench testing. G-7/G-8 calibration and 10-min soak test on hold.</td>
-                                    <td><span class="phase-status paused">Paused</span></td>
+                                    <td class="phase-goal">Electronics: Cytron motor-driver integration, PWM control, and bench work; extended calibration was not completed.</td>
+                                    <td><span class="phase-status partial">Partial</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">Chassis</td>
-                                    <td class="phase-goal">Physical Design: Chassis redesign and stability validation using NVIDIA Omniverse Isaac Sim.</td>
-                                    <td><span class="phase-status current">In Progress</span></td>
+                                    <td class="phase-goal">Physical design: final 3D-printed shell, wheels, electronics mounting, and rear caster assembled.</td>
+                                    <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">H</td>
-                                    <td class="phase-goal">Motion: Closed-loop motor control and follow-me logic. Reached H-8/H-9 (save parameters, brown-out rehearsal); blocked on H-7 (bench test with wheels)—fixing e-stop not working in follow mode.</td>
-                                    <td><span class="phase-status current">In Progress</span></td>
+                                    <td class="phase-goal">Motion: follow controller and physical drive integration reached the tuning stage, but reliable turning and follow behaviour were not achieved.</td>
+                                    <td><span class="phase-status partial">Concluded in tuning</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">I–J</td>
-                                    <td class="phase-goal">Intelligence: Obstacle safety systems and LLM-based visual reasoning.</td>
-                                    <td><span class="phase-status planned">Planned</span></td>
+                                    <td class="phase-goal">Planned intelligence: obstacle systems, LLM/LLAVA reasoning, and context-aware autonomous navigation.</td>
+                                    <td><span class="phase-status not-implemented">Not implemented</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -693,26 +748,34 @@
                             <span>ROS 2 Iron</span>
                             <span>Raspberry Pi</span>
                             <span>Python</span>
-                            <span>YOLOv8</span>
+                            <span>Ultralytics YOLO</span>
                             <span>OpenCV</span>
-                            <span>LLM Integration</span>
                             <span>Vosk</span>
                             <span>pigpio</span>
-                            <span>NVIDIA Isaac Sim</span>
+                            <span>RViz</span>
+                            <span>ROS 2 DDS</span>
                         </div>
                     </div>
 
-                    <div class="project4-progress">
-                        <h2>Progress</h2>
-                        <p class="project4-progress-intro">From concept to physical build, here’s a glimpse of where things stand.</p>
+                    <div class="project4-progress" id="p4-build">
+                        <h2>Final Build</h2>
+                        <p class="project4-progress-intro">The completed physical assembly, followed by the concept and electronics-integration stages.</p>
                         <div class="project4-progress-grid">
                             <div class="project4-progress-item">
-                                <img src="Pictures/project4_concept.png" alt="Early concept design rendering of the mobile robot" />
+                                <img src="Pictures/project4_finalfront.jpg" alt="Front three-quarter view of the completed red ROS 2 rover" loading="lazy" />
+                                <p class="project4-progress-caption">Final rover — front view</p>
+                            </div>
+                            <div class="project4-progress-item">
+                                <img src="Pictures/project4_finalbehind.jpg" alt="Rear three-quarter view of the completed red ROS 2 rover" loading="lazy" />
+                                <p class="project4-progress-caption">Final rover — rear view</p>
+                            </div>
+                            <div class="project4-progress-item">
+                                <img src="Pictures/project4_concept.png" alt="Early concept design rendering of the mobile robot" loading="lazy" />
                                 <p class="project4-progress-caption">Early concept design</p>
                             </div>
                             <div class="project4-progress-item">
-                                <img src="Pictures/project4_wip.png" alt="Work in progress: physical prototype with electronics and motor" />
-                                <p class="project4-progress-caption">WIP prototype</p>
+                                <img src="Pictures/project4_wip.png" alt="Work-in-progress rover with electronics and motor installed" loading="lazy" />
+                                <p class="project4-progress-caption">Electronics integration</p>
                             </div>
                         </div>
                     </div>
