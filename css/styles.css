@@ -1874,54 +1874,18 @@ footer h3 {
     margin-bottom: 1rem;
 }
 
-.project4-outcome > p {
-    color: #b8a898;
-    font-size: 1rem;
-    line-height: 1.75;
-}
-
-.project4-outcome-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
-    margin: 1.5rem 0;
-}
-
-.project4-outcome-card {
-    padding: 1.25rem;
-    background: rgba(0, 0, 0, 0.12);
-    border-top: 2px solid #8a7a6a;
-}
-
-.project4-outcome-card.delivered {
-    border-top-color: #22c55e;
-}
-
-.project4-outcome-label {
-    margin-bottom: 0.75rem;
-    color: #fff;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.project4-outcome-card.delivered .project4-outcome-label {
-    color: #22c55e;
-}
-
-.project4-outcome-card ul {
-    margin: 0;
+.project4-delivered-list {
+    margin: 1.25rem 0 0;
     padding-left: 1.1rem;
     color: #b8a898;
 }
 
-.project4-outcome-card li {
+.project4-delivered-list li {
     margin-bottom: 0.55rem;
     line-height: 1.55;
 }
 
-.project4-outcome-card li:last-child {
+.project4-delivered-list li:last-child {
     margin-bottom: 0;
 }
 
@@ -2010,43 +1974,6 @@ footer h3 {
 
 .phase-table .phase-goal {
     color: #d0c4b8;
-}
-
-.phase-status {
-    display: inline-block;
-    padding: 0.25rem 0.6rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.phase-status.completed {
-    background: rgba(34, 197, 94, 0.12);
-    color: #22c55e;
-    border: 1px solid rgba(34, 197, 94, 0.25);
-}
-
-.phase-status.current {
-    background: rgba(194, 120, 62, 0.2);
-    color: #c2783e;
-    border: 1px solid rgba(194, 120, 62, 0.4);
-}
-
-.phase-status.next {
-    background: rgba(100, 149, 237, 0.12);
-    color: #6495ed;
-    border: 1px solid rgba(100, 149, 237, 0.25);
-}
-
-.phase-status.planned {
-    background: rgba(100, 100, 100, 0.1);
-    color: #777;
-    border: 1px solid rgba(100, 100, 100, 0.2);
-}
-
-.phase-status.paused {
-    background: rgba(234, 179, 8, 0.12);
-    color: #ca8a04;
-    border: 1px solid rgba(234, 179, 8, 0.3);
 }
 
 /* Current Focus Card */
@@ -2142,9 +2069,6 @@ footer h3 {
         padding: 1.25rem;
     }
 
-    .project4-outcome-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* ==================== */

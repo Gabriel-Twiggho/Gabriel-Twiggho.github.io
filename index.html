@@ -640,22 +640,13 @@
 
                     <div class="project4-outcome" id="p4-outcome">
                         <h2>Project Outcome</h2>
-                        <p>
-                            The finished build brings the rover hardware, ROS 2 software architecture, offline voice interface,
-                            and off-board computer vision pipeline together as one integrated system.
-                        </p>
-                        <div class="project4-outcome-grid">
-                            <div class="project4-outcome-card delivered">
-                                <p class="project4-outcome-label">Delivered</p>
-                                <ul>
-                                    <li>Native ROS 2 Iron environment and camera streaming on a Raspberry Pi 4</li>
-                                    <li>Offline voice recognition and command parsing with Vosk</li>
-                                    <li>Virtual differential-drive simulation, velocity arbitration, and motor-control nodes</li>
-                                    <li>PC-hosted YOLO person detection with bounding-box data returned over Wi-Fi</li>
-                                    <li>A complete 3D-printed differential-drive rover and integrated electronics</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <ul class="project4-delivered-list">
+                            <li>Native ROS 2 Iron environment and camera streaming on a Raspberry Pi 4</li>
+                            <li>Offline voice recognition and command parsing with Vosk</li>
+                            <li>Virtual differential-drive simulation, velocity arbitration, and motor-control nodes</li>
+                            <li>PC-hosted YOLO person detection with bounding-box data returned over Wi-Fi</li>
+                            <li>A complete 3D-printed differential-drive rover and integrated electronics</li>
+                        </ul>
                         <div class="project4-repo-links">
                             <a href="https://github.com/Gabriel-Twiggho/ros2-rover" target="_blank" rel="noopener noreferrer" class="project4-repo-link primary">
                                 View ROS 2 Rover Repository →
@@ -667,45 +658,38 @@
                     </div>
 
                     <div class="project4-roadmap" id="p4-roadmap">
-                        <h2>Completed Build Stages</h2>
+                        <h2>Workflow of project</h2>
                         <table class="phase-table">
                             <thead>
                                 <tr>
                                     <th>Phase</th>
                                     <th>Goal</th>
-                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="phase-id">A–C</td>
                                     <td class="phase-goal">Core system: Pi OS, ROS 2 Iron built from source, and camera topic verified.</td>
-                                    <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">D</td>
                                     <td class="phase-goal">Voice Interface: On-board offline speech recognition (Vosk).</td>
-                                    <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">E</td>
                                     <td class="phase-goal">Simulation: Voice-to-motion logic and virtual drive kinematics.</td>
-                                    <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">F</td>
                                     <td class="phase-goal">Vision: off-board GPU person detection and ROS 2 data exchange over Wi-Fi.</td>
-                                    <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">G</td>
                                     <td class="phase-goal">Electronics: Cytron motor-driver integration, PWM control, and bench testing.</td>
-                                    <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                                 <tr>
                                     <td class="phase-id">Chassis</td>
                                     <td class="phase-goal">Physical design: final 3D-printed shell, wheels, electronics mounting, and rear caster assembled.</td>
-                                    <td><span class="phase-status completed">Done</span></td>
                                 </tr>
                             </tbody>
                         </table>
