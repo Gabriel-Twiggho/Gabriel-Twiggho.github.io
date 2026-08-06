@@ -238,3 +238,53 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(stage);
     });
 });
+
+// Full-screen viewer for vacuum-chamber project images.
+document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = document.getElementById('image-lightbox');
+    if (!lightbox) return;
+
+    const lightboxImage = document.getElementById('image-lightbox-image');
+    const lightboxCaption = document.getElementById('image-lightbox-caption');
+    const closeButton = lightbox.querySelector('.image-lightbox-close');
+    const projectImages = document.querySelectorAll(
+        '#portable-vacuum-chamber .vacuum-gallery img, #portable-vacuum-chamber .vacuum-stage-media img'
+    );
+
+    function openLightbox(sourceImage) {
+        const figureCaption = sourceImage.closest('figure')?.querySelector('figcaption')?.textContent.trim();
+        lightboxImage.src = sourceImage.currentSrc || sourceImage.src;
+        lightboxImage.alt = sourceImage.alt;
+        lightboxCaption.textContent = figureCaption || sourceImage.alt;
+        lightbox.showModal();
+    }
+
+    projectImages.forEach(image => {
+        image.tabIndex = 0;
+        image.setAttribute('role', 'button');
+        image.setAttribute('aria-label', `View ${image.alt} full screen`);
+
+        image.addEventListener('click', function() {
+            openLightbox(image);
+        });
+
+        image.addEventListener('keydown', function(event) {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            openLightbox(image);
+        });
+    });
+
+    closeButton.addEventListener('click', function() {
+        lightbox.close();
+    });
+
+    lightbox.addEventListener('click', function(event) {
+        if (event.target === lightbox) lightbox.close();
+    });
+
+    lightbox.addEventListener('close', function() {
+        lightboxImage.removeAttribute('src');
+        lightboxCaption.textContent = '';
+    });
+});

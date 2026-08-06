@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20260806-1">
+    <link rel="stylesheet" href="css/styles.css?v=20260806-2">
 </head>
 <body>
     <nav>
@@ -820,7 +820,7 @@
                         <p class="vacuum-kicker">Space Robotics Lab · Mechanical Design</p>
                         <h1>Portable Vacuum Chamber</h1>
                         <p class="vacuum-intro">
-                            Built for the Space Robotics Lab, this compact chamber carries a dust-covered glass sample to a laser facility for experiments into whether laser energy can remove dust from a surface under vacuum—a technique with potential relevance to lunar robotics.
+                            Built for the Space Robotics Lab, this compact vacuum chamber was built so that we could carry a dust-covered glass sample to a laser lab for experiments into whether laser energy can remove dust from a surface under vacuum.
                         </p>
                     </header>
 
@@ -847,7 +847,7 @@
                         <div class="vacuum-section-heading">
                             <p class="vacuum-eyebrow">Engineering journey</p>
                             <h2>Design Workflow</h2>
-                            <p>Five steps took the chamber from an initial layout to a fabricated and vacuum-tested assembly.</p>
+                            <p>These are the five steps that I took for the design workflow of this vacuum chamber.</p>
                         </div>
 
                         <div class="vacuum-workflow-grid">
@@ -858,7 +858,7 @@
                                         <img src="Pictures/portable_vacuum_chamber/sketches.jpg" alt="Hand-drawn concept sketches and dimensions for the portable vacuum chamber" loading="lazy">
                                     </figure>
                                     <h3>Sketch</h3>
-                                    <p>The first sketches established the chamber shape, flange position and overall sample layout.</p>
+                                    <p>I first brainstormed the initial design through sketches on my phone since its a simple rectangular design establishing the chamber shape, flange position and overall sample layout.</p>
                                 </div>
                             </article>
 
@@ -870,7 +870,7 @@
                                         <img src="Pictures/portable_vacuum_chamber/Top_view.jpg" alt="Top view showing the flange and enclosure geometry resolved during CAD design" loading="lazy">
                                     </figure>
                                     <h3>SolidWorks</h3>
-                                    <p>The concept moved into CAD to resolve the assembly, dimensions and clearances between components.</p>
+                                    <p>I then moved the concept into CAD to resolve the assembly, dimensions and clearances between components.</p>
                                 </div>
                             </article>
 
@@ -881,7 +881,7 @@
                                         <img src="Pictures/portable_vacuum_chamber/3d_print.jpg" alt="Disassembled 3D-printed prototype of the vacuum chamber enclosure" loading="lazy">
                                     </figure>
                                     <h3>Prototype</h3>
-                                    <p>A 3D-printed model made the geometry tangible before committing the design to metal fabrication.</p>
+                                    <p>After Cadding up I made a prototype (3D-printed model started off with a paper mache) The main purpose was so that I could reason with the workshop how to manufacture the design so that I could sensecheck it.</p>
                                 </div>
                             </article>
 
@@ -920,7 +920,7 @@
                                 <span class="vacuum-recovery-number">01</span>
                                 <h3>Height and flange problem</h3>
                                 <p>
-                                    The completed chamber and glass-flange assembly ended up slightly taller than intended, revealing a stack-up mistake in the original design. Part of the glass flange was machined down to recover the height, but the change affected the flange and introduced a vacuum leak. A water-pressure test located the leaking area and, after discussion with the workshop, resin was applied to repair the seal. The recovery reinforced the importance of checking the complete flange stack-up before fabrication and validating changes before machining finished components.
+                                    The completed chamber and glass-flange assembly ended up slightly taller than intended, revealing a stack-up mistake on my end in the original design. Part of the glass flange was machined down to recover the height but the change affected the flange and introduced a vacuum leak. A water-pressure test located the leaking area and after discussion with the workshop, resin was applied to repair the seal. The recovery reinforced the importance of checking the complete flange stack-up before fabrication and validating changes before machining finished components.
                                 </p>
                             </article>
 
@@ -928,7 +928,7 @@
                                 <span class="vacuum-recovery-number">02</span>
                                 <h3>Vacuum pump-down problem</h3>
                                 <p>
-                                    After the local leak was repaired, pump-down testing exposed a separate system-level limitation. The target was approximately <span class="vacuum-pressure">10<sup>−3</sup> mbar</span>, but the overall system could maintain only about <span class="vacuum-pressure">10<sup>−1</sup> mbar</span> without continuous pumping. Individual parts were investigated, and the practical conclusion was to bring the pump to the laser laboratory and run it during the experiment. This broader limitation was distinct from the repaired flange leak.
+                                    After the local leak was repaired, pump-down testing exposed a separate system-level limitation. We wanted to simulate the lunar environment for that testing at approximately <span class="vacuum-pressure">10<sup>−3</sup> mbar</span> is "good enough" for research purposes but the overall system could only get to <span class="vacuum-pressure">10<sup>−1</sup> mbar</span> without continuous pumping. Individual parts were investigated finding that the entire system couldn't stay at the desired pressure, The practical conclusion was to move the pump to the laser laboratory and run it during the experiment. This broader limitation was distinct from the repaired flange leak.
                                 </p>
                             </article>
                         </div>
@@ -983,6 +983,14 @@
 
     </main>
 
-    <script src="js/main.js?v=20260806-1"></script>
+    <dialog class="image-lightbox" id="image-lightbox" aria-label="Full-screen project image">
+        <button class="image-lightbox-close" type="button" aria-label="Close full-screen image">×</button>
+        <figure>
+            <img id="image-lightbox-image" alt="">
+            <figcaption id="image-lightbox-caption"></figcaption>
+        </figure>
+    </dialog>
+
+    <script src="js/main.js?v=20260806-2"></script>
 </body>
 </html>
