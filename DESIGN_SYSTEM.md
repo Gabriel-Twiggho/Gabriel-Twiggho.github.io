@@ -59,7 +59,8 @@ Motion should support hierarchy, never call attention to itself:
 - Lead with what was built, the technical problem, and evidence of the work.
 - Use clear, direct language and short paragraphs. Avoid marketing clichés and inflated claims.
 - Describe delivered capabilities accurately. If a page is intended to showcase completed work only, omit unfinished scope rather than framing it as a feature.
-- Write useful image alt text that describes the image, not its filename.
+- Write useful image alt text that describes the image, not its filename. 
+
 
 ## Project routes and structure
 
