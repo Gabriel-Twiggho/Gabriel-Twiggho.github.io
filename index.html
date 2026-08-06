@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20260806-2">
+    <link rel="stylesheet" href="css/styles.css?v=20260806-3">
 </head>
 <body>
     <nav>
@@ -65,8 +65,8 @@
                         <!-- Project 1: Swarm Tracking -->
                         <div class="project-card" onclick="showPage('swarm-tracking')">
                             <div class="card-media">
-                                <video autoplay loop muted playsinline>
-                                    <source src="Swarm%20Tracking%20Demo%20Video%202.mp4" type="video/mp4">
+                                <video loop muted playsinline preload="none" poster="Pictures/swarm-tracking-poster.jpg" data-page-video>
+                                    <source src="swarm-tracking-demo.web.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <div class="card-content">
@@ -119,7 +119,7 @@
                         <!-- Project 5: Portable Vacuum Chamber -->
                         <a class="project-card" href="#portable-vacuum-chamber" onclick="showPage('portable-vacuum-chamber'); return false;">
                             <div class="card-media">
-                                <img src="Pictures/portable_vacuum_chamber/Side_view.jpg" alt="Portable metal vacuum chamber connected to a vacuum system">
+                                <img src="Pictures/portable_vacuum_chamber/side_view.webp" alt="Portable metal vacuum chamber connected to a vacuum system" loading="lazy" decoding="async">
                             </div>
                             <div class="card-content">
                                 <h3>Portable Vacuum Chamber</h3>
@@ -213,8 +213,8 @@
             <div class="video-hero" id="p1-hero">
                 <h1>How can a swarm of slow drones maintain persistent contact with a target moving twice their speed?</h1>
                 <div class="video-container" id="video-container">
-                    <video autoplay loop muted playsinline preload="auto" oncanplay="document.getElementById('video-container').classList.add('loaded')">
-                        <source src="Swarm%20Tracking%20Demo%20Video%202.mp4" type="video/mp4">
+                    <video loop muted playsinline preload="none" poster="Pictures/swarm-tracking-poster.jpg" data-page-video oncanplay="document.getElementById('video-container').classList.add('loaded')">
+                        <source src="swarm-tracking-demo.web.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="video-caption">
@@ -826,19 +826,19 @@
 
                     <section class="vacuum-gallery" id="vacuum-gallery" aria-label="Finished portable vacuum chamber views">
                         <figure class="vacuum-gallery-item vacuum-gallery-front">
-                            <img src="Pictures/portable_vacuum_chamber/Front_view.jpg" alt="Front view of the completed portable vacuum chamber and glass flange" loading="lazy">
+                            <img src="Pictures/portable_vacuum_chamber/front_view.webp" alt="Front view of the completed portable vacuum chamber and glass flange" loading="lazy" decoding="async">
                             <figcaption>Front view</figcaption>
                         </figure>
                         <figure class="vacuum-gallery-item vacuum-gallery-side">
-                            <img src="Pictures/portable_vacuum_chamber/Side_view.jpg" alt="Side view of the completed chamber connected to the vacuum system" loading="lazy">
+                            <img src="Pictures/portable_vacuum_chamber/side_view.webp" alt="Side view of the completed chamber connected to the vacuum system" loading="lazy" decoding="async">
                             <figcaption>Side view</figcaption>
                         </figure>
                         <figure class="vacuum-gallery-item vacuum-gallery-other-side">
-                            <img src="Pictures/portable_vacuum_chamber/other_side_view.jpg" alt="Opposite side view showing the chamber body and bolted end plate" loading="lazy">
+                            <img src="Pictures/portable_vacuum_chamber/other_side_view.webp" alt="Opposite side view showing the chamber body and bolted end plate" loading="lazy" decoding="async">
                             <figcaption>Opposite side</figcaption>
                         </figure>
                         <figure class="vacuum-gallery-item vacuum-gallery-top">
-                            <img src="Pictures/portable_vacuum_chamber/Top_view.jpg" alt="Top view of the completed chamber and circular viewing flange" loading="lazy">
+                            <img src="Pictures/portable_vacuum_chamber/top_view.webp" alt="Top view of the completed chamber and circular viewing flange" loading="lazy" decoding="async">
                             <figcaption>Top view</figcaption>
                         </figure>
                     </section>
@@ -855,7 +855,7 @@
                                 <span class="vacuum-stage-marker">01</span>
                                 <div class="vacuum-stage-content">
                                     <figure class="vacuum-stage-media">
-                                        <img src="Pictures/portable_vacuum_chamber/sketches.jpg" alt="Hand-drawn concept sketches and dimensions for the portable vacuum chamber" loading="lazy">
+                                        <img src="Pictures/portable_vacuum_chamber/sketches.webp" alt="Hand-drawn concept sketches and dimensions for the portable vacuum chamber" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>Sketch</h3>
                                     <p>I first brainstormed the initial design through sketches on my phone since its a simple rectangular design establishing the chamber shape, flange position and overall sample layout.</p>
@@ -867,7 +867,7 @@
                                 <div class="vacuum-stage-content">
                                     <!-- Replace this resolved-geometry view with a SolidWorks screenshot when one is available. -->
                                     <figure class="vacuum-stage-media">
-                                        <img src="Pictures/portable_vacuum_chamber/Top_view.jpg" alt="Top view showing the flange and enclosure geometry resolved during CAD design" loading="lazy">
+                                        <img src="Pictures/portable_vacuum_chamber/top_view.webp" alt="Top view showing the flange and enclosure geometry resolved during CAD design" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>SolidWorks</h3>
                                     <p>I then moved the concept into CAD to resolve the assembly, dimensions and clearances between components.</p>
@@ -878,7 +878,7 @@
                                 <span class="vacuum-stage-marker">03</span>
                                 <div class="vacuum-stage-content">
                                     <figure class="vacuum-stage-media">
-                                        <img src="Pictures/portable_vacuum_chamber/3d_print.jpg" alt="Disassembled 3D-printed prototype of the vacuum chamber enclosure" loading="lazy">
+                                        <img src="Pictures/portable_vacuum_chamber/3d_print.webp" alt="Disassembled 3D-printed prototype of the vacuum chamber enclosure" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>Prototype</h3>
                                     <p>After Cadding up I made a prototype (3D-printed model started off with a paper mache) The main purpose was so that I could reason with the workshop how to manufacture the design so that I could sensecheck it.</p>
@@ -889,7 +889,7 @@
                                 <span class="vacuum-stage-marker">04</span>
                                 <div class="vacuum-stage-content">
                                     <figure class="vacuum-stage-media">
-                                        <img src="Pictures/portable_vacuum_chamber/Fabrication.jpg" alt="Fabricated metal vacuum chamber body before final clamping and testing" loading="lazy">
+                                        <img src="Pictures/portable_vacuum_chamber/fabrication.webp" alt="Fabricated metal vacuum chamber body before final clamping and testing" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>Fabrication</h3>
                                     <p>The design was reviewed with the workshop, then manufactured and assembled in metal.</p>
@@ -900,7 +900,7 @@
                                 <span class="vacuum-stage-marker">05</span>
                                 <div class="vacuum-stage-content">
                                     <figure class="vacuum-stage-media">
-                                        <img src="Pictures/portable_vacuum_chamber/Side_view.jpg" alt="Finished portable vacuum chamber connected for vacuum-system testing" loading="lazy">
+                                        <img src="Pictures/portable_vacuum_chamber/side_view.webp" alt="Finished portable vacuum chamber connected for vacuum-system testing" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>Finished Chamber</h3>
                                     <p>The completed assembly was connected to the vacuum system and tested ahead of the laser experiment.</p>
@@ -986,11 +986,11 @@
     <dialog class="image-lightbox" id="image-lightbox" aria-label="Full-screen project image">
         <button class="image-lightbox-close" type="button" aria-label="Close full-screen image">×</button>
         <figure>
-            <img id="image-lightbox-image" alt="">
+            <img id="image-lightbox-image" alt="" decoding="async">
             <figcaption id="image-lightbox-caption"></figcaption>
         </figure>
     </dialog>
 
-    <script src="js/main.js?v=20260806-2"></script>
+    <script src="js/main.js?v=20260806-3"></script>
 </body>
 </html>

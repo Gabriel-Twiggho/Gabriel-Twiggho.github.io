@@ -20,6 +20,20 @@ function canonicalPageId(pageId) {
     return LEGACY_PAGE_ALIASES[pageId] || pageId;
 }
 
+// Only play media on the visible page so duplicate project previews do not
+// download and decode at the same time.
+function syncPageVideos(activePage) {
+    document.querySelectorAll('.page video').forEach(video => {
+        if (video.closest('.page') !== activePage) {
+            video.pause();
+            return;
+        }
+
+        const playRequest = video.play();
+        if (playRequest) playRequest.catch(() => {});
+    });
+}
+
 // Easter egg: Click logo 5 times to go to LEGO
 (function() {
     let clickCount = 0;
@@ -64,6 +78,7 @@ function showPage(pageId, updateHash = true) {
     // Show selected page
     const targetPage = document.getElementById(pageId);
     targetPage.classList.add('active');
+    syncPageVideos(targetPage);
     
     // Trigger animation restart with a tiny delay
     requestAnimationFrame(() => {
@@ -114,6 +129,9 @@ function handleHashChange() {
 // Check for hash on page load
 window.addEventListener('DOMContentLoaded', function() {
     handleHashChange();
+
+    const activePage = document.querySelector('.page.active');
+    if (activePage) syncPageVideos(activePage);
 });
 
 // Handle browser back/forward buttons
@@ -253,7 +271,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function openLightbox(sourceImage) {
         const figureCaption = sourceImage.closest('figure')?.querySelector('figcaption')?.textContent.trim();
-        lightboxImage.src = sourceImage.currentSrc || sourceImage.src;
+        const imageSource = sourceImage.currentSrc || sourceImage.src;
+        if (lightboxImage.src !== imageSource) lightboxImage.src = imageSource;
         lightboxImage.alt = sourceImage.alt;
         lightboxCaption.textContent = figureCaption || sourceImage.alt;
         lightbox.showModal();
@@ -283,8 +302,4 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.target === lightbox) lightbox.close();
     });
 
-    lightbox.addEventListener('close', function() {
-        lightboxImage.removeAttribute('src');
-        lightboxCaption.textContent = '';
-    });
 });
