@@ -83,7 +83,6 @@ Use these canonical project hashes in all new links:
 
 Legacy `#project1` through `#project4` links are supported in `js/main.js`. Do not remove that compatibility without migrating existing public links. New project IDs should be descriptive, lowercase, and hyphenated.
 
-
 ## Before handing off a change
 
 1. Reuse an existing class, token, or component pattern where possible.
