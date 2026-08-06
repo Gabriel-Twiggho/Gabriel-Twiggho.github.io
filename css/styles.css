@@ -404,6 +404,21 @@ main {
     box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
+a.project-card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+a.project-card:hover {
+    text-decoration: none;
+}
+
+a.project-card:focus-visible {
+    outline: 3px solid rgba(41, 151, 255, 0.35);
+    outline-offset: 3px;
+}
+
 .card-media {
     width: 100%;
     height: 180px;
@@ -2070,6 +2085,491 @@ footer h3 {
         padding: 1.25rem;
     }
 
+}
+
+/* ==================== */
+/* PROJECT 5 VACUUM CHAMBER */
+/* ==================== */
+
+#portable-vacuum-chamber {
+    --vacuum-bg: #f4f5f6;
+    --vacuum-surface: #ffffff;
+    --vacuum-ink: #171a1d;
+    --vacuum-muted: #5d6670;
+    --vacuum-accent: #607586;
+    --vacuum-line: #d8dde1;
+    background: var(--vacuum-bg);
+    color: var(--vacuum-ink);
+}
+
+.vacuum-page {
+    min-height: calc(100vh - 48px);
+    padding: 0 2rem;
+    background:
+        radial-gradient(circle at 82% 3%, rgba(161, 177, 188, 0.2), transparent 25rem),
+        linear-gradient(180deg, #fafbfb 0%, var(--vacuum-bg) 45%, #eef1f3 100%);
+}
+
+.vacuum-inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.vacuum-header {
+    max-width: 850px;
+    padding: clamp(5rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
+}
+
+.vacuum-kicker,
+.vacuum-eyebrow {
+    font-family: var(--font-mono);
+    color: var(--vacuum-accent);
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.vacuum-header h1 {
+    max-width: 820px;
+    margin: 1rem 0 1.5rem;
+    color: var(--vacuum-ink);
+    font-size: clamp(2.75rem, 7vw, 5.4rem);
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    line-height: 0.98;
+}
+
+.vacuum-intro {
+    max-width: 760px;
+    color: var(--vacuum-muted);
+    font-size: clamp(1.05rem, 2vw, 1.22rem);
+    line-height: 1.75;
+}
+
+.vacuum-header > *,
+.vacuum-gallery {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.page.animate .vacuum-header > *,
+.page.animate .vacuum-gallery {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.page.animate .vacuum-kicker {
+    animation-delay: 0.08s;
+}
+
+.page.animate .vacuum-header h1 {
+    animation-delay: 0.18s;
+}
+
+.page.animate .vacuum-intro {
+    animation-delay: 0.3s;
+}
+
+.page.animate .vacuum-gallery {
+    animation-delay: 0.42s;
+}
+
+.vacuum-gallery {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: 250px 220px;
+    gap: 0.8rem;
+    margin-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+.vacuum-gallery-item {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background: #dfe4e7;
+    border: 1px solid rgba(96, 117, 134, 0.18);
+}
+
+.vacuum-gallery-front {
+    grid-column: 1 / 8;
+    grid-row: 1 / 3;
+}
+
+.vacuum-gallery-side {
+    grid-column: 8 / 13;
+    grid-row: 1;
+}
+
+.vacuum-gallery-other-side {
+    grid-column: 8 / 11;
+    grid-row: 2;
+}
+
+.vacuum-gallery-top {
+    grid-column: 11 / 13;
+    grid-row: 2;
+}
+
+.vacuum-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.vacuum-gallery-front img {
+    object-position: center 58%;
+}
+
+.vacuum-gallery-item:hover img {
+    transform: scale(1.025);
+}
+
+.vacuum-gallery-item figcaption {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.32rem 0.55rem;
+    background: rgba(255, 255, 255, 0.84);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #343a40;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+}
+
+.vacuum-section {
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
+    border-top: 1px solid var(--vacuum-line);
+}
+
+.vacuum-section-heading {
+    max-width: 720px;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.vacuum-section-heading h2 {
+    margin: 0.65rem 0 0.85rem;
+    color: var(--vacuum-ink);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+}
+
+.vacuum-section-heading > p:last-child:not(.vacuum-eyebrow) {
+    color: var(--vacuum-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+}
+
+.vacuum-workflow-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.vacuum-workflow-grid::before {
+    content: '';
+    position: absolute;
+    top: 17px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #aab5bd 8%, #aab5bd 92%, transparent);
+}
+
+.vacuum-workflow-stage {
+    position: relative;
+    min-width: 0;
+    transition: transform 0.25s ease;
+}
+
+.vacuum-workflow-stage:hover {
+    transform: translateY(-3px);
+}
+
+.vacuum-workflow.reveal-ready .vacuum-workflow-stage {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+.vacuum-workflow.reveal-ready .vacuum-workflow-stage.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    transition-delay: calc(var(--stage-index) * 70ms);
+}
+
+.vacuum-workflow.reveal-ready .vacuum-workflow-stage.is-visible:hover {
+    transform: translateY(-3px);
+    transition-delay: 0s;
+}
+
+.vacuum-stage-marker {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 35px;
+    height: 35px;
+    margin: 0 auto;
+    border: 1px solid #aab5bd;
+    border-radius: 50%;
+    background: var(--vacuum-bg);
+    color: var(--vacuum-accent);
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    font-weight: 500;
+}
+
+.vacuum-stage-content {
+    margin-top: 1.25rem;
+}
+
+.vacuum-stage-media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    margin-bottom: 1.1rem;
+    background: #dfe4e7;
+    border: 1px solid var(--vacuum-line);
+}
+
+.vacuum-stage-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.vacuum-workflow-stage:first-child .vacuum-stage-media img {
+    object-position: center;
+}
+
+.vacuum-workflow-stage:hover .vacuum-stage-media img {
+    transform: scale(1.035);
+}
+
+.vacuum-workflow-stage h3 {
+    margin-bottom: 0.5rem;
+    color: var(--vacuum-ink);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.vacuum-workflow-stage p {
+    color: var(--vacuum-muted);
+    font-size: 0.86rem;
+    line-height: 1.6;
+}
+
+.vacuum-recovery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.vacuum-recovery-card {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--vacuum-surface);
+    border: 1px solid var(--vacuum-line);
+}
+
+.vacuum-recovery-number {
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--vacuum-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+}
+
+.vacuum-recovery-card h3 {
+    margin-bottom: 1rem;
+    color: var(--vacuum-ink);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.vacuum-recovery-card p {
+    color: var(--vacuum-muted);
+    font-size: 0.97rem;
+    line-height: 1.78;
+}
+
+.vacuum-pressure {
+    color: #334b5c;
+    font-family: var(--font-mono);
+    font-size: 0.93em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.vacuum-pressure sup {
+    font-size: 0.72em;
+}
+
+.vacuum-skills {
+    padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+.vacuum-skill-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.vacuum-skill-stack span {
+    padding: 0.55rem 0.82rem;
+    background: rgba(255, 255, 255, 0.66);
+    border: 1px solid var(--vacuum-line);
+    color: #46525c;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+}
+
+.vacuum-footer {
+    background: #fff;
+}
+
+#portable-vacuum-chamber .project-nav-line {
+    background: rgba(23, 26, 29, 0.22);
+}
+
+#portable-vacuum-chamber .project-nav-text {
+    color: rgba(23, 26, 29, 0.42);
+}
+
+#portable-vacuum-chamber .project-nav-item:hover .project-nav-line {
+    background: rgba(23, 26, 29, 0.42);
+}
+
+#portable-vacuum-chamber .project-nav-item:hover .project-nav-text,
+#portable-vacuum-chamber .project-nav-item.active .project-nav-text {
+    color: var(--vacuum-accent);
+}
+
+#portable-vacuum-chamber .project-nav-item.active .project-nav-line {
+    background: var(--vacuum-accent);
+}
+
+@media (max-width: 900px) {
+    .vacuum-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: 420px 220px 220px;
+    }
+
+    .vacuum-gallery-front {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    .vacuum-gallery-side {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .vacuum-gallery-other-side {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .vacuum-gallery-top {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    .vacuum-workflow-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .vacuum-workflow-grid::before {
+        top: 17px;
+        bottom: 17px;
+        left: 17px;
+        right: auto;
+        width: 1px;
+        height: auto;
+        background: linear-gradient(180deg, transparent, #aab5bd 4%, #aab5bd 96%, transparent);
+    }
+
+    .vacuum-workflow-stage {
+        display: grid;
+        grid-template-columns: 35px minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .vacuum-stage-marker {
+        margin: 0;
+    }
+
+    .vacuum-stage-content {
+        margin-top: 0;
+    }
+
+    .vacuum-stage-media {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+@media (max-width: 700px) {
+    .vacuum-page {
+        padding: 0 1.25rem;
+    }
+
+    .vacuum-header {
+        padding-top: 4rem;
+    }
+
+    .vacuum-gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: 360px repeat(3, 220px);
+        gap: 0.65rem;
+    }
+
+    .vacuum-gallery-front,
+    .vacuum-gallery-side,
+    .vacuum-gallery-other-side,
+    .vacuum-gallery-top {
+        grid-column: 1;
+    }
+
+    .vacuum-gallery-front { grid-row: 1; }
+    .vacuum-gallery-side { grid-row: 2; }
+    .vacuum-gallery-other-side { grid-row: 3; }
+    .vacuum-gallery-top { grid-row: 4; }
+
+    .vacuum-recovery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vacuum-recovery-number {
+        margin-bottom: 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page.animate .vacuum-header > *,
+    .page.animate .vacuum-gallery,
+    .vacuum-workflow.reveal-ready .vacuum-workflow-stage,
+    .vacuum-workflow.reveal-ready .vacuum-workflow-stage.is-visible,
+    .vacuum-workflow.reveal-ready .vacuum-workflow-stage.is-visible:hover {
+        opacity: 1;
+        transform: none;
+        animation: none;
+        transition: none;
+    }
+
+    .vacuum-gallery-item img,
+    .vacuum-stage-media img {
+        transition: none;
+    }
 }
 
 /* ==================== */

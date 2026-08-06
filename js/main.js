@@ -3,7 +3,8 @@ const VALID_PAGES = [
     'swarm-tracking',
     'task-scheduling',
     'co2-prediction',
-    'ai-robot'
+    'ai-robot',
+    'portable-vacuum-chamber'
 ];
 
 const LEGACY_PAGE_ALIASES = {
@@ -211,4 +212,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial update
     updateSidebarActive();
+});
+
+// Reveal the vacuum-chamber workflow in sequence as it enters the viewport.
+document.addEventListener('DOMContentLoaded', function() {
+    const workflow = document.querySelector('.vacuum-workflow');
+    if (!workflow || !('IntersectionObserver' in window)) return;
+
+    const stages = workflow.querySelectorAll('.vacuum-workflow-stage');
+    workflow.classList.add('reveal-ready');
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -8% 0px'
+    });
+
+    stages.forEach((stage, index) => {
+        stage.style.setProperty('--stage-index', index);
+        observer.observe(stage);
+    });
 });

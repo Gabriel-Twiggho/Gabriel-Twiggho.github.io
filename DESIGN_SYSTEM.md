@@ -11,6 +11,8 @@ The portfolio has two related modes:
 - **Home and research projects:** bright, quiet, and minimal.
 - **Systems projects (Swarm Tracking and ROS 2 Rover):** immersive dark presentations, with the rover using a restrained warm copper accent.
 
+The Portable Vacuum Chamber page stays in the light mode, using cool neutral metal tones, image-led layouts, and a wider editorial canvas for its engineering workflow.
+
 ## Foundations
 
 Use the existing CSS custom properties in `css/styles.css` rather than introducing one-off colours or fonts.
@@ -76,6 +78,7 @@ Use these canonical project hashes in all new links:
 | Task scheduling research | `#task-scheduling` |
 | CO2 prediction model | `#co2-prediction` |
 | ROS 2 rover | `#ai-robot` |
+| Portable vacuum chamber | `#portable-vacuum-chamber` |
 
 Legacy `#project1` through `#project4` links are supported in `js/main.js`. Do not remove that compatibility without migrating existing public links. New project IDs should be descriptive, lowercase, and hyphenated.
 
