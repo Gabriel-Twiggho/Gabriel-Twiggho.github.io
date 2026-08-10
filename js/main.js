@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Full-screen viewer for vacuum-chamber project images.
+// Shared full-screen viewer for images on every project detail page.
 document.addEventListener('DOMContentLoaded', function() {
     const lightbox = document.getElementById('image-lightbox');
     if (!lightbox) return;
@@ -265,22 +265,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightboxImage = document.getElementById('image-lightbox-image');
     const lightboxCaption = document.getElementById('image-lightbox-caption');
     const closeButton = lightbox.querySelector('.image-lightbox-close');
-    const projectImages = document.querySelectorAll(
-        '#portable-vacuum-chamber .vacuum-gallery img, #portable-vacuum-chamber .vacuum-stage-media img'
-    );
+    const projectImages = document.querySelectorAll('.page:not(#home) img');
+    let lastTrigger = null;
+
+    function getImageCaption(sourceImage) {
+        const imageContainer = sourceImage.closest(
+            'figure, .project2-diagram, .project3-image, .project4-progress-item'
+        );
+        const caption = imageContainer?.querySelector(
+            'figcaption, .diagram-caption, .image-caption, .project4-progress-caption'
+        );
+
+        return caption?.textContent.trim() || sourceImage.alt;
+    }
 
     function openLightbox(sourceImage) {
-        const figureCaption = sourceImage.closest('figure')?.querySelector('figcaption')?.textContent.trim();
         const imageSource = sourceImage.currentSrc || sourceImage.src;
         if (lightboxImage.src !== imageSource) lightboxImage.src = imageSource;
         lightboxImage.alt = sourceImage.alt;
-        lightboxCaption.textContent = figureCaption || sourceImage.alt;
+        lightboxCaption.textContent = getImageCaption(sourceImage);
+        lastTrigger = sourceImage;
         lightbox.showModal();
     }
 
     projectImages.forEach(image => {
         image.tabIndex = 0;
         image.setAttribute('role', 'button');
+        image.setAttribute('aria-haspopup', 'dialog');
         image.setAttribute('aria-label', `View ${image.alt} full screen`);
 
         image.addEventListener('click', function() {
@@ -302,4 +313,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.target === lightbox) lightbox.close();
     });
 
+    lightbox.addEventListener('close', function() {
+        if (lastTrigger?.isConnected) lastTrigger.focus({ preventScroll: true });
+        lastTrigger = null;
+    });
 });
