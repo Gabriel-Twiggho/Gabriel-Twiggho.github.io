@@ -265,16 +265,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightboxImage = document.getElementById('image-lightbox-image');
     const lightboxCaption = document.getElementById('image-lightbox-caption');
     const closeButton = lightbox.querySelector('.image-lightbox-close');
-    const projectImages = document.querySelectorAll('.page:not(#home) img');
+    const projectImages = document.querySelectorAll('.project-page img');
     let lastTrigger = null;
 
     function getImageCaption(sourceImage) {
-        const imageContainer = sourceImage.closest(
-            'figure, .project2-diagram, .project3-image, .project4-progress-item'
-        );
-        const caption = imageContainer?.querySelector(
-            'figcaption, .diagram-caption, .image-caption, .project4-progress-caption'
-        );
+        const imageContainer = sourceImage.closest('.project-media, figure');
+        const caption = imageContainer?.querySelector('.project-caption, figcaption');
 
         return caption?.textContent.trim() || sourceImage.alt;
     }

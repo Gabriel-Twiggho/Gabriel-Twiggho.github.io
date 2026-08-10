@@ -7,7 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20260810-1">
+    <link rel="stylesheet" href="css/base.css?v=20260810-2">
+    <link rel="stylesheet" href="css/home.css?v=20260810-2">
+    <link rel="stylesheet" href="css/projects.css?v=20260810-2">
+    <link rel="stylesheet" href="css/project-themes.css?v=20260810-2">
 </head>
 <body>
     <nav>
@@ -42,7 +45,7 @@
                         This is a webpage to help describe some of my more published work in greater 
                         detail.
                     </p>
-                    <a href="Gabriel%20Twigg-Ho%20Resume%202026.pdf" target="_blank" class="resume-link">
+                    <a href="documents/Gabriel%20Twigg-Ho%20Resume%202026.pdf" target="_blank" class="resume-link">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
@@ -66,7 +69,7 @@
                         <div class="project-card" onclick="showPage('swarm-tracking')">
                             <div class="card-media">
                                 <video loop muted playsinline preload="none" poster="Pictures/swarm-tracking-poster.jpg" data-page-video>
-                                    <source src="swarm-tracking-demo.web.mp4" type="video/mp4">
+                                    <source src="videos/swarm-tracking-demo.web.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <div class="card-content">
@@ -176,7 +179,7 @@
         </section>
 
         <!-- Project 1: Robot Swarms -->
-        <section id="swarm-tracking" class="page">
+        <section id="swarm-tracking" class="page project-page project-page--dark">
             <!-- Sidebar Navigation -->
             <nav class="project-nav" data-project="1">
                 <a href="#p1-hero" class="project-nav-item active" data-section="p1-hero">
@@ -212,10 +215,10 @@
             <!-- Fullscreen Video Hero -->
             <div class="video-hero" id="p1-hero">
                 <p class="project-kicker">Robotics Research &middot; Autonomous Systems</p>
-                <h1>How can a swarm of slow drones maintain persistent contact with a target moving twice their speed?</h1>
+                <h1 class="project-title">How can a swarm of slow drones maintain persistent contact with a target moving twice their speed?</h1>
                 <div class="video-container" id="video-container">
                     <video loop muted playsinline preload="none" poster="Pictures/swarm-tracking-poster.jpg" data-page-video oncanplay="document.getElementById('video-container').classList.add('loaded')">
-                        <source src="swarm-tracking-demo.web.mp4" type="video/mp4">
+                        <source src="videos/swarm-tracking-demo.web.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="video-caption">
@@ -228,19 +231,19 @@
             <div class="download-hero" id="p1-downloads">
                 <h2>Read the Full Research</h2>
                 <div class="download-buttons">
-                    <a href="Project%20Thesis%20Report%20V2%20Final.pdf" download class="download-btn">
+                    <a href="documents/Project%20Thesis%20Report%20V2%20Final.pdf" download class="download-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                         Thesis
                     </a>
-                    <a href="IEEE_ResearchPaper.pdf" download class="download-btn">
+                    <a href="documents/IEEE_ResearchPaper.pdf" download class="download-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                         Research Paper
                     </a>
-                    <a href="UG_ENG_55_poster%20(2).pdf" download class="download-btn">
+                    <a href="documents/UG_ENG_55_poster%20(2).pdf" download class="download-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
@@ -394,9 +397,9 @@
             </div>
 
             <!-- Dark Footer -->
-            <div class="dark-footer">
+            <div class="dark-footer project-footer">
                 <h3>Let's Connect</h3>
-                <div class="dark-footer-links">
+                <div class="dark-footer-links project-footer-links">
                     <a href="mailto:gabrieljyth@gmail.com">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -421,7 +424,7 @@
         </section>
 
         <!-- Project 2: Online Task Scheduling -->
-        <section id="task-scheduling" class="page">
+        <section id="task-scheduling" class="page project-page project-page--light">
             <!-- Sidebar Navigation -->
             <nav class="project-nav" data-project="2">
                 <a href="#task-scheduling" class="project-nav-item active" data-section="task-scheduling">
@@ -438,14 +441,14 @@
                 </a>
             </nav>
 
-            <div class="project2-content">
-                <div class="project2-inner">
-                    <header class="project-editorial-header">
+            <div class="project2-content project-shell">
+                <div class="project2-inner project-inner">
+                    <header class="project-editorial-header project-header">
                         <p class="project2-subtitle project-kicker">SC '25 Workshops Publication &middot; SAGA Framework</p>
-                        <h1>Online Task Scheduling under Uncertainty</h1>
+                        <h1 class="project-title">Online Task Scheduling under Uncertainty</h1>
                     </header>
                     
-                    <div class="project2-paragraphs" id="p2-publication">
+                    <div class="project2-paragraphs project-copy" id="p2-publication">
                         <p>
                             During my exchange semester at Loyola Marymount University in Los Angeles, 
                             I was invited by Professor Jared Coleman to join his research team. Even after returning 
@@ -471,7 +474,7 @@
                             </svg>
                             Read the Publication
                         </a>
-                        <a href="Adapting%20Classic%20Scheduling%20Heuristics%20for%20Online%20Execution%20under%20Uncertainty.pdf" download class="project2-btn secondary">
+                        <a href="documents/Adapting%20Classic%20Scheduling%20Heuristics%20for%20Online%20Execution%20under%20Uncertainty.pdf" download class="project2-btn secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
@@ -480,14 +483,14 @@
                     </div>
 
                     <!-- Task Scheduling Visualization -->
-                    <div class="project2-research-section" id="p2-research">
-                        <div class="project2-diagram">
+                    <div class="project2-research-section project-section" id="p2-research">
+                        <div class="project2-diagram project-media">
                             <img src="Pictures/Task_Scheduling.png" alt="Directed task graph showing dependencies between computational tasks in the scheduling research" />
-                            <p class="diagram-caption">Task graph visualization from our publication showing computational dependencies and scheduling complexity</p>
+                            <p class="diagram-caption project-caption">Task graph visualization from our publication showing computational dependencies and scheduling complexity</p>
                         </div>
 
                         <div class="project2-about-research">
-                            <h3>Understanding the Task Scheduling Problem</h3>
+                            <h3 class="project-section-title">Understanding the Task Scheduling Problem</h3>
                             <p>
                                 Task scheduling aims to assign computational tasks to machines to minimize execution time 
                                 while respecting dependencies. Traditional algorithms assume known task durations, but real-world 
@@ -498,7 +501,7 @@
                         </div>
 
                         <div class="project2-research-links" id="p2-links">
-                            <h3>Learn More About This Research</h3>
+                            <h3 class="project-section-title">Learn More About This Research</h3>
                             <div class="research-links-grid">
                                 <a href="https://research.kubishi.com/" target="_blank" class="research-link-btn">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -517,9 +520,9 @@
                     </div>
                 </div>
             </div>
-            <div class="project2-footer">
+            <div class="project2-footer project-footer">
                 <h3>Let's Connect</h3>
-                <div class="project2-footer-links">
+                <div class="project2-footer-links project-footer-links">
                     <a href="mailto:gabrieljyth@gmail.com">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -544,7 +547,7 @@
         </section>
 
         <!-- Project 3: CO2 Model -->
-        <section id="co2-prediction" class="page">
+        <section id="co2-prediction" class="page project-page project-page--light">
             <!-- Sidebar Navigation -->
             <nav class="project-nav" data-project="3">
                 <a href="#co2-prediction" class="project-nav-item active" data-section="co2-prediction">
@@ -557,13 +560,13 @@
                 </a>
             </nav>
 
-            <div class="project3-content">
-                <div class="project3-inner">
-                    <header class="project-editorial-header">
+            <div class="project3-content project-shell">
+                <div class="project3-inner project-inner">
+                    <header class="project-editorial-header project-header">
                         <p class="project3-subtitle project-kicker">Inductive Automation Conference 2024 Finalist</p>
-                        <h1>CO2 Prediction Model</h1>
+                        <h1 class="project-title">CO2 Prediction Model</h1>
                     </header>
-                    <div class="project3-text">
+                    <div class="project3-text project-copy">
                         <p>
                             During my university placement at Carlton & United Breweries, I was given the opportunity 
                             to complete and deploy a CO2 prediction model for the brewery.
@@ -575,15 +578,15 @@
                     </div>
 
                     <!-- Project Image -->
-                    <div class="project3-image" id="p3-showcase">
+                    <div class="project3-image project-media project-section" id="p3-showcase">
                         <img src="Pictures/Co2_project.png" alt="Ignition SCADA interface with hourly CO2 storage forecasts and actual levels" />
-                        <p class="image-caption">The Ignition-based CO2 prediction model interface showing real-time storage levels and forecasting</p>
+                        <p class="image-caption project-caption">The Ignition-based CO2 prediction model interface showing real-time storage levels and forecasting</p>
                     </div>
 
-                    <div class="project3-text">
+                    <div class="project3-text project-copy">
                         <p>
                             This work was submitted to the Ignition Community Conference's annual Discover Gallery, 
-                            where it was selected as a <span style="color: #fff;">finalist among the best projects of the year.</span>
+                            where it was selected as a <strong class="project3-highlight">finalist among the best projects of the year.</strong>
                         </p>
                     </div>
 
@@ -592,9 +595,9 @@
                     </a>
                 </div>
             </div>
-            <div class="project3-footer">
+            <div class="project3-footer project-footer">
                 <h3>Let's Connect</h3>
-                <div class="project3-footer-links">
+                <div class="project3-footer-links project-footer-links">
                     <a href="mailto:gabrieljyth@gmail.com">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -619,7 +622,7 @@
         </section>
 
         <!-- Project 4: ROS 2 Voice-Controlled Rover -->
-        <section id="ai-robot" class="page">
+        <section id="ai-robot" class="page project-page project-page--dark">
             <!-- Sidebar Navigation -->
             <nav class="project-nav" data-project="ai-robot">
                 <a href="#ai-robot" class="project-nav-item active" data-section="ai-robot">
@@ -648,15 +651,15 @@
                 </a>
             </nav>
 
-            <div class="project4-content">
-                <div class="project4-inner">
-                    <div class="project4-header">
+            <div class="project4-content project-shell">
+                <div class="project4-inner project-inner">
+                    <div class="project4-header project-header">
                         <p class="project4-subtitle project-kicker">Raspberry Pi &middot; Offline Speech Recognition &middot; Off-board Computer Vision</p>
-                        <h1>ROS 2 Voice-Controlled Rover</h1>
+                        <h1 class="project-title">ROS 2 Voice-Controlled Rover</h1>
                     </div>
 
-                    <div class="project4-description">
-                        <h2>Project Overview</h2>
+                    <div class="project4-description project-section">
+                        <h2 class="project-section-title">Project Overview</h2>
                         <p>
                             I built this rover as an end-to-end exploration of how speech, computer vision, and physical control
                             can work together in ROS 2. The Raspberry Pi handled the camera, offline Vosk speech recognition,
@@ -665,23 +668,23 @@
                         </p>
                     </div>
 
-                    <div class="project4-progress" id="p4-final-build">
-                        <h2>Final Build</h2>
+                    <div class="project4-progress project-section" id="p4-final-build">
+                        <h2 class="project-section-title">Final Build</h2>
                         <p class="project4-progress-intro">The completed rover from the front and rear.</p>
                         <div class="project4-progress-grid">
-                            <div class="project4-progress-item">
+                            <div class="project4-progress-item project-media">
                                 <img src="Pictures/project4_finalfront.jpg" alt="Front three-quarter view of the completed red ROS 2 rover" loading="lazy" />
-                                <p class="project4-progress-caption">Final rover — front view</p>
+                                <p class="project4-progress-caption project-caption">Final rover — front view</p>
                             </div>
-                            <div class="project4-progress-item">
+                            <div class="project4-progress-item project-media">
                                 <img src="Pictures/project4_finalbehind.jpg" alt="Rear three-quarter view of the completed red ROS 2 rover" loading="lazy" />
-                                <p class="project4-progress-caption">Final rover — rear view</p>
+                                <p class="project4-progress-caption project-caption">Final rover — rear view</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="project4-outcome" id="p4-outcome">
-                        <h2>Project Outcome</h2>
+                    <div class="project4-outcome project-section" id="p4-outcome">
+                        <h2 class="project-section-title">Project Outcome</h2>
                         <ul class="project4-delivered-list">
                             <li>Native ROS 2 Iron environment and camera streaming on a Raspberry Pi 4</li>
                             <li>Offline voice recognition and command parsing with Vosk</li>
@@ -699,8 +702,8 @@
                         </div>
                     </div>
 
-                    <div class="project4-roadmap" id="p4-roadmap">
-                        <h2>Workflow of project</h2>
+                    <div class="project4-roadmap project-section" id="p4-roadmap">
+                        <h2 class="project-section-title">Workflow of project</h2>
                         <table class="phase-table">
                             <thead>
                                 <tr>
@@ -737,23 +740,23 @@
                         </table>
                     </div>
 
-                    <div class="project4-progress" id="p4-development">
-                        <h2>Build Development</h2>
+                    <div class="project4-progress project-section" id="p4-development">
+                        <h2 class="project-section-title">Build Development</h2>
                         <p class="project4-progress-intro">Concept design and electronics integration stages.</p>
                         <div class="project4-progress-grid">
-                            <div class="project4-progress-item">
+                            <div class="project4-progress-item project-media">
                                 <img src="Pictures/project4_concept.png" alt="Early concept design rendering of the mobile robot" loading="lazy" />
-                                <p class="project4-progress-caption">Early concept design</p>
+                                <p class="project4-progress-caption project-caption">Early concept design</p>
                             </div>
-                            <div class="project4-progress-item">
+                            <div class="project4-progress-item project-media">
                                 <img src="Pictures/project4_wip.png" alt="Work-in-progress rover with electronics and motor installed" loading="lazy" />
-                                <p class="project4-progress-caption">Electronics integration</p>
+                                <p class="project4-progress-caption project-caption">Electronics integration</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="project4-tech-section" id="p4-tech">
-                        <h3>Tech Stack</h3>
+                    <div class="project4-tech-section project-section" id="p4-tech">
+                        <h3 class="project-section-title">Tech Stack</h3>
                         <div class="project4-tech-stack">
                             <span>ROS 2 Iron</span>
                             <span>Raspberry Pi</span>
@@ -768,9 +771,9 @@
                     </div>
                 </div>
             </div>
-            <div class="project4-footer">
+            <div class="project4-footer project-footer">
                 <h3>Let's Connect</h3>
-                <div class="project4-footer-links">
+                <div class="project4-footer-links project-footer-links">
                     <a href="mailto:gabrieljyth@gmail.com">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -795,7 +798,7 @@
         </section>
 
         <!-- Project 5: Portable Vacuum Chamber -->
-        <section id="portable-vacuum-chamber" class="page">
+        <section id="portable-vacuum-chamber" class="page project-page project-page--light">
             <nav class="project-nav" data-project="portable-vacuum-chamber" aria-label="Vacuum chamber project sections">
                 <a href="#vacuum-overview" class="project-nav-item active" data-section="vacuum-overview">
                     <span class="project-nav-line"></span>
@@ -819,39 +822,39 @@
                 </a>
             </nav>
 
-            <div class="vacuum-page">
-                <div class="vacuum-inner">
-                    <header class="vacuum-header" id="vacuum-overview">
-                        <p class="vacuum-kicker">Space Robotics Lab · Mechanical Design</p>
-                        <h1>Portable Vacuum Chamber</h1>
+            <div class="vacuum-page project-shell">
+                <div class="vacuum-inner project-inner">
+                    <header class="vacuum-header project-header" id="vacuum-overview">
+                        <p class="vacuum-kicker project-kicker">Space Robotics Lab · Mechanical Design</p>
+                        <h1 class="project-title">Portable Vacuum Chamber</h1>
                         <p class="vacuum-intro">
                             Built for the Space Robotics Lab, this compact vacuum chamber was built so that we could carry a dust-covered glass sample to a laser lab for experiments into whether laser energy can remove dust from a surface under vacuum.
                         </p>
                     </header>
 
                     <section class="vacuum-gallery" id="vacuum-gallery" aria-label="Finished portable vacuum chamber views">
-                        <figure class="vacuum-gallery-item vacuum-gallery-front">
+                        <figure class="vacuum-gallery-item vacuum-gallery-front project-media">
                             <img src="Pictures/portable_vacuum_chamber/front_view.webp" alt="Front view of the completed portable vacuum chamber and glass flange" loading="lazy" decoding="async">
-                            <figcaption>Front view</figcaption>
+                            <figcaption class="project-caption">Front view</figcaption>
                         </figure>
-                        <figure class="vacuum-gallery-item vacuum-gallery-side">
+                        <figure class="vacuum-gallery-item vacuum-gallery-side project-media">
                             <img src="Pictures/portable_vacuum_chamber/side_view.webp" alt="Side view of the completed chamber connected to the vacuum system" loading="lazy" decoding="async">
-                            <figcaption>Side view</figcaption>
+                            <figcaption class="project-caption">Side view</figcaption>
                         </figure>
-                        <figure class="vacuum-gallery-item vacuum-gallery-other-side">
+                        <figure class="vacuum-gallery-item vacuum-gallery-other-side project-media">
                             <img src="Pictures/portable_vacuum_chamber/other_side_view.webp" alt="Opposite side view showing the chamber body and bolted end plate" loading="lazy" decoding="async">
-                            <figcaption>Opposite side</figcaption>
+                            <figcaption class="project-caption">Opposite side</figcaption>
                         </figure>
-                        <figure class="vacuum-gallery-item vacuum-gallery-top">
+                        <figure class="vacuum-gallery-item vacuum-gallery-top project-media">
                             <img src="Pictures/portable_vacuum_chamber/top_view.webp" alt="Top view of the completed chamber and circular viewing flange" loading="lazy" decoding="async">
-                            <figcaption>Top view</figcaption>
+                            <figcaption class="project-caption">Top view</figcaption>
                         </figure>
                     </section>
 
-                    <section class="vacuum-section vacuum-workflow" id="vacuum-workflow">
+                    <section class="vacuum-section vacuum-workflow project-section" id="vacuum-workflow">
                         <div class="vacuum-section-heading">
                             <p class="vacuum-eyebrow">Engineering journey</p>
-                            <h2>Design Workflow</h2>
+                            <h2 class="project-section-title">Design Workflow</h2>
                             <p>These are the five steps that I took for the design workflow of this vacuum chamber.</p>
                         </div>
 
@@ -859,7 +862,7 @@
                             <article class="vacuum-workflow-stage">
                                 <span class="vacuum-stage-marker">01</span>
                                 <div class="vacuum-stage-content">
-                                    <figure class="vacuum-stage-media">
+                                    <figure class="vacuum-stage-media project-media">
                                         <img src="Pictures/portable_vacuum_chamber/sketches.webp" alt="Hand-drawn concept sketches and dimensions for the portable vacuum chamber" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>Sketch</h3>
@@ -871,7 +874,7 @@
                                 <span class="vacuum-stage-marker">02</span>
                                 <div class="vacuum-stage-content">
                                     <!-- Replace this resolved-geometry view with a SolidWorks screenshot when one is available. -->
-                                    <figure class="vacuum-stage-media">
+                                    <figure class="vacuum-stage-media project-media">
                                         <img src="Pictures/portable_vacuum_chamber/top_view.webp" alt="Top view showing the flange and enclosure geometry resolved during CAD design" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>SolidWorks</h3>
@@ -882,7 +885,7 @@
                             <article class="vacuum-workflow-stage">
                                 <span class="vacuum-stage-marker">03</span>
                                 <div class="vacuum-stage-content">
-                                    <figure class="vacuum-stage-media">
+                                    <figure class="vacuum-stage-media project-media">
                                         <img src="Pictures/portable_vacuum_chamber/3d_print.webp" alt="Disassembled 3D-printed prototype of the vacuum chamber enclosure" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>Prototype</h3>
@@ -893,7 +896,7 @@
                             <article class="vacuum-workflow-stage">
                                 <span class="vacuum-stage-marker">04</span>
                                 <div class="vacuum-stage-content">
-                                    <figure class="vacuum-stage-media">
+                                    <figure class="vacuum-stage-media project-media">
                                         <img src="Pictures/portable_vacuum_chamber/fabrication.webp" alt="Fabricated metal vacuum chamber body before final clamping and testing" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>Fabrication</h3>
@@ -904,7 +907,7 @@
                             <article class="vacuum-workflow-stage">
                                 <span class="vacuum-stage-marker">05</span>
                                 <div class="vacuum-stage-content">
-                                    <figure class="vacuum-stage-media">
+                                    <figure class="vacuum-stage-media project-media">
                                         <img src="Pictures/portable_vacuum_chamber/side_view.webp" alt="Finished portable vacuum chamber connected for vacuum-system testing" loading="lazy" decoding="async">
                                     </figure>
                                     <h3>Finished Chamber</h3>
@@ -914,10 +917,10 @@
                         </div>
                     </section>
 
-                    <section class="vacuum-section vacuum-recovery" id="vacuum-recovery">
+                    <section class="vacuum-section vacuum-recovery project-section" id="vacuum-recovery">
                         <div class="vacuum-section-heading">
                             <p class="vacuum-eyebrow">Iteration under test</p>
-                            <h2>Design Mistake &amp; Recovery</h2>
+                            <h2 class="project-section-title">Design Mistake &amp; Recovery</h2>
                         </div>
 
                         <div class="vacuum-recovery-grid">
@@ -939,10 +942,10 @@
                         </div>
                     </section>
 
-                    <section class="vacuum-section vacuum-skills" id="vacuum-skills">
+                    <section class="vacuum-section vacuum-skills project-section" id="vacuum-skills">
                         <div class="vacuum-section-heading">
                             <p class="vacuum-eyebrow">Methods and tools</p>
-                            <h2>Skill Stack</h2>
+                            <h2 class="project-section-title">Skill Stack</h2>
                         </div>
                         <div class="vacuum-skill-stack" aria-label="Project skills">
                             <span>SolidWorks</span>
@@ -958,10 +961,10 @@
                 </div>
             </div>
 
-            <footer class="vacuum-footer">
+            <footer class="vacuum-footer project-footer">
                 <div class="container">
                     <h3>Let's Connect</h3>
-                    <div class="footer-links">
+                    <div class="footer-links project-footer-links">
                         <a href="mailto:gabrieljyth@gmail.com">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -996,6 +999,6 @@
         </figure>
     </dialog>
 
-    <script src="js/main.js?v=20260810-1"></script>
+    <script src="js/main.js?v=20260810-2"></script>
 </body>
 </html>
