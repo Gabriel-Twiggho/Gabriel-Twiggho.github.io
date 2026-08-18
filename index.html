@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/base.css?v=20260810-2">
     <link rel="stylesheet" href="css/home.css?v=20260810-2">
     <link rel="stylesheet" href="css/projects.css?v=20260810-2">
-    <link rel="stylesheet" href="css/project-themes.css?v=20260810-2">
+    <link rel="stylesheet" href="css/project-themes.css?v=20260818-1">
 </head>
 <body>
     <nav>
@@ -26,6 +26,7 @@
                         <li><a href="#co2-prediction" data-page="co2-prediction" id="nav-co2-prediction">CO2 Prediction</a></li>
                         <li><a href="#ai-robot" data-page="ai-robot" id="nav-ai-robot">ROS 2 Rover</a></li>
                         <li><a href="#portable-vacuum-chamber" data-page="portable-vacuum-chamber" id="nav-portable-vacuum-chamber">Vacuum Chamber</a></li>
+                        <li><a href="#thermal-vacuum-control" data-page="thermal-vacuum-control" id="nav-thermal-vacuum-control">TVAC Control</a></li>
                     </ul>
                 </li>
             </ul>
@@ -128,6 +129,19 @@
                                 <h3>Portable Vacuum Chamber</h3>
                                 <p class="card-problem"><strong>Problem:</strong> Transport a dust-covered glass sample under vacuum for laser-cleaning experiments.</p>
                                 <p class="card-solution"><strong>Solution:</strong> Designed, prototyped, fabricated and pump-down tested a compact chamber for the Space Robotics Lab.</p>
+                                <span class="card-link">View Project →</span>
+                            </div>
+                        </a>
+
+                        <!-- Project 6: Thermal Vacuum Chamber Control -->
+                        <a class="project-card" href="#thermal-vacuum-control" onclick="showPage('thermal-vacuum-control'); return false;">
+                            <div class="card-media">
+                                <img src="Pictures/tvac/PCB_design_iterations_final_physical_product.png" alt="Three iterations of the custom TVAC controller PCB" loading="lazy" decoding="async">
+                            </div>
+                            <div class="card-content">
+                                <h3>Thermal Vacuum Chamber Control</h3>
+                                <p class="card-problem"><strong>Problem:</strong> Automate temperature ramps and holds across the chamber's heaters and LN₂ cooling system.</p>
+                                <p class="card-solution"><strong>Solution:</strong> Validated the architecture on a bench prototype, then developed the HMI, LN₂ control, dedicated PCB and model-based control logic.</p>
                                 <span class="card-link">View Project →</span>
                             </div>
                         </a>
@@ -989,6 +1003,276 @@
             </footer>
         </section>
 
+        <!-- Project 6: Thermal Vacuum Chamber Control System -->
+        <section id="thermal-vacuum-control" class="page project-page project-page--light">
+            <nav class="project-nav" data-project="thermal-vacuum-control" aria-label="Thermal vacuum control project sections">
+                <a href="#tvac-overview" class="project-nav-item active" data-section="tvac-overview">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Overview</span>
+                </a>
+                <a href="#tvac-architecture" class="project-nav-item" data-section="tvac-architecture">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Architecture</span>
+                </a>
+                <a href="#tvac-hardware" class="project-nav-item" data-section="tvac-hardware">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Hardware</span>
+                </a>
+                <a href="#tvac-control" class="project-nav-item" data-section="tvac-control">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Control</span>
+                </a>
+                <a href="#tvac-skills" class="project-nav-item" data-section="tvac-skills">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Skills</span>
+                </a>
+            </nav>
+
+            <div class="tvac-page project-shell">
+                <div class="tvac-inner project-inner">
+                    <header class="tvac-header project-header" id="tvac-overview">
+                        <p class="project-kicker">Space Robotics Lab · Automation &amp; Control</p>
+                        <h1 class="project-title">Thermal Vacuum Chamber Control System</h1>
+                        <p class="tvac-intro">
+                            I helped turn an existing thermal vacuum chamber with heat shrouds and LN₂ cooling into an automated system. An operator could set a target temperature while the controller coordinated telemetry, heaters and cooling through a desktop HMI.
+                        </p>
+                    </header>
+
+                    <figure class="tvac-hero project-media">
+                        <video autoplay loop muted playsinline controls preload="metadata" data-page-video>
+                            <source src="Pictures/tvac/tvac_working_phase1_720p_no_audio.mp4" type="video/mp4">
+                            Your browser does not support the project video.
+                        </video>
+                        <figcaption class="project-caption">Functional bench prototype validating the HMI and control architecture before the final PCB hardware was produced.</figcaption>
+                    </figure>
+
+                    <div class="tvac-targets" aria-label="Key project targets and test result">
+                        <div class="tvac-target">
+                            <span>Ramp target</span>
+                            <strong>1–2°C/min</strong>
+                        </div>
+                        <div class="tvac-target">
+                            <span>Hold target</span>
+                            <strong>±2°C</strong>
+                        </div>
+                        <div class="tvac-target">
+                            <span>LN₂ test</span>
+                            <strong>≈9 hours</strong>
+                        </div>
+                    </div>
+
+                    <section class="tvac-section project-section" id="tvac-architecture">
+                        <div class="tvac-section-heading">
+                            <p class="tvac-eyebrow">From manual plant to integrated control</p>
+                            <h2 class="project-section-title">System Architecture</h2>
+                            <p>The new architecture connected the chamber's thermocouples to ESP32-based heater and LN₂ control, with a desktop HMI for monitoring and operator commands.</p>
+                        </div>
+
+                        <div class="tvac-architecture-grid">
+                            <figure class="tvac-architecture-card project-media">
+                                <div class="tvac-card-label">01 · Existing system</div>
+                                <img src="Pictures/tvac/diagram_tvac_system_arch_before_mycontrol_arch.png" alt="Diagram of the original thermal vacuum chamber with heat pads, vacuum pump and liquid nitrogen tank" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">The original chamber hardware before the automated control layer.</figcaption>
+                            </figure>
+                            <figure class="tvac-architecture-card project-media">
+                                <div class="tvac-card-label">02 · Proposed control system</div>
+                                <img src="Pictures/tvac/diagram_tvac_system_arch_I_plan_to_implement.png" alt="Diagram of the proposed TVAC architecture with thermocouples, dual ESP32 controllers, HMI and liquid nitrogen valve" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">Thermocouples → ESP32 control → heaters and LN₂ valve, supervised by the desktop HMI.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <section class="tvac-section project-section" id="tvac-hardware">
+                        <div class="tvac-section-heading">
+                            <p class="tvac-eyebrow">Functional prototype → engineered final hardware</p>
+                            <h2 class="project-section-title">Hardware Development</h2>
+                            <p>The temporary wiring was intentional: it let me prove temperature acquisition, switching and integration before committing the design to a dedicated PCB.</p>
+                        </div>
+
+                        <div class="tvac-hardware-grid">
+                            <article class="tvac-stage-card tvac-stage-card--wide">
+                                <figure class="tvac-stage-media project-media">
+                                    <img src="Pictures/tvac/entire_tvac_bench_testing_top.png" alt="Overhead view of the thermal vacuum chamber bench prototype with temporary control electronics and wiring" loading="lazy" decoding="async">
+                                </figure>
+                                <div class="tvac-stage-copy">
+                                    <span class="tvac-stage-number">01</span>
+                                    <h3>Bench Prototype</h3>
+                                    <p>Temporary electronics and breadboards validated the control architecture, temperature acquisition and heater switching around the complete TVAC.</p>
+                                </div>
+                            </article>
+
+                            <article class="tvac-stage-card tvac-stage-card--interface">
+                                <figure class="tvac-stage-media project-media">
+                                    <img src="Pictures/tvac/HMI.png" alt="Desktop HMI displaying thermal vacuum chamber temperatures, setpoints and heater controls" loading="lazy" decoding="async">
+                                </figure>
+                                <div class="tvac-stage-copy">
+                                    <span class="tvac-stage-number">02</span>
+                                    <h3>HMI &amp; Integration</h3>
+                                    <p>The interface displayed telemetry, issued commands and brought the prototype together as one testable system, progressing from an early browser concept to a simpler PySide6 desktop application.</p>
+                                </div>
+                            </article>
+
+                            <article class="tvac-stage-card">
+                                <figure class="tvac-stage-media project-media">
+                                    <img src="Pictures/tvac/testing_solenoid_ice_around_it.png" alt="Liquid nitrogen solenoid and pipework covered in frost during cryogenic testing" loading="lazy" decoding="async">
+                                </figure>
+                                <div class="tvac-stage-copy">
+                                    <span class="tvac-stage-number">03</span>
+                                    <h3>LN₂ Control</h3>
+                                    <p>I integrated an electrically controlled solenoid into the legacy plumbing and tested it under real LN₂ conditions for approximately nine hours.</p>
+                                </div>
+                            </article>
+
+                            <article class="tvac-stage-card">
+                                <div class="tvac-media-pair">
+                                    <figure class="tvac-stage-media project-media">
+                                        <img src="Pictures/tvac/kicad_esp32control_pcb.png" alt="KiCad schematic for the ESP32 TVAC controller, heater loads and solenoid output" loading="lazy" decoding="async">
+                                    </figure>
+                                    <figure class="tvac-stage-media project-media">
+                                        <img src="Pictures/tvac/kicad_esp32control_pcb_schematic.png" alt="KiCad PCB layout for the ESP32 TVAC controller" loading="lazy" decoding="async">
+                                    </figure>
+                                </div>
+                                <div class="tvac-stage-copy">
+                                    <span class="tvac-stage-number">04</span>
+                                    <h3>PCB Design</h3>
+                                    <p>The proven temporary circuit became a dedicated ESP32 PCB with power distribution and MOSFET switching for the heaters and solenoid.</p>
+                                </div>
+                            </article>
+
+                            <article class="tvac-stage-card">
+                                <div class="tvac-media-pair">
+                                    <figure class="tvac-stage-media project-media">
+                                        <img src="Pictures/tvac/PCB_design_iterations_final_physical_product.png" alt="Three physical iterations of the green TVAC controller PCB" loading="lazy" decoding="async">
+                                    </figure>
+                                    <figure class="tvac-stage-media project-media">
+                                        <img src="Pictures/tvac/Final_esp32control_design_phase2.png" alt="Final phase two ESP32 controller PCB installed with its wiring" loading="lazy" decoding="async">
+                                    </figure>
+                                </div>
+                                <div class="tvac-stage-copy">
+                                    <span class="tvac-stage-number">05</span>
+                                    <h3>Final Hardware</h3>
+                                    <p>Phase 2 converted the working bench prototype into a cleaner, serviceable controller and finalised LN₂ hardware.</p>
+                                </div>
+                            </article>
+                        </div>
+
+                        <figure class="tvac-final-solenoid project-media">
+                            <img src="Pictures/tvac/final_solenoid_phase2.png" alt="Final phase two liquid nitrogen solenoid and plumbing fitted to the tank" loading="lazy" decoding="async">
+                            <figcaption class="project-caption">Final Phase 2 LN₂ solenoid assembly.</figcaption>
+                        </figure>
+                    </section>
+
+                    <section class="tvac-section project-section" id="tvac-control">
+                        <div class="tvac-section-heading">
+                            <p class="tvac-eyebrow">Thermal testing → model-based logic</p>
+                            <h2 class="project-section-title">Developing the Temperature Controller</h2>
+                            <p>The first physical controller reached approximately the required ramp rate, but its hold performance was around ±5°C. Recorded test data was then used to develop a more capable model-based approach.</p>
+                        </div>
+
+                        <div class="tvac-control-grid">
+                            <article class="tvac-control-card">
+                                <div class="tvac-control-copy">
+                                    <span>01 · Thermal testing</span>
+                                    <h3>Measure the chamber</h3>
+                                    <p>Heating trials exposed the chamber's lag and showed why fixed heater cut-off temperatures could not provide reliable control.</p>
+                                </div>
+                                <figure class="tvac-control-media project-media">
+                                    <img src="Pictures/tvac/testdata_graph.png" alt="Measured TVAC temperature compared with the identified thermal model prediction" loading="lazy" decoding="async">
+                                    <figcaption class="project-caption">A recorded heating run comparing measured temperature with the model prediction.</figcaption>
+                                </figure>
+                            </article>
+
+                            <article class="tvac-control-card">
+                                <div class="tvac-control-copy">
+                                    <span>02 · Initial control</span>
+                                    <h3>Feedback with prediction</h3>
+                                    <p>The early physical controller managed the ramp using feedback and temperature prediction, but still varied by about ±5°C around the final setpoint.</p>
+                                </div>
+                                <figure class="tvac-control-media project-media">
+                                    <img src="Pictures/tvac/control_traindata_graph3.png" alt="Initial TVAC feedback controller trial showing temperature, heater duty and ramp rate" loading="lazy" decoding="async">
+                                    <figcaption class="project-caption">Physical controller trial with temperature, heater duty and measured ramp rate.</figcaption>
+                                </figure>
+                            </article>
+
+                            <article class="tvac-control-card tvac-control-card--formula">
+                                <div class="tvac-control-copy">
+                                    <span>03 · System identification</span>
+                                    <h3>Build a thermal model</h3>
+                                    <p>Experimental data produced a four-pole transfer-function model with approximately 95% fit on the cleaner training data.</p>
+                                </div>
+                                <figure class="tvac-control-media project-media">
+                                    <img src="Pictures/tvac/generated_transfer_function.png" alt="Four-pole transfer function identified from thermal vacuum chamber test data" loading="lazy" decoding="async">
+                                    <figcaption class="project-caption">Identified four-pole transfer function.</figcaption>
+                                </figure>
+                            </article>
+
+                            <article class="tvac-control-card tvac-control-card--final">
+                                <div class="tvac-control-copy">
+                                    <span>04 · Final control logic</span>
+                                    <h3>Separate ramp and hold behaviour</h3>
+                                    <p>The identified model was used to tune separate logic for a 1–2°C/min ramp and ±2°C hold target.</p>
+                                    <p class="tvac-validation-note"><strong>Validation status:</strong> developed from recorded TVAC data, but not physically validated before the project concluded because other chamber hardware was still being worked on.</p>
+                                </div>
+                                <figure class="tvac-control-media project-media">
+                                    <img src="Pictures/tvac/using_tf_create_model_of_system_final_logic_values_for_system_graph.png" alt="Simulated model-based TVAC controller showing target ramp, temperature hold and heater output" loading="lazy" decoding="async">
+                                    <figcaption class="project-caption">Model-based control simulation; this result is not a physical TVAC test.</figcaption>
+                                </figure>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="tvac-section tvac-skills project-section" id="tvac-skills">
+                        <div class="tvac-section-heading">
+                            <p class="tvac-eyebrow">Methods and tools</p>
+                            <h2 class="project-section-title">Skill Stack</h2>
+                        </div>
+                        <div class="tvac-skill-stack" aria-label="Project skills">
+                            <span>Control Systems</span>
+                            <span>System Identification</span>
+                            <span>ESP32</span>
+                            <span>Embedded Systems</span>
+                            <span>KiCad</span>
+                            <span>PCB Design</span>
+                            <span>MOSFET Control</span>
+                            <span>Python</span>
+                            <span>PySide6</span>
+                            <span>HMI / SCADA</span>
+                            <span>Thermocouples</span>
+                            <span>LN₂ Systems</span>
+                            <span>Hardware Integration</span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <footer class="tvac-footer project-footer">
+                <div class="container">
+                    <h3>Let's Connect</h3>
+                    <div class="footer-links project-footer-links">
+                        <a href="mailto:gabrieljyth@gmail.com">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            Email
+                        </a>
+                        <a href="https://github.com/Gabriel-Twiggho" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="https://www.linkedin.com/in/gabriel-twigg-ho-96579b1b8/" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                    <p class="copyright">© 2025 Gabriel Twigg-Ho</p>
+                </div>
+            </footer>
+        </section>
+
     </main>
 
     <dialog class="image-lightbox" id="image-lightbox" aria-label="Full-screen project image">
@@ -999,6 +1283,6 @@
         </figure>
     </dialog>
 
-    <script src="js/main.js?v=20260810-2"></script>
+    <script src="js/main.js?v=20260818-1"></script>
 </body>
 </html>

@@ -2213,3 +2213,532 @@
         font-size: 3rem;
     }
 }
+
+/* ==================== */
+/* PROJECT 6 TVAC CONTROL */
+/* ==================== */
+
+#thermal-vacuum-control {
+    --tvac-bg: #f3f6f8;
+    --tvac-surface: #ffffff;
+    --tvac-ink: #14202a;
+    --tvac-muted: #5f6e79;
+    --tvac-accent: #147c9e;
+    --tvac-line: rgba(35, 67, 82, 0.16);
+    background: var(--tvac-bg);
+    color: var(--tvac-ink);
+}
+
+.tvac-page {
+    min-height: calc(100vh - 48px);
+    padding: 0 2rem;
+    background:
+        radial-gradient(circle at 84% 5%, rgba(67, 159, 190, 0.12), transparent 24rem),
+        linear-gradient(180deg, #fbfcfd 0%, var(--tvac-bg) 40%, #edf2f4 100%);
+}
+
+.tvac-inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.tvac-header {
+    max-width: 920px;
+    padding: clamp(5rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 4.5rem);
+}
+
+.tvac-header .project-kicker,
+.tvac-eyebrow,
+.tvac-card-label,
+.tvac-stage-number,
+.tvac-control-copy > span,
+.tvac-target span {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tvac-header .project-kicker,
+.tvac-eyebrow,
+.tvac-stage-number,
+.tvac-control-copy > span {
+    color: var(--tvac-accent);
+}
+
+.tvac-header h1 {
+    max-width: 900px;
+    margin: 1rem 0 1.5rem;
+    color: var(--tvac-ink);
+    font-size: clamp(2.8rem, 7vw, 5.8rem);
+    font-weight: 600;
+    letter-spacing: -0.052em;
+    line-height: 0.98;
+}
+
+.tvac-intro {
+    max-width: 780px;
+    color: var(--tvac-muted);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.75;
+}
+
+.tvac-header > *,
+.tvac-hero,
+.tvac-targets {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.page.animate .tvac-header > *,
+.page.animate .tvac-hero,
+.page.animate .tvac-targets {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.page.animate .tvac-header h1 { animation-delay: 0.1s; }
+.page.animate .tvac-intro { animation-delay: 0.2s; }
+.page.animate .tvac-hero { animation-delay: 0.3s; }
+.page.animate .tvac-targets { animation-delay: 0.4s; }
+
+.tvac-hero {
+    margin: 0 0 1.25rem;
+    overflow: hidden;
+    background: #11191e;
+    border: 1px solid rgba(35, 67, 82, 0.2);
+    box-shadow: 0 28px 70px rgba(29, 62, 77, 0.16);
+}
+
+.tvac-hero video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #11191e;
+    object-fit: contain;
+}
+
+.tvac-hero figcaption,
+.tvac-architecture-card figcaption,
+.tvac-final-solenoid figcaption,
+.tvac-control-media figcaption {
+    padding: 0.85rem 1rem;
+    color: var(--tvac-muted);
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+
+.tvac-hero figcaption {
+    background: var(--tvac-surface);
+}
+
+.tvac-targets {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: clamp(5rem, 9vw, 8rem);
+    border-top: 1px solid var(--tvac-line);
+    border-bottom: 1px solid var(--tvac-line);
+}
+
+.tvac-target {
+    padding: 1.4rem 1.5rem;
+}
+
+.tvac-target + .tvac-target {
+    border-left: 1px solid var(--tvac-line);
+}
+
+.tvac-target span {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--tvac-muted);
+    font-size: 0.68rem;
+}
+
+.tvac-target strong {
+    color: var(--tvac-ink);
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+}
+
+.tvac-section {
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
+    border-top: 1px solid var(--tvac-line);
+}
+
+.tvac-section-heading {
+    max-width: 760px;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.tvac-eyebrow {
+    margin: 0;
+    font-size: 0.72rem;
+}
+
+.tvac-section-heading h2 {
+    margin: 0.65rem 0 0.9rem;
+    color: var(--tvac-ink);
+    font-size: clamp(2.1rem, 4vw, 3.4rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+}
+
+.tvac-section-heading > p:last-child:not(.tvac-eyebrow) {
+    color: var(--tvac-muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.tvac-architecture-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tvac-architecture-card,
+.tvac-stage-card,
+.tvac-control-card {
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid var(--tvac-line);
+    box-shadow: 0 18px 50px rgba(29, 62, 77, 0.07);
+}
+
+.tvac-card-label {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--tvac-line);
+    color: var(--tvac-accent);
+    font-size: 0.68rem;
+}
+
+.tvac-architecture-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #eee9de;
+    object-fit: contain;
+}
+
+.tvac-architecture-card figcaption {
+    min-height: 4.2rem;
+    border-top: 1px solid var(--tvac-line);
+}
+
+.tvac-hardware-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tvac-stage-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.tvac-stage-card--wide {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.55fr);
+}
+
+.tvac-stage-media {
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #dfe8ec;
+}
+
+.tvac-stage-media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.tvac-stage-card:hover .tvac-stage-media img {
+    transform: scale(1.025);
+}
+
+.tvac-stage-card--wide > .tvac-stage-media img {
+    height: 100%;
+    min-height: 390px;
+    aspect-ratio: auto;
+}
+
+.tvac-stage-card--interface .tvac-stage-media img {
+    background: #151b20;
+    object-fit: contain;
+}
+
+.tvac-stage-copy {
+    padding: 1.4rem;
+}
+
+.tvac-stage-number,
+.tvac-control-copy > span {
+    display: block;
+    margin-bottom: 0.65rem;
+    font-size: 0.68rem;
+}
+
+.tvac-stage-copy h3,
+.tvac-control-copy h3 {
+    margin: 0 0 0.65rem;
+    color: var(--tvac-ink);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.tvac-stage-copy p,
+.tvac-control-copy p {
+    color: var(--tvac-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.tvac-media-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--tvac-line);
+}
+
+.tvac-media-pair .tvac-stage-media img {
+    height: 270px;
+    aspect-ratio: auto;
+}
+
+.tvac-media-pair .tvac-stage-media:first-child img {
+    object-fit: contain;
+}
+
+.tvac-final-solenoid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    margin: 1rem 0 0;
+    overflow: hidden;
+    background: var(--tvac-surface);
+    border: 1px solid var(--tvac-line);
+}
+
+.tvac-final-solenoid img {
+    display: block;
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    object-position: center 56%;
+}
+
+.tvac-final-solenoid figcaption {
+    display: flex;
+    align-items: flex-end;
+    border-left: 1px solid var(--tvac-line);
+}
+
+.tvac-control-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tvac-control-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.tvac-control-copy {
+    padding: 1.5rem;
+}
+
+.tvac-control-media {
+    margin: auto 0 0;
+    border-top: 1px solid var(--tvac-line);
+}
+
+.tvac-control-media img {
+    display: block;
+    width: 100%;
+    height: 300px;
+    padding: 0.75rem;
+    background: #fff;
+    object-fit: contain;
+}
+
+.tvac-control-media figcaption {
+    min-height: 3.9rem;
+    border-top: 1px solid var(--tvac-line);
+}
+
+.tvac-control-card--formula .tvac-control-media img {
+    height: 220px;
+}
+
+.tvac-control-card--final {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(280px, 0.65fr) minmax(0, 1.35fr);
+}
+
+.tvac-control-card--final .tvac-control-media {
+    margin: 0;
+    border-top: 0;
+    border-left: 1px solid var(--tvac-line);
+}
+
+.tvac-control-card--final .tvac-control-media img {
+    height: 390px;
+}
+
+.tvac-validation-note {
+    margin-top: 1.2rem;
+    padding: 0.9rem 1rem;
+    border-left: 3px solid var(--tvac-accent);
+    background: rgba(20, 124, 158, 0.08);
+    color: #42535f !important;
+}
+
+.tvac-skills {
+    padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+.tvac-skill-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.tvac-skill-stack span {
+    padding: 0.58rem 0.85rem;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid var(--tvac-line);
+    color: #455661;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+}
+
+.tvac-footer {
+    background: #fff;
+}
+
+#thermal-vacuum-control .project-nav-line {
+    background: rgba(20, 32, 42, 0.22);
+}
+
+#thermal-vacuum-control .project-nav-text {
+    color: rgba(20, 32, 42, 0.44);
+}
+
+#thermal-vacuum-control .project-nav-item:hover .project-nav-line {
+    background: rgba(20, 32, 42, 0.42);
+}
+
+#thermal-vacuum-control .project-nav-item:hover .project-nav-text,
+#thermal-vacuum-control .project-nav-item.active .project-nav-text {
+    color: var(--tvac-accent);
+}
+
+#thermal-vacuum-control .project-nav-item.active .project-nav-line {
+    background: var(--tvac-accent);
+}
+
+@media (max-width: 900px) {
+    .tvac-stage-card--wide,
+    .tvac-control-card--final {
+        display: flex;
+        grid-column: auto;
+    }
+
+    .tvac-stage-card--wide {
+        grid-column: 1 / -1;
+    }
+
+    .tvac-stage-card--wide > .tvac-stage-media img {
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .tvac-control-card--final .tvac-control-media {
+        border-top: 1px solid var(--tvac-line);
+        border-left: 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .tvac-page {
+        padding: 0 1.25rem;
+    }
+
+    .tvac-header {
+        padding-top: 4rem;
+    }
+
+    .tvac-header h1 {
+        font-size: clamp(2.65rem, 13vw, 4rem);
+    }
+
+    .tvac-targets,
+    .tvac-architecture-grid,
+    .tvac-hardware-grid,
+    .tvac-control-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tvac-target + .tvac-target {
+        border-top: 1px solid var(--tvac-line);
+        border-left: 0;
+    }
+
+    .tvac-stage-card--wide {
+        grid-column: auto;
+    }
+
+    .tvac-media-pair {
+        grid-template-columns: 1fr;
+    }
+
+    .tvac-media-pair .tvac-stage-media img {
+        height: auto;
+        aspect-ratio: 16 / 10;
+    }
+
+    .tvac-final-solenoid {
+        grid-template-columns: 1fr;
+    }
+
+    .tvac-final-solenoid img {
+        height: 300px;
+    }
+
+    .tvac-final-solenoid figcaption {
+        border-top: 1px solid var(--tvac-line);
+        border-left: 0;
+    }
+
+    .tvac-control-card--final .tvac-control-media img,
+    .tvac-control-media img {
+        height: auto;
+        min-height: 220px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page.animate .tvac-header > *,
+    .page.animate .tvac-hero,
+    .page.animate .tvac-targets {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    .tvac-stage-media img {
+        transition: none;
+    }
+}

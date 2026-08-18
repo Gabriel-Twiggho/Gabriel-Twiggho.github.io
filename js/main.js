@@ -4,7 +4,8 @@ const VALID_PAGES = [
     'task-scheduling',
     'co2-prediction',
     'ai-robot',
-    'portable-vacuum-chamber'
+    'portable-vacuum-chamber',
+    'thermal-vacuum-control'
 ];
 
 const LEGACY_PAGE_ALIASES = {
