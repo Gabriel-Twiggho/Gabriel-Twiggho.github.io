@@ -16,6 +16,7 @@ const LEGACY_PAGE_ALIASES = {
 };
 
 const DARK_PAGES = new Set(['swarm-tracking', 'ai-robot']);
+let updateTvacArchitectureScroll = function() {};
 
 function canonicalPageId(pageId) {
     return LEGACY_PAGE_ALIASES[pageId] || pageId;
@@ -84,6 +85,7 @@ function showPage(pageId, updateHash = true) {
     // Trigger animation restart with a tiny delay
     requestAnimationFrame(() => {
         targetPage.classList.add('animate');
+        updateTvacArchitectureScroll();
     });
     
     // Set active nav link
@@ -137,6 +139,75 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // Handle browser back/forward buttons
 window.addEventListener('hashchange', handleHashChange);
+
+// Separate the TVAC architecture states as the comparison enters the viewport.
+document.addEventListener('DOMContentLoaded', function() {
+    const architecture = document.querySelector('.tvac-architecture-grid');
+    if (!architecture) return;
+
+    const projectPage = architecture.closest('.page');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let animationFrame = null;
+
+    function clamp(value, minimum, maximum) {
+        return Math.min(Math.max(value, minimum), maximum);
+    }
+
+    function easeInOut(value) {
+        return value * value * (3 - (2 * value));
+    }
+
+    updateTvacArchitectureScroll = function() {
+        if (!projectPage.classList.contains('active')) return;
+
+        if (reducedMotion.matches) {
+            architecture.style.setProperty('--tvac-card-left-shift', '0px');
+            architecture.style.setProperty('--tvac-card-right-shift', '0px');
+            architecture.style.setProperty('--tvac-arrow-opacity', '1');
+            architecture.style.setProperty('--tvac-arrow-scale', '1');
+            return;
+        }
+
+        const bounds = architecture.getBoundingClientRect();
+        const animationStart = window.innerHeight * 0.88;
+        const animationEnd = window.innerHeight * 0.38;
+        const rawProgress = clamp(
+            (animationStart - bounds.top) / (animationStart - animationEnd),
+            0,
+            1
+        );
+        const separationProgress = easeInOut(rawProgress);
+        const arrowProgress = easeInOut(clamp((rawProgress - 0.18) / 0.52, 0, 1));
+        const narrowLayout = window.innerWidth <= 700;
+
+        if (narrowLayout) {
+            architecture.style.setProperty('--tvac-card-left-shift', '0px');
+            architecture.style.setProperty('--tvac-card-right-shift', '0px');
+        } else {
+            const leftShift = 22 + ((-34 - 22) * separationProgress);
+            const rightShift = -22 + ((34 + 22) * separationProgress);
+            architecture.style.setProperty('--tvac-card-left-shift', leftShift.toFixed(2) + 'px');
+            architecture.style.setProperty('--tvac-card-right-shift', rightShift.toFixed(2) + 'px');
+        }
+
+        architecture.style.setProperty('--tvac-arrow-opacity', arrowProgress.toFixed(3));
+        architecture.style.setProperty('--tvac-arrow-scale', (0.72 + (0.28 * arrowProgress)).toFixed(3));
+    };
+
+    function requestArchitectureUpdate() {
+        if (animationFrame !== null) return;
+
+        animationFrame = window.requestAnimationFrame(function() {
+            updateTvacArchitectureScroll();
+            animationFrame = null;
+        });
+    }
+
+    window.addEventListener('scroll', requestArchitectureUpdate, { passive: true });
+    window.addEventListener('resize', requestArchitectureUpdate);
+    reducedMotion.addEventListener('change', requestArchitectureUpdate);
+    updateTvacArchitectureScroll();
+});
 
 // Scroll indicator click handler
 document.addEventListener('DOMContentLoaded', function() {

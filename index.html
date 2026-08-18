@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/base.css?v=20260810-2">
     <link rel="stylesheet" href="css/home.css?v=20260810-2">
     <link rel="stylesheet" href="css/projects.css?v=20260810-2">
-    <link rel="stylesheet" href="css/project-themes.css?v=20260818-4">
+    <link rel="stylesheet" href="css/project-themes.css?v=20260818-6">
 </head>
 <body>
     <nav>
@@ -136,7 +136,9 @@
                         <!-- Project 6: Thermal Vacuum Chamber Control -->
                         <a class="project-card" href="#thermal-vacuum-control" onclick="showPage('thermal-vacuum-control'); return false;">
                             <div class="card-media">
-                                <img src="Pictures/tvac/PCB_design_iterations_final_physical_product.png" alt="Three iterations of the custom TVAC controller PCB" loading="lazy" decoding="async">
+                                <video loop muted playsinline preload="metadata" poster="Pictures/tvac/PCB_design_iterations_final_physical_product.png" data-page-video aria-label="TVAC functional prototype operating on the laboratory bench">
+                                    <source src="videos/tvac/tvac-functional-prototype-360p.web.mp4" type="video/mp4">
+                                </video>
                             </div>
                             <div class="card-content">
                                 <h3>Thermal Vacuum Chamber Control</h3>
@@ -1044,10 +1046,10 @@
 
                     <figure class="tvac-hero project-media">
                         <video autoplay loop muted playsinline controls preload="metadata" data-page-video>
-                            <source src="Pictures/tvac/tvac_working_phase1_720p_no_audio.mp4" type="video/mp4">
+                            <source src="videos/tvac/tvac-functional-prototype-cropped.web.mp4" type="video/mp4">
                             Your browser does not support the project video.
                         </video>
-                        <figcaption class="project-caption">Functional bench prototype validating the HMI and control architecture before the final PCB hardware was produced.</figcaption>
+                        <figcaption class="project-caption">Functional bench prototype — HMI and control architecture validation before the final PCB.</figcaption>
                     </figure>
 
                     <section class="tvac-section project-section" id="tvac-architecture">
@@ -1059,7 +1061,10 @@
 
                         <div class="tvac-architecture-grid">
                             <figure class="tvac-architecture-card project-media">
-                                <div class="tvac-card-label">01 · Existing system</div>
+                                <div class="tvac-card-label">
+                                    <span>01 · Existing system</span>
+                                    <strong>What we started with</strong>
+                                </div>
                                 <img src="Pictures/tvac/diagram_tvac_system_arch_before_mycontrol_arch.png" alt="Diagram of the original thermal vacuum chamber with heat pads, vacuum pump and liquid nitrogen tank" loading="lazy" decoding="async">
                                 <figcaption class="project-caption">The original chamber hardware before the automated control layer.</figcaption>
                             </figure>
@@ -1071,7 +1076,10 @@
                                 </svg>
                             </div>
                             <figure class="tvac-architecture-card project-media">
-                                <div class="tvac-card-label">02 · Proposed control system</div>
+                                <div class="tvac-card-label">
+                                    <span>02 · Proposed control system</span>
+                                    <strong>What I was tasked with implementing</strong>
+                                </div>
                                 <img src="Pictures/tvac/diagram_tvac_system_arch_I_plan_to_implement.png" alt="Diagram of the proposed TVAC architecture with thermocouples, dual ESP32 controllers, HMI and liquid nitrogen valve" loading="lazy" decoding="async">
                                 <figcaption class="project-caption">Thermocouples → ESP32 control → heaters and LN₂ valve, supervised by the desktop HMI.</figcaption>
                             </figure>
@@ -1323,6 +1331,6 @@
         </figure>
     </dialog>
 
-    <script src="js/main.js?v=20260818-1"></script>
+    <script src="js/main.js?v=20260818-2"></script>
 </body>
 </html>

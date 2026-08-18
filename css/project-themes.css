@@ -2303,19 +2303,24 @@
 .page.animate .tvac-hero { animation-delay: 0.3s; }
 
 .tvac-hero {
-    margin: 0 0 clamp(5rem, 9vw, 8rem);
-    overflow: hidden;
-    background: #11191e;
-    border: 1px solid rgba(35, 67, 82, 0.2);
-    box-shadow: 0 28px 70px rgba(29, 62, 77, 0.16);
+    width: min(100%, 620px);
+    margin: 0 auto clamp(5rem, 9vw, 8rem);
+    overflow: visible;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
 }
 
 .tvac-hero video {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 5;
     background: #11191e;
-    object-fit: contain;
+    border: 1px solid rgba(35, 67, 82, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 28px 70px rgba(29, 62, 77, 0.16);
+    object-fit: cover;
+    object-position: center;
 }
 
 .tvac-hero figcaption,
@@ -2328,7 +2333,11 @@
 }
 
 .tvac-hero figcaption {
-    background: var(--tvac-surface);
+    max-width: 520px;
+    margin: 0.9rem auto 0;
+    padding: 0 1rem;
+    background: transparent;
+    text-align: center;
 }
 
 .tvac-section {
@@ -2362,15 +2371,34 @@
 }
 
 .tvac-architecture-grid {
+    --tvac-card-left-shift: 22px;
+    --tvac-card-right-shift: -22px;
+    --tvac-arrow-opacity: 0;
+    --tvac-arrow-scale: 0.72;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr);
     gap: 0.45rem;
+    overflow: visible;
+}
+
+.tvac-architecture-card:first-child {
+    transform: translateX(var(--tvac-card-left-shift));
+    will-change: transform;
+}
+
+.tvac-architecture-card:last-child {
+    transform: translateX(var(--tvac-card-right-shift));
+    will-change: transform;
 }
 
 .tvac-architecture-arrow {
     display: grid;
     place-items: center;
     color: var(--tvac-accent);
+    opacity: var(--tvac-arrow-opacity);
+    transform: scale(var(--tvac-arrow-scale));
+    transform-origin: center;
+    will-change: opacity, transform;
 }
 
 .tvac-architecture-arrow svg {
@@ -2421,10 +2449,24 @@
 }
 
 .tvac-card-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
     padding: 0.85rem 1rem;
     border-bottom: 1px solid var(--tvac-line);
     color: var(--tvac-accent);
     font-size: 0.68rem;
+}
+
+.tvac-card-label strong {
+    color: var(--tvac-muted);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-align: right;
+    text-transform: none;
 }
 
 .tvac-architecture-card img {
@@ -2553,33 +2595,34 @@
 
 .tvac-control-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
 }
 
 .tvac-control-card {
-    display: flex;
+    display: grid;
+    grid-template-areas: "media copy";
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.5fr);
     min-width: 0;
-    flex-direction: column;
-}
-
-.tvac-control-card--wide {
     grid-column: 1 / -1;
 }
 
 .tvac-control-copy {
-    padding: 1.5rem;
+    align-self: center;
+    grid-area: copy;
+    padding: 1.4rem;
 }
 
 .tvac-control-media {
-    margin: auto 0 0;
-    border-top: 1px solid var(--tvac-line);
+    grid-area: media;
+    margin: 0;
+    border-right: 1px solid var(--tvac-line);
 }
 
 .tvac-control-media img {
     display: block;
     width: 100%;
-    height: 300px;
+    height: 320px;
     padding: 0.75rem;
     background: #fff;
     object-fit: contain;
@@ -2598,7 +2641,7 @@
 }
 
 .tvac-control-media--triptych .tvac-control-gallery img {
-    height: 260px;
+    height: 320px;
     min-width: 0;
     padding: 0.5rem;
     background: #fff;
@@ -2606,23 +2649,23 @@
 }
 
 .tvac-control-card--formula .tvac-control-media img {
-    height: 220px;
+    height: 320px;
 }
 
 .tvac-control-card--final {
-    display: grid;
-    grid-column: 1 / -1;
-    grid-template-columns: minmax(280px, 0.65fr) minmax(0, 1.35fr);
+    grid-template-areas: "media copy";
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.5fr);
 }
 
 .tvac-control-card--final .tvac-control-media {
     margin: 0;
     border-top: 0;
-    border-left: 1px solid var(--tvac-line);
+    border-right: 1px solid var(--tvac-line);
+    border-left: 0;
 }
 
 .tvac-control-card--final .tvac-control-media img {
-    height: 390px;
+    height: 320px;
 }
 
 .tvac-validation-note {
@@ -2742,7 +2785,7 @@
 
 @media (max-width: 900px) {
     .tvac-stage-card,
-    .tvac-control-card--final {
+    .tvac-control-card {
         display: flex;
         flex-direction: column;
         grid-column: auto;
@@ -2752,13 +2795,15 @@
         align-self: stretch;
     }
 
-    .tvac-control-gallery {
-        grid-template-columns: 1fr;
+    .tvac-control-media,
+    .tvac-control-card--final .tvac-control-media {
+        order: -1;
+        border-right: 0;
+        border-left: 0;
     }
 
-    .tvac-control-card--final .tvac-control-media {
-        border-top: 1px solid var(--tvac-line);
-        border-left: 0;
+    .tvac-control-copy {
+        align-self: stretch;
     }
 }
 
@@ -2792,12 +2837,28 @@
 
     .tvac-architecture-arrow {
         min-height: 34px;
-        transform: rotate(90deg);
+        transform: rotate(90deg) scale(var(--tvac-arrow-scale));
+    }
+
+    .tvac-architecture-card:first-child,
+    .tvac-architecture-card:last-child {
+        transform: none;
+    }
+
+    .tvac-card-label {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .tvac-card-label strong {
+        text-align: left;
     }
 
     .tvac-media-pair,
     .tvac-stage-gallery--two,
-    .tvac-stage-gallery--three {
+    .tvac-stage-gallery--three,
+    .tvac-control-gallery {
         grid-template-columns: 1fr;
     }
 
@@ -2807,10 +2868,14 @@
         height: 240px;
     }
 
-    .tvac-control-card--final .tvac-control-media img,
     .tvac-control-media img {
-        height: auto;
-        min-height: 220px;
+        height: 260px;
+        min-height: 0;
+    }
+
+    .tvac-control-media--triptych .tvac-control-gallery img {
+        height: 240px;
+        min-height: 0;
     }
 }
 
@@ -2829,6 +2894,16 @@
     .tvac-architecture-arrow path {
         animation: none;
         opacity: 0.78;
+    }
+
+    .tvac-architecture-card:first-child,
+    .tvac-architecture-card:last-child {
+        transform: none;
+    }
+
+    .tvac-architecture-arrow {
+        opacity: 1;
+        transform: none;
     }
 
     .tvac-repository-card {
