@@ -2459,16 +2459,6 @@
     font-size: 0.68rem;
 }
 
-.tvac-card-label strong {
-    color: var(--tvac-muted);
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0;
-    text-align: right;
-    text-transform: none;
-}
-
 .tvac-architecture-card img {
     display: block;
     width: 100%;
@@ -2479,7 +2469,21 @@
 
 .tvac-architecture-card figcaption {
     min-height: 4.2rem;
+    padding-top: 0.25rem;
+}
+
+.tvac-architecture-context {
+    margin: 0;
+    padding: 0.85rem 1rem 0;
     border-top: 1px solid var(--tvac-line);
+    color: var(--tvac-ink);
+    font-family: var(--font-main);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.tvac-architecture-context strong {
+    font-weight: 700;
 }
 
 .tvac-hardware-grid {
@@ -2849,10 +2853,6 @@
         align-items: flex-start;
         flex-direction: column;
         gap: 0.25rem;
-    }
-
-    .tvac-card-label strong {
-        text-align: left;
     }
 
     .tvac-media-pair,

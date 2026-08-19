@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/base.css?v=20260810-2">
     <link rel="stylesheet" href="css/home.css?v=20260819-9">
     <link rel="stylesheet" href="css/projects.css?v=20260810-2">
-    <link rel="stylesheet" href="css/project-themes.css?v=20260819-5">
+    <link rel="stylesheet" href="css/project-themes.css?v=20260819-9">
 </head>
 <body>
     <nav>
@@ -1082,9 +1082,9 @@
                             <figure class="tvac-architecture-card project-media">
                                 <div class="tvac-card-label">
                                     <span>01 · Existing system</span>
-                                    <strong>What we started with</strong>
                                 </div>
                                 <img src="Pictures/tvac/diagram_tvac_system_arch_before_mycontrol_arch.png" alt="Diagram of the original thermal vacuum chamber with heat pads, vacuum pump and liquid nitrogen tank" loading="lazy" decoding="async">
+                                <p class="tvac-architecture-context"><strong>What we started with</strong></p>
                                 <figcaption class="project-caption">The original chamber hardware before the automated control layer.</figcaption>
                             </figure>
                             <div class="tvac-architecture-arrow" aria-hidden="true">
@@ -1097,10 +1097,10 @@
                             <figure class="tvac-architecture-card project-media">
                                 <div class="tvac-card-label">
                                     <span>02 · Proposed control system</span>
-                                    <strong>What I was tasked with implementing</strong>
                                 </div>
                                 <img src="Pictures/tvac/diagram_tvac_system_arch_I_plan_to_implement.png" alt="Diagram of the proposed TVAC architecture with thermocouples, dual ESP32 controllers, HMI and liquid nitrogen valve" loading="lazy" decoding="async">
-                                <figcaption class="project-caption">Thermocouples → ESP32 control → heaters and LN₂ valve, supervised by the desktop HMI.</figcaption>
+                                <p class="tvac-architecture-context"><strong>What I was tasked with implementing</strong></p>
+                                <figcaption class="project-caption">My Architecture design was a simple slave master approach which had the esp32 control monitoring the esp32 temp read and contolling the heaters and Ln2, which was fed to hmi which could interrupt control esp32 when needed</figcaption>
                             </figure>
                         </div>
                     </section>
@@ -1119,7 +1119,7 @@
                                         <img src="Pictures/tvac/entire_tvac_bench_testing_top.png" alt="Overhead view of the thermal vacuum chamber bench prototype with temporary control electronics and wiring" loading="lazy" decoding="async">
                                     </figure>
                                     <figure class="tvac-stage-media project-media">
-                                        <img src="Pictures/tvac/tvac_chamber_with_heat_shroud_init_and_esp32temp.png" alt="Inside the thermal vacuum chamber showing the wired heat shroud and temperature electronics" loading="lazy" decoding="async">
+                                        <img src="Pictures/tvac/tvac_chamber_with_heat_shroud_init_and_esp32temp.png" alt="Inside the thermal vacuum chamber showing the wired heat shroud and showing the ESP32 tempread" loading="lazy" decoding="async">
                                     </figure>
                                     <figure class="tvac-stage-media project-media">
                                         <img src="Pictures/tvac/esp32_tempread.png" alt="ESP32 temperature-reading electronics and thermocouple interface prepared beside the chamber" loading="lazy" decoding="async">
@@ -1139,7 +1139,7 @@
                                 <div class="tvac-stage-copy">
                                     <span class="tvac-stage-number">02</span>
                                     <h3>HMI &amp; Integration</h3>
-                                    <p>The interface displayed telemetry, issued commands and brought the prototype together as one testable system, progressing from an early browser concept to a simpler PySide6 desktop application.</p>
+                                    <p>The interface displayed telemetry, it started as a browser-based HTML HMI to a native desktop HMI built with PySide6. as multiple issues came up with the previous solution.</p>
                                 </div>
                             </article>
 
@@ -1155,7 +1155,7 @@
                                 <div class="tvac-stage-copy">
                                     <span class="tvac-stage-number">03</span>
                                     <h3>LN₂ Control</h3>
-                                    <p>I worked through the legacy fitting interfaces, assembled the electrically controlled solenoid into the plumbing and tested it under real LN₂ conditions for approximately nine hours.</p>
+                                    <p>I worked through the legacy fitting interfaces (worked with BSP/NPT and SAE), assembled the electrically controlled solenoid into the plumbing and tested it under real LN₂ conditions for approximately nine hours.</p>
                                 </div>
                             </article>
 
@@ -1198,7 +1198,7 @@
                                 <div class="tvac-stage-copy">
                                     <span class="tvac-stage-number">06</span>
                                     <h3>Final Hardware – Solenoid</h3>
-                                    <p>The completed Phase 2 valve assembly packaged the electrically controlled solenoid into the existing LN₂ plumbing.</p>
+                                    <p>The completed Phase 2 valve assembly packaged the electrically controlled solenoid into the existing LN₂ plumbing. And also made permenant wire solutions for the heaters and other electronics (not seen)</p>
                                 </div>
                             </article>
                         </div>
@@ -1248,7 +1248,7 @@
                                 </div>
                                 <figure class="tvac-control-media project-media">
                                     <img src="Pictures/tvac/generated_transfer_function.png" alt="Four-pole transfer function identified from thermal vacuum chamber test data" loading="lazy" decoding="async">
-                                    <figcaption class="project-caption">Identified four-pole transfer function.</figcaption>
+                                    <figcaption class="project-caption">Using Matlab System Identification, created a model that matched the current system to help build a control system within NASA specification</figcaption>
                                 </figure>
                             </article>
 
@@ -1261,7 +1261,7 @@
                                 </div>
                                 <figure class="tvac-control-media project-media">
                                     <img src="Pictures/tvac/using_tf_create_model_of_system_final_logic_values_for_system_graph.png" alt="Simulated model-based TVAC controller showing target ramp, temperature hold and heater output" loading="lazy" decoding="async">
-                                    <figcaption class="project-caption">Model-based control simulation; this result is not a physical TVAC test.</figcaption>
+                                    <figcaption class="project-caption">After thousands of iterations and logic testing and tuning the a Model-based control simulation was created; this result was not a physical TVAC test.</figcaption>
                                 </figure>
                             </article>
                         </div>
@@ -1399,13 +1399,13 @@
                             alt="The team working on the processor implementation with hackathon staff and judges"
                             data-primary-src="Pictures/microcontroller_hackathon/winning-team-with-judges.webp"
                             data-primary-alt="The team working on the processor implementation with hackathon staff and judges"
-                            data-primary-caption="The team developing and reviewing the processor during MCU HACK 2026."
+                            data-primary-caption="The team presenting our processor to the judges during MCU HACK 2026."
                             data-secondary-src="Pictures/microcontroller_hackathon/hackathon-group-photo.webp"
                             data-secondary-alt="Participants, organisers and judges gathered for the MCU HACK 2026 group photograph"
                             data-secondary-caption="Participants, organisers and judges at MCU HACK 2026."
                             loading="lazy"
                             decoding="async">
-                        <figcaption class="project-caption" id="hackathon-hero-caption">The team developing and reviewing the processor during MCU HACK 2026.</figcaption>
+                        <figcaption class="project-caption" id="hackathon-hero-caption">The team presenting our processor to the judges during MCU HACK 2026.</figcaption>
                     </figure>
 
                     <section class="hackathon-section project-section" id="hackathon-build">
@@ -1472,6 +1472,6 @@
         </figure>
     </dialog>
 
-    <script src="js/main.js?v=20260819-4"></script>
+    <script src="js/main.js?v=20260819-6"></script>
 </body>
 </html>
