@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base.css?v=20260810-2">
-    <link rel="stylesheet" href="css/home.css?v=20260810-2">
+    <link rel="stylesheet" href="css/home.css?v=20260819-5">
     <link rel="stylesheet" href="css/projects.css?v=20260810-2">
-    <link rel="stylesheet" href="css/project-themes.css?v=20260818-6">
+    <link rel="stylesheet" href="css/project-themes.css?v=20260819-5">
 </head>
 <body>
     <nav>
@@ -27,6 +27,7 @@
                         <li><a href="#ai-robot" data-page="ai-robot" id="nav-ai-robot">ROS 2 Rover</a></li>
                         <li><a href="#portable-vacuum-chamber" data-page="portable-vacuum-chamber" id="nav-portable-vacuum-chamber">Vacuum Chamber</a></li>
                         <li><a href="#thermal-vacuum-control" data-page="thermal-vacuum-control" id="nav-thermal-vacuum-control">TVAC Control</a></li>
+                        <li><a href="#pid-processor-hackathon" data-page="pid-processor-hackathon" id="nav-pid-processor-hackathon">MCU Hackathon</a></li>
                     </ul>
                 </li>
             </ul>
@@ -136,7 +137,7 @@
                         <!-- Project 6: Thermal Vacuum Chamber Control -->
                         <a class="project-card" href="#thermal-vacuum-control" onclick="showPage('thermal-vacuum-control'); return false;">
                             <div class="card-media">
-                                <video loop muted playsinline preload="metadata" poster="Pictures/tvac/PCB_design_iterations_final_physical_product.png" data-page-video aria-label="TVAC functional prototype operating on the laboratory bench">
+                                <video loop muted playsinline preload="metadata" poster="Pictures/tvac/entire_tvac_bench_testing_sideview.png" data-page-video aria-label="TVAC functional prototype operating on the laboratory bench">
                                     <source src="videos/tvac/tvac-functional-prototype-360p.web.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -148,6 +149,24 @@
                             </div>
                         </a>
                     </div>
+
+                    <section class="hackathon-wins" aria-labelledby="hackathon-wins-heading">
+                        <div class="hackathon-wins-heading">
+                            <p>Competition projects</p>
+                            <h2 id="hackathon-wins-heading">Hackathon Wins</h2>
+                        </div>
+                        <a class="hackathon-feature-card" href="#pid-processor-hackathon" onclick="showPage('pid-processor-hackathon'); return false;">
+                            <div class="hackathon-feature-media">
+                                <img src="Pictures/microcontroller_hackathon/winning-team-with-judges.webp" alt="The team developing its processor with hackathon staff and judges at the table" loading="lazy" decoding="async">
+                            </div>
+                            <div class="hackathon-feature-content">
+                                <span class="hackathon-feature-result">1st Place · Two-day Analog Devices MCU Hackathon</span>
+                                <h3>From a Basic CPU to a PID Processor</h3>
+                                <p>We built a processor from first principles, then specialised its datapath and instruction set for fixed-point PID control.</p>
+                                <span class="card-link">View Hackathon Project →</span>
+                            </div>
+                        </a>
+                    </section>
                 </div>
             </div>
 
@@ -1321,6 +1340,128 @@
             </footer>
         </section>
 
+        <!-- Hackathon Win: PID Processor -->
+        <section id="pid-processor-hackathon" class="page project-page project-page--light">
+            <nav class="project-nav" data-project="pid-processor-hackathon" aria-label="PID processor hackathon sections">
+                <a href="#hackathon-overview" class="project-nav-item active" data-section="hackathon-overview">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Overview</span>
+                </a>
+                <a href="#hackathon-build" class="project-nav-item" data-section="hackathon-build">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Build &amp; Results</span>
+                </a>
+                <a href="#hackathon-presentation" class="project-nav-item" data-section="hackathon-presentation">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Presentation</span>
+                </a>
+            </nav>
+
+            <div class="hackathon-page">
+                <div class="hackathon-inner">
+                    <header class="hackathon-header project-editorial-header project-header" id="hackathon-overview">
+                        <p class="project-kicker">Analog Devices MCU Hackathon · Two days · 1st Place</p>
+                        <h1 class="project-title">From a Basic CPU to a PID Processor</h1>
+                        <div class="hackathon-intro">
+                            <p><strong>Goal</strong> of the hackathon was to design and build a custom CPU from the ground up, from its instruction set and datapath to its Verilog implementation, simulation and FPGA synthesis.</p>
+                            <p>Once we understood the basics of CPU architecture, we developed the narrative of designing it for PID control.</p>
+                        </div>
+                        <div class="hackathon-actions">
+                            <a class="hackathon-button hackathon-button--primary" href="#hackathon-presentation" onclick="document.getElementById('hackathon-presentation').scrollIntoView({ behavior: 'smooth' }); return false;">Watch Our Presentation</a>
+                            <a class="hackathon-button" href="https://github.com/Gabriel-Twiggho/microcontroller-hackathon" target="_blank" rel="noopener noreferrer">View the Source Code <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </header>
+
+                    <div class="hackathon-facts" aria-label="Hackathon result summary">
+                        <div>
+                            <span>Result</span>
+                            <strong>1st Place</strong>
+                        </div>
+                        <div>
+                            <span>Duration</span>
+                            <strong>2-day hackathon</strong>
+                        </div>
+                        <div>
+                            <span>Architecture</span>
+                            <strong>32-bit · single-cycle · non-pipelined · Harvard</strong>
+                        </div>
+                        <div>
+                            <span>Designs</span>
+                            <strong>6 CPU variants</strong>
+                        </div>
+                    </div>
+                    <p class="hackathon-team"><strong>Team members:</strong> Utkrisht Jain · Gabriel Twigg-Ho · Mohammed Ibrahim</p>
+
+                    <figure class="hackathon-hero project-media">
+                        <img
+                            id="hackathon-hero-image"
+                            src="Pictures/microcontroller_hackathon/winning-team-with-judges.webp"
+                            alt="The team working on the processor implementation with hackathon staff and judges"
+                            data-primary-src="Pictures/microcontroller_hackathon/winning-team-with-judges.webp"
+                            data-primary-alt="The team working on the processor implementation with hackathon staff and judges"
+                            data-primary-caption="The team developing and reviewing the processor during MCU HACK 2026."
+                            data-secondary-src="Pictures/microcontroller_hackathon/hackathon-group-photo.webp"
+                            data-secondary-alt="Participants, organisers and judges gathered for the MCU HACK 2026 group photograph"
+                            data-secondary-caption="Participants, organisers and judges at MCU HACK 2026."
+                            loading="lazy"
+                            decoding="async">
+                        <figcaption class="project-caption" id="hackathon-hero-caption">The team developing and reviewing the processor during MCU HACK 2026.</figcaption>
+                    </figure>
+
+                    <section class="hackathon-section project-section" id="hackathon-build">
+                        <div class="hackathon-story-layout">
+                            <div class="hackathon-section-heading">
+                                <p class="hackathon-eyebrow">Build &amp; results</p>
+                                <h2 class="project-section-title">From processor fundamentals to PID control</h2>
+                            </div>
+                            <div class="hackathon-story-copy">
+                                <p>Before this hackathon, we could write software, but the internal operation of a processor still felt like a black box. We had never followed a hexadecimal instruction from instruction memory, through the decoder and register file, into the ALU or understood how load and store operations connect a processor to data memory.</p>
+                                <p>During the challenge, we learned those concepts by building the processor ourselves. Starting with a basic arithmetic CPU, we gradually implemented its datapath, instruction decoder, registers, memory interfaces and assembler.</p>
+                                <p>Once the architecture made sense, we adapted it for closed-loop control. Signed fixed-point scaling, comparison and conditional branching allowed the processor to calculate proportional, integral and derivative terms, make runtime decisions and constrain actuator outputs.</p>
+                                <p>We compared six CPU variants through functional simulation and FPGA synthesis, validated 1,000 PID updates and met the 50 MHz timing constraint.</p>
+                                <p>The main problem for us, and this is also mentioned throughout the video below, was that PID requires fractional numbers, and implementing that in a CPU that fundamentally only works with binary integers can initially be challenging. It turns out the solution is quite ingenious: scale all the numbers up by a power of two so the fractional values can be represented as integers, perform the multiplication, and then scale the result back down, making sure that the hardcoded ISA we had knew about this scaling.</p>
+                                <p>Ultimately, we built a CPU that could run a 1,000-iteration PID loop. Nothing more.</p>
+                            </div>
+                        </div>
+
+                        <div class="hackathon-technology-row" aria-label="Hackathon technologies">
+                            <span>Verilog</span>
+                            <span>FPGA</span>
+                            <span>Assembly</span>
+                            <span>Quartus</span>
+                            <span>Icarus Verilog</span>
+                        </div>
+
+                        <div class="hackathon-presentation-block" id="hackathon-presentation">
+                            <p class="hackathon-eyebrow">Ten-minute final presentation</p>
+                            <h3>Watch the full project walkthrough</h3>
+                            <p>Our final presentation explains the processor architecture, PID specific extensions, validation workflow and the variants we compared, this was our final submission for this Hackathon.</p>
+                            <figure class="hackathon-video project-media">
+                                <video controls playsinline preload="metadata" poster="Pictures/microcontroller_hackathon/winning-team-with-judges.webp" data-seekable-video>
+                                    <source src="videos/Wolf_brigade_Hackathon_720p.mp4" type="video/mp4">
+                                    Your browser does not support the presentation video.
+                                </video>
+                                <figcaption class="project-caption">The team's final MCU Hackathon presentation.</figcaption>
+                            </figure>
+                            <a class="hackathon-button" href="https://github.com/Gabriel-Twiggho/microcontroller-hackathon" target="_blank" rel="noopener noreferrer">Explore the processor source code <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <footer class="hackathon-footer">
+                <div class="container">
+                    <h3>Let's Connect</h3>
+                    <div class="footer-links">
+                        <a href="mailto:gabrieljyth@gmail.com">Email</a>
+                        <a href="https://github.com/Gabriel-Twiggho" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://www.linkedin.com/in/gabriel-twigg-ho-96579b1b8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                    <p class="copyright">© 2025 Gabriel Twigg-Ho</p>
+                </div>
+            </footer>
+        </section>
+
     </main>
 
     <dialog class="image-lightbox" id="image-lightbox" aria-label="Full-screen project image">
@@ -1331,6 +1472,6 @@
         </figure>
     </dialog>
 
-    <script src="js/main.js?v=20260818-2"></script>
+    <script src="js/main.js?v=20260819-4"></script>
 </body>
 </html>

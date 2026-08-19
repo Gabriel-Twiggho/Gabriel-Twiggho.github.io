@@ -150,6 +150,10 @@
     padding: 3rem 0 5rem;
 }
 
+.home-projects > .container {
+    max-width: 1340px;
+}
+
 .projects-heading {
     font-size: 1.5rem;
     font-weight: 600;
@@ -159,11 +163,19 @@
 
 .project-cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-flow: row;
+    align-items: stretch;
     gap: 1.5rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+    .project-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
     .project-cards {
         grid-template-columns: 1fr;
     }
@@ -261,3 +273,125 @@ a.project-card:focus-visible {
     text-decoration: underline;
 }
 
+/* Hackathon wins sit outside the standard project-card grid. */
+.hackathon-wins {
+    margin-top: clamp(4rem, 7vw, 6rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--color-border);
+}
+
+.hackathon-wins-heading {
+    margin-bottom: 1.5rem;
+}
+
+.hackathon-wins-heading p,
+.hackathon-feature-result {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hackathon-wins-heading p {
+    margin-bottom: 0.35rem;
+    color: var(--color-text-muted);
+}
+
+.hackathon-wins-heading h2 {
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+}
+
+.hackathon-feature-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    width: min(100%, 880px);
+    min-height: 240px;
+    overflow: hidden;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hackathon-feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.hackathon-feature-card:focus-visible {
+    outline: 3px solid rgba(41, 151, 255, 0.35);
+    outline-offset: 3px;
+}
+
+.hackathon-feature-media {
+    min-height: 240px;
+    overflow: hidden;
+    background: #e8e5de;
+}
+
+.hackathon-feature-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 66%;
+    transition: transform 0.35s ease;
+}
+
+.hackathon-feature-card:hover .hackathon-feature-media img {
+    transform: scale(1.015);
+}
+
+.hackathon-feature-content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.hackathon-feature-result {
+    margin-bottom: 0.7rem;
+    color: #8a5a12;
+}
+
+.hackathon-feature-content h3 {
+    max-width: 520px;
+    margin-bottom: 0.7rem;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+}
+
+.hackathon-feature-content p {
+    max-width: 540px;
+    margin-bottom: 0.7rem;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+@media (max-width: 800px) {
+    .hackathon-feature-card {
+        grid-template-columns: 1fr;
+    }
+
+    .hackathon-feature-media {
+        min-height: 200px;
+        height: 200px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hackathon-feature-card,
+    .hackathon-feature-media img {
+        transition: none;
+    }
+}

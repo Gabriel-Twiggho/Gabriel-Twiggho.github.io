@@ -5,7 +5,8 @@ const VALID_PAGES = [
     'co2-prediction',
     'ai-robot',
     'portable-vacuum-chamber',
-    'thermal-vacuum-control'
+    'thermal-vacuum-control',
+    'pid-processor-hackathon'
 ];
 
 const LEGACY_PAGE_ALIASES = {
@@ -31,8 +32,53 @@ function syncPageVideos(activePage) {
             return;
         }
 
-        const playRequest = video.play();
-        if (playRequest) playRequest.catch(() => {});
+        if (video.hasAttribute('data-page-video')) {
+            const playRequest = video.play();
+            if (playRequest) playRequest.catch(() => {});
+        }
+    });
+}
+
+// Some local static servers ignore HTTP range requests, which prevents the
+// browser from seeking through an otherwise valid MP4. Probe range support
+// when the page opens; if it is unavailable, use the downloaded file as a
+// Blob URL so the native player can scrub freely.
+function prepareSeekableVideos(activePage) {
+    activePage.querySelectorAll('video[data-seekable-video]').forEach(video => {
+        if (video.dataset.seekState) return;
+
+        const source = video.querySelector('source');
+        if (!source) return;
+
+        video.dataset.seekState = 'loading';
+        fetch(source.src, { headers: { Range: 'bytes=0-1' } })
+            .then(response => {
+                if (response.status === 206) {
+                    if (response.body) response.body.cancel();
+                    video.dataset.seekState = 'native';
+                    return null;
+                }
+
+                if (!response.ok) {
+                    throw new Error('Unable to prepare seekable video.');
+                }
+
+                return response.blob();
+            })
+            .then(blob => {
+                if (!blob) return;
+
+                const objectUrl = URL.createObjectURL(blob);
+                video.dataset.seekObjectUrl = objectUrl;
+                video.src = objectUrl;
+                video.load();
+                video.dataset.seekState = 'blob';
+            })
+            .catch(() => {
+                video.preload = 'auto';
+                video.load();
+                video.dataset.seekState = 'fallback';
+            });
     });
 }
 
@@ -81,6 +127,7 @@ function showPage(pageId, updateHash = true) {
     const targetPage = document.getElementById(pageId);
     targetPage.classList.add('active');
     syncPageVideos(targetPage);
+    prepareSeekableVideos(targetPage);
     
     // Trigger animation restart with a tiny delay
     requestAnimationFrame(() => {
@@ -327,6 +374,45 @@ document.addEventListener('DOMContentLoaded', function() {
         stage.style.setProperty('--stage-index', index);
         observer.observe(stage);
     });
+});
+
+// Cycle the two hackathon photographs without adding extra gallery sections.
+document.addEventListener('DOMContentLoaded', function() {
+    const image = document.getElementById('hackathon-hero-image');
+    const caption = document.getElementById('hackathon-hero-caption');
+    if (!image || !caption || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const projectPage = image.closest('.page');
+    const slides = [
+        {
+            src: image.dataset.primarySrc,
+            alt: image.dataset.primaryAlt,
+            caption: image.dataset.primaryCaption,
+            isGroupPhoto: false
+        },
+        {
+            src: image.dataset.secondarySrc,
+            alt: image.dataset.secondaryAlt,
+            caption: image.dataset.secondaryCaption,
+            isGroupPhoto: true
+        }
+    ];
+    let currentSlide = 0;
+
+    window.setInterval(function() {
+        if (!projectPage.classList.contains('active') || document.hidden) return;
+
+        image.classList.add('is-changing');
+        window.setTimeout(function() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            const nextSlide = slides[currentSlide];
+            image.src = nextSlide.src;
+            image.alt = nextSlide.alt;
+            caption.textContent = nextSlide.caption;
+            image.classList.toggle('is-group-photo', nextSlide.isGroupPhoto);
+            image.classList.remove('is-changing');
+        }, 280);
+    }, 6000);
 });
 
 // Shared full-screen viewer for images on every project detail page.

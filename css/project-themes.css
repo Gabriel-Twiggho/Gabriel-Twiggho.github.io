@@ -2910,3 +2910,473 @@
         transition: none;
     }
 }
+
+/* ==================== */
+/* PID Processor Hackathon */
+/* ==================== */
+
+#pid-processor-hackathon {
+    --hackathon-ink: #20201e;
+    --hackathon-accent: #8a5a12;
+}
+
+.hackathon-page {
+    --hackathon-ink: #20201e;
+    --hackathon-muted: #62605b;
+    --hackathon-line: #dedbd4;
+    --hackathon-surface: #ffffff;
+    --hackathon-accent: #8a5a12;
+    min-height: 100vh;
+    padding: 0 2rem;
+    background: #f8f7f3;
+    color: var(--hackathon-ink);
+}
+
+#pid-processor-hackathon .project-nav-line {
+    background: rgba(32, 32, 30, 0.32);
+}
+
+#pid-processor-hackathon .project-nav-text {
+    color: rgba(32, 32, 30, 0.68);
+    opacity: 0.62;
+}
+
+#pid-processor-hackathon .project-nav-item:hover .project-nav-line {
+    background: rgba(32, 32, 30, 0.72);
+}
+
+#pid-processor-hackathon .project-nav-item:hover .project-nav-text {
+    color: var(--hackathon-ink);
+}
+
+#pid-processor-hackathon .project-nav-item.active .project-nav-line {
+    background: var(--hackathon-accent);
+}
+
+#pid-processor-hackathon .project-nav-item.active .project-nav-text {
+    color: var(--hackathon-accent);
+    opacity: 1;
+}
+
+.hackathon-inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.hackathon-header {
+    max-width: 940px;
+    padding-bottom: clamp(2.75rem, 5vw, 4rem);
+}
+
+.hackathon-header .project-kicker,
+.hackathon-eyebrow,
+.hackathon-facts span,
+.hackathon-capabilities > article > span,
+.hackathon-technology-row span {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hackathon-header .project-kicker,
+.hackathon-eyebrow,
+.hackathon-capabilities > article > span {
+    color: var(--hackathon-accent);
+}
+
+.hackathon-header h1 {
+    max-width: 900px;
+    margin: 0.7rem 0 1.5rem;
+    font-size: clamp(3rem, 7vw, 5.7rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+}
+
+.hackathon-intro {
+    max-width: 760px;
+    color: var(--hackathon-muted);
+    font-size: clamp(0.9rem, 1.35vw, 1.05rem);
+    line-height: 1.65;
+}
+
+.hackathon-intro p + p {
+    margin-top: 0.7rem;
+}
+
+.hackathon-intro strong {
+    color: var(--hackathon-ink);
+    font-weight: 700;
+}
+
+.hackathon-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.hackathon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.8rem 1.1rem;
+    background: transparent;
+    border: 1px solid var(--hackathon-line);
+    color: var(--hackathon-ink);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.hackathon-button:hover {
+    background: var(--hackathon-surface);
+    border-color: var(--hackathon-accent);
+    color: var(--hackathon-accent);
+    text-decoration: none;
+}
+
+.hackathon-button--primary {
+    background: var(--hackathon-ink);
+    border-color: var(--hackathon-ink);
+    color: #fff;
+}
+
+.hackathon-button--primary:hover {
+    background: var(--hackathon-accent);
+    border-color: var(--hackathon-accent);
+    color: #fff;
+}
+
+.hackathon-button:focus-visible {
+    outline: 3px solid rgba(138, 90, 18, 0.25);
+    outline-offset: 3px;
+}
+
+.hackathon-header > *,
+.hackathon-facts,
+.hackathon-team,
+.hackathon-hero {
+    opacity: 0;
+    transform: translateY(22px);
+}
+
+.page.animate .hackathon-header > *,
+.page.animate .hackathon-facts,
+.page.animate .hackathon-team,
+.page.animate .hackathon-hero {
+    animation: fadeInUp 0.75s ease forwards;
+}
+
+.page.animate .hackathon-header h1 { animation-delay: 0.08s; }
+.page.animate .hackathon-intro { animation-delay: 0.14s; }
+.page.animate .hackathon-actions { animation-delay: 0.2s; }
+.page.animate .hackathon-facts { animation-delay: 0.24s; }
+.page.animate .hackathon-team { animation-delay: 0.28s; }
+.page.animate .hackathon-hero { animation-delay: 0.32s; }
+
+.hackathon-facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 0.75rem;
+    border-top: 1px solid var(--hackathon-line);
+    border-bottom: 1px solid var(--hackathon-line);
+}
+
+.hackathon-facts > div {
+    min-width: 0;
+    padding: 0.75rem 0.9rem;
+    border-right: 1px solid var(--hackathon-line);
+}
+
+.hackathon-facts > div:first-child {
+    padding-left: 0;
+}
+
+.hackathon-facts > div:last-child {
+    border-right: 0;
+}
+
+.hackathon-facts span {
+    display: block;
+    margin-bottom: 0.18rem;
+    color: var(--hackathon-muted);
+    font-size: 0.56rem;
+}
+
+.hackathon-facts strong {
+    display: block;
+    font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+.hackathon-team {
+    margin-bottom: 2rem;
+    color: var(--hackathon-muted);
+    font-size: 0.9rem;
+}
+
+.hackathon-hero,
+.hackathon-group-photo,
+.hackathon-video {
+    overflow: hidden;
+    background: var(--hackathon-surface);
+    border: 1px solid var(--hackathon-line);
+}
+
+.hackathon-hero {
+    margin: 0 0 clamp(5rem, 9vw, 8rem);
+}
+
+.hackathon-hero img,
+.hackathon-group-photo img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.hackathon-hero img {
+    object-position: center 68%;
+    transition: opacity 0.28s ease;
+}
+
+.hackathon-hero img.is-changing {
+    opacity: 0;
+}
+
+.hackathon-hero img.is-group-photo {
+    object-position: center 82%;
+}
+
+.hackathon-group-photo img {
+    object-position: center 82%;
+}
+
+.hackathon-hero figcaption,
+.hackathon-group-photo figcaption,
+.hackathon-video figcaption {
+    padding: 0.8rem 1rem;
+    color: var(--hackathon-muted);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    line-height: 1.5;
+}
+
+.hackathon-section {
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
+    border-top: 1px solid var(--hackathon-line);
+}
+
+.hackathon-section-heading {
+    max-width: 780px;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.hackathon-eyebrow {
+    margin-bottom: 0.75rem;
+    font-size: 0.7rem;
+}
+
+.hackathon-section-heading h2 {
+    margin-bottom: 1.1rem;
+    font-size: clamp(2.15rem, 4.5vw, 3.8rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+}
+
+.hackathon-section-heading > p:last-child:not(.hackathon-eyebrow),
+.hackathon-story-copy p {
+    color: var(--hackathon-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.hackathon-story-layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.35fr);
+    gap: clamp(2.5rem, 7vw, 6rem);
+}
+
+.hackathon-story-copy p {
+    margin-bottom: 1.25rem;
+}
+
+.hackathon-story-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.hackathon-pullquote {
+    max-width: 900px;
+    margin: clamp(3rem, 6vw, 5rem) 0 0;
+    padding-left: clamp(1.5rem, 3vw, 2.25rem);
+    border-left: 3px solid var(--hackathon-accent);
+    font-size: clamp(1.5rem, 3vw, 2.35rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.35;
+}
+
+.hackathon-capabilities {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.hackathon-capabilities article {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hackathon-line);
+}
+
+.hackathon-capabilities > article > span {
+    display: block;
+    margin-bottom: 1.75rem;
+    font-size: 0.68rem;
+}
+
+.hackathon-capabilities h3 {
+    margin-bottom: 0.65rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.hackathon-capabilities p {
+    color: var(--hackathon-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.hackathon-technology-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 3rem;
+}
+
+.hackathon-technology-row span {
+    padding: 0.55rem 0.75rem;
+    background: var(--hackathon-surface);
+    border: 1px solid var(--hackathon-line);
+    color: var(--hackathon-muted);
+    font-size: 0.64rem;
+}
+
+.hackathon-group-photo {
+    margin: 0;
+}
+
+.hackathon-video {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.hackathon-presentation-block {
+    margin-top: clamp(3.5rem, 7vw, 5.5rem);
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--hackathon-line);
+}
+
+.hackathon-presentation-block > h3 {
+    max-width: 760px;
+    margin-bottom: 1rem;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+}
+
+.hackathon-presentation-block > p:not(.hackathon-eyebrow) {
+    max-width: 760px;
+    color: var(--hackathon-muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.hackathon-video video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    object-fit: contain;
+}
+
+.hackathon-footer {
+    background: #fff;
+}
+
+@media (max-width: 768px) {
+    .hackathon-page {
+        padding: 0 1.25rem;
+    }
+
+    .hackathon-header {
+        padding-top: 4rem;
+    }
+
+    .hackathon-header h1 {
+        font-size: clamp(2.65rem, 12vw, 4rem);
+    }
+
+    .hackathon-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hackathon-facts > div,
+    .hackathon-facts > div:first-child {
+        padding: 0.7rem 0.75rem;
+    }
+
+    .hackathon-facts > div:nth-child(2) {
+        border-right: 0;
+    }
+
+    .hackathon-facts > div:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--hackathon-line);
+    }
+
+    .hackathon-story-layout,
+    .hackathon-capabilities {
+        grid-template-columns: 1fr;
+    }
+
+    .hackathon-story-layout {
+        gap: 0;
+    }
+
+    .hackathon-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .hackathon-hero img,
+    .hackathon-group-photo img {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page.animate .hackathon-header > *,
+    .page.animate .hackathon-facts,
+    .page.animate .hackathon-team,
+    .page.animate .hackathon-hero {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    .hackathon-button {
+        transition: none;
+    }
+
+    .hackathon-hero img {
+        transition: none;
+    }
+}

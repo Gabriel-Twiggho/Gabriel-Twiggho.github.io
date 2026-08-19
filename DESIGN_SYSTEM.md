@@ -138,6 +138,7 @@ Use these canonical project hashes in all new links:
 | ROS 2 rover | `#ai-robot` |
 | Portable vacuum chamber | `#portable-vacuum-chamber` |
 | Thermal vacuum chamber control | `#thermal-vacuum-control` |
+| PID processor hackathon | `#pid-processor-hackathon` |
 
 Legacy `#project1` through `#project4` links are supported in `js/main.js`. Do not remove that compatibility without migrating existing public links. New project IDs should be descriptive, lowercase, and hyphenated.
 
