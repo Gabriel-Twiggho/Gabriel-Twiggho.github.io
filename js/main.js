@@ -40,7 +40,10 @@ function isPageAvailable(pageId) {
 function syncDraftProjectVisibility() {
     document.querySelectorAll('[data-draft-project]').forEach(element => {
         const pageId = element.getAttribute('data-draft-project');
-        element.hidden = !SHOW_DRAFT_PAGES && DRAFT_PAGES.has(pageId);
+        const isLocalPreviewEntry = element.hasAttribute('data-draft-local-preview');
+        element.hidden = DRAFT_PAGES.has(pageId) && (
+            !SHOW_DRAFT_PAGES || !isLocalPreviewEntry
+        );
     });
 }
 
