@@ -6,6 +6,7 @@ const VALID_PAGES = [
     'ai-robot',
     'portable-vacuum-chamber',
     'thermal-vacuum-control',
+    'search-and-rescue',
     'pid-processor-hackathon'
 ];
 
@@ -17,10 +18,30 @@ const LEGACY_PAGE_ALIASES = {
 };
 
 const DARK_PAGES = new Set(['swarm-tracking', 'ai-robot']);
+// Draft projects remain editable on local previews but are hidden and
+// unroutable on the published site until removed from this set.
+const DRAFT_PAGES = new Set(['search-and-rescue']);
+const SHOW_DRAFT_PAGES = (
+    window.location.protocol === 'file:' ||
+    ['localhost', '127.0.0.1', '0.0.0.0'].includes(window.location.hostname)
+);
 let updateTvacArchitectureScroll = function() {};
 
 function canonicalPageId(pageId) {
     return LEGACY_PAGE_ALIASES[pageId] || pageId;
+}
+
+function isPageAvailable(pageId) {
+    return VALID_PAGES.includes(pageId) && (
+        SHOW_DRAFT_PAGES || !DRAFT_PAGES.has(pageId)
+    );
+}
+
+function syncDraftProjectVisibility() {
+    document.querySelectorAll('[data-draft-project]').forEach(element => {
+        const pageId = element.getAttribute('data-draft-project');
+        element.hidden = !SHOW_DRAFT_PAGES && DRAFT_PAGES.has(pageId);
+    });
 }
 
 // Only play media on the visible page so duplicate project previews do not
@@ -108,7 +129,7 @@ function prepareSeekableVideos(activePage) {
 function showPage(pageId, updateHash = true) {
     // Resolve old numbered links before validating the canonical route.
     pageId = canonicalPageId(pageId);
-    if (!VALID_PAGES.includes(pageId)) {
+    if (!isPageAvailable(pageId)) {
         pageId = 'home';
     }
     
@@ -166,18 +187,22 @@ function handleHashChange() {
     const pageId = canonicalPageId(requestedHash);
 
     // Ignore section-level hashes and only handle known page routes.
-    if (requestedHash && VALID_PAGES.includes(pageId)) {
+    if (requestedHash && isPageAvailable(pageId)) {
         showPage(pageId, false);
 
         // Keep legacy bookmarks working while exposing the descriptive URL.
         if (requestedHash !== pageId) {
             window.history.replaceState(null, '', '#' + pageId);
         }
+    } else if (requestedHash && DRAFT_PAGES.has(pageId)) {
+        showPage('home', false);
+        window.history.replaceState(null, '', '#home');
     }
 }
 
 // Check for hash on page load
 window.addEventListener('DOMContentLoaded', function() {
+    syncDraftProjectVisibility();
     handleHashChange();
 
     const activePage = document.querySelector('.page.active');

@@ -3380,3 +3380,759 @@
         transition: none;
     }
 }
+
+
+/* ==================== */
+/* SEARCH & RESCUE ROVERS */
+/* ==================== */
+
+#search-and-rescue {
+    --sar-bg: #f4f5f2;
+    --sar-surface: #ffffff;
+    --sar-ink: #1d2420;
+    --sar-muted: #626b65;
+    --sar-line: rgba(45, 63, 53, 0.17);
+    --sar-accent: #a83f2a;
+    --sar-accent-soft: #f0ded8;
+    background: var(--sar-bg);
+    color: var(--sar-ink);
+}
+
+.sar-page {
+    min-height: 100vh;
+    padding: 0 2rem;
+    background:
+        radial-gradient(circle at 92% 3%, rgba(168, 63, 42, 0.075), transparent 26rem),
+        linear-gradient(180deg, #fbfcfa 0%, var(--sar-bg) 42%, #eef0ec 100%);
+}
+
+.sar-inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+}
+
+.sar-header {
+    max-width: 970px;
+    padding-bottom: clamp(2.75rem, 5vw, 4.5rem);
+}
+
+.sar-header .project-kicker,
+.sar-eyebrow,
+.sar-stage-copy > span,
+.sar-card-label,
+.sar-architecture-map span,
+.sar-world-card figcaption span,
+.sar-skill-stack span {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.sar-header .project-kicker,
+.sar-eyebrow,
+.sar-stage-copy > span,
+.sar-card-label span,
+.sar-architecture-map span,
+.sar-world-card figcaption span {
+    color: var(--sar-accent);
+}
+
+.sar-header h1 {
+    max-width: 940px;
+    margin-bottom: 1.5rem;
+    color: var(--sar-ink);
+    font-size: clamp(3.15rem, 6.4vw, 5.65rem);
+    font-weight: 600;
+    letter-spacing: -0.06em;
+    line-height: 0.94;
+}
+
+.sar-intro,
+.sar-role {
+    max-width: 790px;
+    color: var(--sar-muted);
+    line-height: 1.72;
+}
+
+.sar-intro {
+    font-size: clamp(1.08rem, 1.6vw, 1.26rem);
+}
+
+.sar-role {
+    margin-top: 0.85rem;
+    font-size: 0.98rem;
+}
+
+.sar-role strong {
+    color: var(--sar-ink);
+}
+
+.sar-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 1.75rem;
+    padding: 0.72rem 1rem;
+    border: 1px solid var(--sar-line);
+    color: var(--sar-ink);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.sar-button:hover {
+    background: var(--sar-surface);
+    border-color: var(--sar-accent);
+    color: var(--sar-accent);
+    text-decoration: none;
+}
+
+.sar-button:focus-visible {
+    outline: 3px solid rgba(168, 63, 42, 0.24);
+    outline-offset: 3px;
+}
+
+.sar-header > *,
+.sar-hero {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.page.animate .sar-header > *,
+.page.animate .sar-hero {
+    animation: fadeInUp 0.48s ease forwards;
+}
+
+.page.animate .sar-header h1 { animation-delay: 0.08s; }
+.page.animate .sar-intro { animation-delay: 0.14s; }
+.page.animate .sar-role { animation-delay: 0.2s; }
+.page.animate .sar-button { animation-delay: 0.26s; }
+.page.animate .sar-hero { animation-delay: 0.32s; }
+
+.sar-hero,
+.sar-framed-media,
+.sar-calibration-card,
+.sar-world-card {
+    margin: 0;
+    overflow: hidden;
+    background: var(--sar-surface);
+    border: 1px solid var(--sar-line);
+}
+
+.sar-video-label {
+    padding: 0.7rem 0.85rem;
+    background: var(--sar-surface);
+    border-bottom: 1px solid var(--sar-line);
+    color: var(--sar-muted);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.065em;
+    line-height: 1.45;
+    text-transform: uppercase;
+}
+
+.sar-video-label span {
+    display: inline-block;
+    margin-right: 0.4rem;
+    color: var(--sar-accent);
+    animation: sarVideoPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes sarVideoPulse {
+    0%, 100% { opacity: 0.42; }
+    50% { opacity: 1; }
+}
+
+.sar-hero {
+    box-shadow: 0 24px 65px rgba(32, 43, 36, 0.11);
+}
+
+.sar-hero img {
+    display: block;
+    width: 100%;
+    max-height: 690px;
+    object-fit: contain;
+    background: #242a26;
+}
+
+.sar-hero figcaption,
+.sar-framed-media figcaption,
+.sar-calibration-card figcaption {
+    padding: 0.78rem 0.9rem;
+    border-top: 1px solid var(--sar-line);
+    color: var(--sar-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    line-height: 1.55;
+}
+
+.sar-section {
+    padding: clamp(4.75rem, 9vw, 7.5rem) 0;
+    border-top: 1px solid var(--sar-line);
+}
+
+.sar-hero + .sar-section {
+    margin-top: clamp(5rem, 9vw, 7.5rem);
+}
+
+.sar-section-heading {
+    max-width: 820px;
+    margin-bottom: clamp(2.25rem, 5vw, 4rem);
+}
+
+.sar-eyebrow {
+    margin-bottom: 0.8rem;
+    font-size: 0.7rem;
+}
+
+.sar-section-heading h2 {
+    max-width: 810px;
+    margin-bottom: 1rem;
+    color: var(--sar-ink);
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.052em;
+    line-height: 1.01;
+}
+
+.sar-section-heading > p:last-child:not(.sar-eyebrow) {
+    max-width: 760px;
+    color: var(--sar-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.sar-objective-layout {
+    display: grid;
+    gap: 1.4rem;
+}
+
+.sar-objective-media img {
+    display: block;
+    width: 100%;
+    max-height: 650px;
+    object-fit: contain;
+    background: #e9ece8;
+}
+
+.sar-objective-flow {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) auto minmax(0, 1.15fr) auto minmax(0, 1fr) auto minmax(0, 0.8fr);
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    background: var(--sar-surface);
+    border: 1px solid var(--sar-line);
+}
+
+.sar-objective-flow div {
+    min-height: 76px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sar-objective-flow div span {
+    margin-bottom: 0.25rem;
+    color: var(--sar-accent);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+}
+
+.sar-objective-flow strong {
+    font-size: 0.88rem;
+    line-height: 1.35;
+}
+
+.sar-flow-arrow {
+    color: rgba(168, 63, 42, 0.7);
+    font-size: 1.35rem;
+}
+
+.sar-accuracy-note {
+    max-width: 780px;
+    padding-left: 1rem;
+    border-left: 3px solid var(--sar-accent);
+    color: var(--sar-muted);
+    font-size: 0.88rem;
+    line-height: 1.65;
+}
+
+.sar-accuracy-note strong {
+    color: var(--sar-ink);
+}
+
+.sar-stage-list {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.sar-stage-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.62fr) minmax(270px, 0.78fr);
+    min-height: 440px;
+    overflow: hidden;
+    background: var(--sar-surface);
+    border: 1px solid var(--sar-line);
+}
+
+.sar-stage-gallery {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+    background: var(--sar-line);
+    border-right: 1px solid var(--sar-line);
+}
+
+.sar-stage-gallery--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sar-stage-gallery--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sar-stage-media {
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #e8ebe7;
+}
+
+.sar-stage-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 440px;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.sar-stage-gallery--three .sar-stage-media img,
+.sar-stage-gallery--diagrams .sar-stage-media img {
+    object-fit: contain;
+}
+
+.sar-stage-gallery--three .sar-stage-media img {
+    min-height: 500px;
+}
+
+.sar-stage-gallery--diagrams .sar-stage-media img {
+    min-height: 620px;
+    background: #f1f2ef;
+}
+
+.sar-stage-card:hover .sar-stage-media img {
+    transform: scale(1.012);
+}
+
+.sar-stage-copy {
+    align-self: center;
+    padding: clamp(1.6rem, 3.4vw, 2.8rem);
+}
+
+.sar-stage-copy > span {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-size: 0.67rem;
+}
+
+.sar-stage-copy h3 {
+    margin-bottom: 1rem;
+    color: var(--sar-ink);
+    font-size: clamp(1.65rem, 2.8vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+}
+
+.sar-stage-copy p {
+    color: var(--sar-muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.sar-stage-chain {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--sar-line);
+    color: var(--sar-ink) !important;
+    font-family: var(--font-mono);
+    font-size: 0.67rem !important;
+    line-height: 1.65 !important;
+}
+
+.sar-architecture-story {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 1.25rem;
+    align-items: stretch;
+}
+
+.sar-architecture-story figure {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.sar-architecture-story img {
+    display: block;
+    width: 100%;
+    height: 500px;
+}
+
+.sar-architecture-diagram img {
+    object-fit: contain;
+    padding: 1.5rem;
+    background: #eef0ed;
+}
+
+.sar-planning-photo img {
+    object-fit: cover;
+    object-position: center 45%;
+}
+
+.sar-architecture-map {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+    padding-top: 4.25rem;
+}
+
+.sar-coordinator-node,
+.sar-rover-node {
+    padding: 1.35rem;
+    background: var(--sar-surface);
+    border: 1px solid var(--sar-line);
+}
+
+.sar-coordinator-node {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 1;
+    width: min(420px, 62%);
+    transform: translateX(-50%);
+    border-color: rgba(168, 63, 42, 0.38);
+}
+
+.sar-architecture-branch {
+    position: absolute;
+    top: 2.35rem;
+    left: 25%;
+    right: 25%;
+    height: 4.4rem;
+    border-right: 1px solid rgba(168, 63, 42, 0.38);
+    border-bottom: 1px solid rgba(168, 63, 42, 0.38);
+    border-left: 1px solid rgba(168, 63, 42, 0.38);
+}
+
+.sar-architecture-map span {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.62rem;
+}
+
+.sar-architecture-map strong {
+    display: block;
+    color: var(--sar-ink);
+    font-size: 1.2rem;
+}
+
+.sar-architecture-map p {
+    margin-top: 0.45rem;
+    color: var(--sar-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.sar-calibration-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.sar-calibration-card {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.sar-card-label {
+    padding: 0.75rem 0.85rem;
+    border-bottom: 1px solid var(--sar-line);
+    color: var(--sar-muted);
+    font-size: 0.62rem;
+}
+
+.sar-card-label span {
+    margin-right: 0.45rem;
+}
+
+.sar-calibration-card img {
+    display: block;
+    width: 100%;
+    height: 325px;
+    object-fit: contain;
+    padding: 0.75rem;
+    background: #f6f7f5;
+}
+
+.sar-method-line,
+.sar-layer-line {
+    color: var(--sar-ink);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.7;
+}
+
+.sar-method-line {
+    margin-top: 1.25rem;
+    padding: 1rem 1.15rem;
+    background: var(--sar-accent-soft);
+    border-left: 3px solid var(--sar-accent);
+}
+
+.sar-validation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.sar-world-card {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.sar-world-card img {
+    display: block;
+    width: 100%;
+    height: 390px;
+    object-fit: contain;
+    background: #202522;
+}
+
+.sar-world-card figcaption {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem;
+    border-top: 1px solid var(--sar-line);
+}
+
+.sar-world-card figcaption span {
+    font-size: 0.62rem;
+}
+
+.sar-world-card figcaption strong {
+    color: var(--sar-ink);
+    font-size: 0.86rem;
+}
+
+.sar-lessons-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+}
+
+.sar-lesson-copy p {
+    color: var(--sar-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.sar-lesson-copy p + p {
+    margin-top: 1rem;
+}
+
+.sar-layer-line {
+    margin-top: 1.5rem !important;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--sar-line);
+    color: var(--sar-ink) !important;
+}
+
+.sar-skill-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.sar-skill-stack span {
+    padding: 0.52rem 0.68rem;
+    background: var(--sar-surface);
+    border: 1px solid var(--sar-line);
+    color: var(--sar-muted);
+    font-size: 0.6rem;
+}
+
+.sar-footer {
+    background: #f8f9f6;
+    border-top: 1px solid var(--sar-line);
+}
+
+#search-and-rescue .project-nav-line {
+    background: rgba(29, 36, 32, 0.24);
+}
+
+#search-and-rescue .project-nav-text {
+    color: rgba(29, 36, 32, 0.5);
+}
+
+#search-and-rescue .project-nav-item:hover .project-nav-line {
+    background: rgba(29, 36, 32, 0.55);
+}
+
+#search-and-rescue .project-nav-item:hover .project-nav-text {
+    color: var(--sar-ink);
+}
+
+#search-and-rescue .project-nav-item.active .project-nav-line {
+    background: var(--sar-accent);
+}
+
+#search-and-rescue .project-nav-item.active .project-nav-text {
+    color: var(--sar-accent);
+    opacity: 1;
+}
+
+@media (min-width: 1201px) and (max-width: 1430px) {
+    .sar-inner {
+        width: min(1120px, calc(100% - 130px));
+        margin-right: 0;
+        margin-left: 130px;
+    }
+}
+
+@media (max-width: 920px) {
+    .sar-stage-card {
+        grid-template-columns: 1fr;
+    }
+
+    .sar-stage-gallery {
+        border-right: 0;
+        border-bottom: 1px solid var(--sar-line);
+    }
+
+    .sar-stage-gallery--diagrams .sar-stage-media img {
+        min-height: 500px;
+    }
+
+    .sar-calibration-grid,
+    .sar-validation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sar-calibration-card img,
+    .sar-world-card img {
+        height: auto;
+        max-height: 620px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sar-page {
+        padding: 0 1.25rem;
+    }
+
+    .sar-header {
+        padding-top: 4rem;
+    }
+
+    .sar-header h1 {
+        font-size: clamp(2.65rem, 12vw, 4rem);
+        line-height: 0.98;
+    }
+
+    .sar-objective-flow {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+    }
+
+    .sar-objective-flow div {
+        min-height: auto;
+        padding: 0.55rem 0;
+    }
+
+    .sar-flow-arrow {
+        transform: rotate(90deg);
+        transform-origin: center;
+    }
+
+    .sar-stage-gallery--three {
+        grid-template-columns: 1fr;
+    }
+
+    .sar-stage-gallery--three .sar-stage-media img {
+        min-height: 0;
+        max-height: 460px;
+    }
+
+    .sar-architecture-story,
+    .sar-lessons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sar-architecture-story img {
+        height: auto;
+        max-height: 560px;
+    }
+
+    .sar-architecture-map {
+        grid-template-columns: 1fr;
+        padding-top: 5.6rem;
+    }
+
+    .sar-coordinator-node {
+        width: calc(100% - 2rem);
+    }
+
+    .sar-architecture-branch {
+        left: 50%;
+        right: auto;
+        width: 1px;
+        height: 5.8rem;
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 1px solid rgba(168, 63, 42, 0.38);
+    }
+}
+
+@media (max-width: 560px) {
+    .sar-stage-gallery--two {
+        grid-template-columns: 1fr;
+    }
+
+    .sar-stage-media img,
+    .sar-stage-gallery--diagrams .sar-stage-media img {
+        min-height: 0;
+        max-height: 520px;
+        object-fit: contain;
+    }
+
+    .sar-stage-copy {
+        padding: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page.animate .sar-header > *,
+    .page.animate .sar-hero {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+
+    .sar-button,
+    .sar-stage-media img {
+        transition: none;
+    }
+
+    .sar-video-label span {
+        animation: none;
+    }
+}

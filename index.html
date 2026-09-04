@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base.css?v=20260810-2">
-    <link rel="stylesheet" href="css/home.css?v=20260819-9">
+    <link rel="stylesheet" href="css/home.css?v=20260901-2">
     <link rel="stylesheet" href="css/projects.css?v=20260810-2">
-    <link rel="stylesheet" href="css/project-themes.css?v=20260819-9">
+    <link rel="stylesheet" href="css/project-themes.css?v=20260901-2">
 </head>
 <body>
     <nav>
@@ -27,6 +27,7 @@
                         <li><a href="#ai-robot" data-page="ai-robot" id="nav-ai-robot">ROS 2 Rover</a></li>
                         <li><a href="#portable-vacuum-chamber" data-page="portable-vacuum-chamber" id="nav-portable-vacuum-chamber">Vacuum Chamber</a></li>
                         <li><a href="#thermal-vacuum-control" data-page="thermal-vacuum-control" id="nav-thermal-vacuum-control">TVAC Control</a></li>
+                        <li data-draft-project="search-and-rescue" hidden><a href="#search-and-rescue" data-page="search-and-rescue" id="nav-search-and-rescue">SAR Rovers</a></li>
                         <li><a href="#pid-processor-hackathon" data-page="pid-processor-hackathon" id="nav-pid-processor-hackathon">MCU Hackathon</a></li>
                     </ul>
                 </li>
@@ -148,6 +149,19 @@
                                 <span class="card-link">View Project →</span>
                             </div>
                         </a>
+
+                        <!-- Project 7: Autonomous Search & Rescue Rovers -->
+                        <a class="project-card" href="#search-and-rescue" onclick="showPage('search-and-rescue'); return false;" data-draft-project="search-and-rescue" hidden>
+                            <div class="card-media">
+                                <img src="Pictures/SAR/SAR%20rover%20victim%20overview.png" alt="Two simulated search and rescue rovers approaching a victim" loading="lazy" decoding="async">
+                            </div>
+                            <div class="card-content">
+                                <h3>Autonomous Search &amp; Rescue Rovers</h3>
+                                <p class="card-problem"><strong>Problem:</strong> Turn a generated rescue map and victim coordinates into reliable autonomous behaviour for two rovers in cluttered indoor environments.</p>
+                                <p class="card-solution"><strong>Solution:</strong> Built and calibrated the rover autonomy stack across motion control, local mapping, path planning, victim handling and multi-robot coordination.</p>
+                                <span class="card-link">View Project →</span>
+                            </div>
+                        </a>
                     </div>
 
                     <section class="hackathon-wins" aria-labelledby="hackathon-wins-heading">
@@ -160,8 +174,8 @@
                                 <img src="Pictures/microcontroller_hackathon/winning-team-with-judges.webp" alt="The team developing its processor with hackathon staff and judges at the table" loading="lazy" decoding="async">
                             </div>
                             <div class="hackathon-feature-content">
-                                <span class="hackathon-feature-result">1st Place · Two-day Analog Devices MCU Hackathon</span>
-                                <h3>From a Basic CPU to a PID Processor</h3>
+                                <span class="hackathon-feature-result">1st Place · Two-day Analog Devices IEEE MCU Hackathon</span>
+                                <h3>Built a Basic CPU to process PID Control</h3>
                                 <p>We built a processor from first principles, then specialised its datapath and instruction set for fixed-point PID control.</p>
                                 <span class="card-link">View Hackathon Project →</span>
                             </div>
@@ -1341,6 +1355,279 @@
             </footer>
         </section>
 
+        <!-- IEEE Search & Rescue Competition -->
+        <section id="search-and-rescue" class="page project-page project-page--light">
+            <nav class="project-nav" data-project="search-and-rescue" aria-label="Search and rescue project sections">
+                <a href="#sar-overview" class="project-nav-item active" data-section="sar-overview">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Overview</span>
+                </a>
+                <a href="#sar-objective" class="project-nav-item" data-section="sar-objective">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Objective</span>
+                </a>
+                <a href="#sar-autonomy" class="project-nav-item" data-section="sar-autonomy">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Autonomy Stack</span>
+                </a>
+                <a href="#sar-architecture" class="project-nav-item" data-section="sar-architecture">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Architecture</span>
+                </a>
+                <a href="#sar-calibration" class="project-nav-item" data-section="sar-calibration">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Calibration</span>
+                </a>
+                <a href="#sar-validation" class="project-nav-item" data-section="sar-validation">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Validation</span>
+                </a>
+                <a href="#sar-lessons" class="project-nav-item" data-section="sar-lessons">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Takeaways</span>
+                </a>
+            </nav>
+
+            <div class="sar-page project-shell">
+                <div class="sar-inner project-inner">
+                    <header class="sar-header project-editorial-header project-header" id="sar-overview">
+                        <p class="project-kicker">IEEE Search &amp; Rescue Competition · Autonomous robotics</p>
+                        <h1 class="project-title">Autonomous Search &amp; Rescue Rover System</h1>
+                        <p class="sar-intro">The competition began with prerecorded drone footage of an indoor environment. From that input, a map and victim coordinates had to be generated so two autonomous rovers could navigate the environment and reach each victim.</p>
+                        <p class="sar-role"><strong>My role</strong> began with the rover motion controller and expanded into local mapping, obstacle awareness, victim-handling logic, architecture redesign, drive-model calibration and final tuning.</p>
+                        <a class="sar-button" href="https://github.com/IEEE-SMCS/2026-ieee-smcs-competition-phase-1" target="_blank" rel="noopener noreferrer">View competition repository <span aria-hidden="true">↗</span></a>
+                    </header>
+
+                    <figure class="sar-hero project-media">
+                        <p class="sar-video-label"><span aria-hidden="true">●</span> Looping video · watch both SAR robots move through the map</p>
+                        <img src="Pictures/SAR/large_world.gif" alt="Autonomous search and rescue rovers navigating the large simulated competition environment" decoding="async">
+                        <figcaption class="project-caption">Final autonomous rover system navigating the large competition test environment.</figcaption>
+                    </figure>
+
+                    <section class="sar-section project-section" id="sar-objective">
+                        <div class="sar-section-heading">
+                            <p class="sar-eyebrow">Competition objective</p>
+                            <h2 class="project-section-title">Turn an aerial survey into a coordinated rescue mission</h2>
+                            <p>The overall workflow connected two distinct problems: extracting the environment from the recorded flyover, then using that information to coordinate two ground vehicles.</p>
+                        </div>
+                        <div class="sar-objective-layout">
+                            <figure class="sar-framed-media sar-objective-media project-media">
+                                <img src="Pictures/SAR/project%20objective%20showing%20sample%20small%20map%20and%20drone%20map%20we%20need%20to%20make.png" alt="Competition example showing the small simulated environment and the map produced from drone footage" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">A sample competition environment beside the map and victim information supplied to the rover system.</figcaption>
+                            </figure>
+                            <div class="sar-objective-flow" aria-label="Competition workflow">
+                                <div><span>01</span><strong>Drone footage</strong></div>
+                                <span class="sar-flow-arrow" aria-hidden="true">→</span>
+                                <div><span>02</span><strong>Map + victim coordinates</strong></div>
+                                <span class="sar-flow-arrow" aria-hidden="true">→</span>
+                                <div><span>03</span><strong>Two autonomous rovers</strong></div>
+                                <span class="sar-flow-arrow" aria-hidden="true">→</span>
+                                <div><span>04</span><strong>Reach each victim</strong></div>
+                            </div>
+                            <p class="sar-accuracy-note"><strong>Collaboration boundary:</strong> my work focused on the rover system that consumed the generated map and victim coordinates. I worked closely with Krish, a master’s robotics student who led much of the drone-footage extraction and also helped across the wider project; we regularly sense-checked decisions and bounced ideas off each other.</p>
+                        </div>
+                    </section>
+
+                    <section class="sar-section project-section" id="sar-autonomy">
+                        <div class="sar-section-heading">
+                            <p class="sar-eyebrow">Building the autonomy stack</p>
+                            <h2 class="project-section-title">Movement first. Environmental understanding next.</h2>
+                            <p>The controller was built in layers so each capability could be understood and tested before it became a dependency for the next.</p>
+                        </div>
+
+                        <div class="sar-stage-list">
+                            <article class="sar-stage-card">
+                                <div class="sar-stage-gallery sar-stage-gallery--two">
+                                    <figure class="sar-stage-media project-media">
+                                        <img src="Pictures/SAR/initial_layer_objectives_first_month.png" alt="Initial rover-controller whiteboard breaking the task into odometry, positioning, motion and waypoint layers" loading="lazy" decoding="async">
+                                    </figure>
+                                    <figure class="sar-stage-media project-media">
+                                        <img src="Pictures/SAR/first%20implemented%20drive%20model.png" alt="Early Webots drive-model test comparing the rover path with its estimated path" loading="lazy" decoding="async">
+                                    </figure>
+                                </div>
+                                <div class="sar-stage-copy">
+                                    <span>01 · Motion foundation</span>
+                                    <h3>Given a path, make the rover follow it reliably.</h3>
+                                    <p>I developed the original rover controller through wheel odometry, world-position estimation, linear and angular control, and waypoint navigation.</p>
+                                    <p class="sar-stage-chain">Wheel odometry → World position → Motion control → Waypoints</p>
+                                </div>
+                            </article>
+
+                            <article class="sar-stage-card">
+                                <div class="sar-stage-gallery sar-stage-gallery--three">
+                                    <figure class="sar-stage-media project-media">
+                                        <img src="Pictures/SAR/expanded%20layer%20objectives%20month%20two.png" alt="Whiteboard showing the expanded mapping, planning, replanning and obstacle-awareness layers" loading="lazy" decoding="async">
+                                    </figure>
+                                    <figure class="sar-stage-media project-media">
+                                        <img src="Pictures/SAR/implemented%20layers%20month%20two.png" alt="Whiteboard checklist of implemented autonomy layers including mapping, planning and recovery" loading="lazy" decoding="async">
+                                    </figure>
+                                    <figure class="sar-stage-media project-media">
+                                        <img src="Pictures/SAR/SAR%20rover%20victim%20overview.png" alt="Two simulated rovers using vision and depth information to approach a victim" loading="lazy" decoding="async">
+                                    </figure>
+                                </div>
+                                <div class="sar-stage-copy">
+                                    <span>02 · Expanded autonomy</span>
+                                    <h3>From waypoint following to reacting to the environment.</h3>
+                                    <p>I expanded the system with “SLAM-lite” local mapping from LiDAR, depth and IR, plus obstacle awareness and path planning. RGB identified potential victims while depth supported distance checks, close-together victims and already-found cases.</p>
+                                    <p class="sar-stage-chain">Local mapping → Obstacle awareness → Planning → Victim handling</p>
+                                </div>
+                            </article>
+
+                            <article class="sar-stage-card sar-stage-card--system">
+                                <div class="sar-stage-gallery sar-stage-gallery--two sar-stage-gallery--diagrams">
+                                    <figure class="sar-stage-media project-media">
+                                        <img src="Pictures/SAR/final%20architecture%20of%20controller%20third%20month.png" alt="Final coordinator workflow for the integrated two-rover system" loading="lazy" decoding="async">
+                                    </figure>
+                                    <figure class="sar-stage-media project-media">
+                                        <img src="Pictures/SAR/final%20architecture%20of%20rosbots%20third%20month.png" alt="Final individual rover workflow covering mapping, planning, motion and victim approach" loading="lazy" decoding="async">
+                                    </figure>
+                                </div>
+                                <div class="sar-stage-copy">
+                                    <span>03 · Complete system</span>
+                                    <h3>Integrate the layers into one coordinated mission.</h3>
+                                    <p>The final workflows separated mission-level coordination from each rover’s local autonomy, making the complete behaviour easier to trace, tune and validate.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="sar-section project-section" id="sar-architecture">
+                        <div class="sar-section-heading">
+                            <p class="sar-eyebrow">Architecture redesign</p>
+                            <h2 class="project-section-title">When the system grew, the structure had to grow with it</h2>
+                            <p>As functionality accumulated, the implementation reached roughly 9,000 lines and became increasingly difficult to reason about. We stepped away from the code and redesigned the system around clearer ownership and data flow.</p>
+                        </div>
+
+                        <div class="sar-architecture-story">
+                            <figure class="sar-framed-media sar-architecture-diagram project-media">
+                                <img src="Pictures/SAR/simple%20diagram%20of%20what%20we%20were%20aiming%20for%20in%20new%20architecture%20third%20month.png" alt="Concept diagram showing a coordinator supervising two rovers with local autonomy" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">The organising idea: one coordinator, two rovers, clear local responsibilities.</figcaption>
+                            </figure>
+                            <figure class="sar-framed-media sar-planning-photo project-media">
+                                <img src="Pictures/SAR/me%20and%20krish%20planning%20our%20final%20architecture%203.png" alt="Gabriel and Krish planning the final rover architecture at a whiteboard" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">Krish and me mapping the rover and coordinator workflows before returning to implementation.</figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="sar-architecture-map" aria-label="Redesigned rover architecture">
+                            <div class="sar-coordinator-node">
+                                <span>Mission layer</span>
+                                <strong>Coordinator</strong>
+                                <p>Assignment and coordination between rovers</p>
+                            </div>
+                            <div class="sar-architecture-branch" aria-hidden="true"></div>
+                            <div class="sar-rover-node">
+                                <span>Local autonomy</span>
+                                <strong>Rover 1</strong>
+                                <p>Mapping → Planning → Motion → Victim approach</p>
+                            </div>
+                            <div class="sar-rover-node">
+                                <span>Local autonomy</span>
+                                <strong>Rover 2</strong>
+                                <p>Mapping → Planning → Motion → Victim approach</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="sar-section project-section" id="sar-calibration">
+                        <div class="sar-section-heading">
+                            <p class="sar-eyebrow">Motion-model calibration</p>
+                            <h2 class="project-section-title">Correcting the model with measured behaviour</h2>
+                            <p>The rover behaved more like a skid-steer platform than an ideal differential-drive robot. Slip and drift meant the predicted trajectory gradually separated from the rover’s actual path.</p>
+                        </div>
+
+                        <div class="sar-calibration-grid">
+                            <figure class="sar-calibration-card project-media">
+                                <div class="sar-card-label"><span>01</span> Observe the error</div>
+                                <img src="Pictures/SAR/Validating_diffdrive_model_before_we_implemented_model.png" alt="Before-calibration plot showing the estimated drive path diverging from the actual rover trajectory" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">The ideal model diverged substantially from the measured route.</figcaption>
+                            </figure>
+                            <figure class="sar-calibration-card project-media">
+                                <div class="sar-card-label"><span>02</span> Run controlled tests</div>
+                                <img src="Pictures/SAR/testing%20diff%20drive%20model.png" alt="Webots controlled-turn test used to compare the planned and predicted drive-model motion" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">Controlled movements exposed the effective wheelbase and turning behaviour.</figcaption>
+                            </figure>
+                            <figure class="sar-calibration-card project-media">
+                                <div class="sar-card-label"><span>03</span> Validate the correction</div>
+                                <img src="Pictures/SAR/Validating_diffdrive_model_after_we_implemented_model.png" alt="After-calibration plot showing predicted and actual rover trajectories closely aligned" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">After calibration, predicted and actual trajectories aligned far more closely.</figcaption>
+                            </figure>
+                        </div>
+                        <p class="sar-method-line">Observe error → Controlled motion tests → Estimate parameters → Correct the model → Validate</p>
+                    </section>
+
+                    <section class="sar-section project-section" id="sar-validation">
+                        <div class="sar-section-heading">
+                            <p class="sar-eyebrow">Final validation</p>
+                            <h2 class="project-section-title">One system, three environments</h2>
+                            <p>We centralised shared parameters—including lookahead values, sensor ranges and update frequencies—then tuned the rover system until it repeatedly completed the small, medium and large test environments across multiple iterations.</p>
+                        </div>
+
+                        <div class="sar-validation-grid">
+                            <figure class="sar-world-card project-media">
+                                <p class="sar-video-label"><span aria-hidden="true">●</span> Looping video · track both robots</p>
+                                <img src="Pictures/SAR/small_world.gif" alt="Autonomous rover system completing the small search and rescue test environment" loading="lazy" decoding="async">
+                                <figcaption><span>01</span><strong>Small world</strong></figcaption>
+                            </figure>
+                            <figure class="sar-world-card project-media">
+                                <p class="sar-video-label"><span aria-hidden="true">●</span> Looping video · track both robots</p>
+                                <img src="Pictures/SAR/medium_world.gif" alt="Autonomous rover system completing the medium search and rescue test environment" loading="lazy" decoding="async">
+                                <figcaption><span>02</span><strong>Medium world</strong></figcaption>
+                            </figure>
+                            <figure class="sar-world-card project-media">
+                                <p class="sar-video-label"><span aria-hidden="true">●</span> Looping video · track both robots</p>
+                                <img src="Pictures/SAR/large_world.gif" alt="Autonomous rover system completing the large search and rescue test environment" loading="lazy" decoding="async">
+                                <figcaption><span>03</span><strong>Large world</strong></figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <section class="sar-section sar-lessons project-section" id="sar-lessons">
+                        <div class="sar-section-heading">
+                            <p class="sar-eyebrow">Takeaways</p>
+                            <h2 class="project-section-title">Build autonomy layer by layer</h2>
+                        </div>
+                        <div class="sar-lessons-grid">
+                            <div class="sar-lesson-copy">
+                                <p>The project gave me a repeatable workflow for autonomous robotics: understand the sensing and actuation first, establish reliable motion and odometry, then add mapping, higher-level behaviour and integration.</p>
+                                <p>It also made the value of architecture tangible. The early structure helped us learn quickly; the redesign made the larger system easier to trace, tune and validate.</p>
+                                <p class="sar-layer-line">Sensors &amp; actuators → Motion → Odometry → Mapping → Behaviour → Integration</p>
+                            </div>
+                            <div class="sar-skill-stack" aria-label="Search and rescue project skills">
+                                <span>Python</span>
+                                <span>Webots</span>
+                                <span>Autonomous Robotics</span>
+                                <span>Robot Motion Control</span>
+                                <span>PID Control</span>
+                                <span>Odometry</span>
+                                <span>Differential / Skid-Steer</span>
+                                <span>LiDAR</span>
+                                <span>Depth Cameras</span>
+                                <span>Computer Vision</span>
+                                <span>SLAM-lite</span>
+                                <span>Path Planning</span>
+                                <span>Multi-Robot Systems</span>
+                                <span>Software Architecture</span>
+                                <span>Testing &amp; Validation</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <footer class="sar-footer project-footer">
+                <div class="container">
+                    <h3>Let's Connect</h3>
+                    <div class="footer-links">
+                        <a href="mailto:gabrieljyth@gmail.com">Email</a>
+                        <a href="https://github.com/Gabriel-Twiggho" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://www.linkedin.com/in/gabriel-twigg-ho-96579b1b8/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                    <p class="copyright">© 2025 Gabriel Twigg-Ho</p>
+                </div>
+            </footer>
+        </section>
+
         <!-- Hackathon Win: PID Processor -->
         <section id="pid-processor-hackathon" class="page project-page project-page--light">
             <nav class="project-nav" data-project="pid-processor-hackathon" aria-label="PID processor hackathon sections">
@@ -1361,8 +1648,8 @@
             <div class="hackathon-page">
                 <div class="hackathon-inner">
                     <header class="hackathon-header project-editorial-header project-header" id="hackathon-overview">
-                        <p class="project-kicker">Analog Devices MCU Hackathon · Two days · 1st Place</p>
-                        <h1 class="project-title">From a Basic CPU to a PID Processor</h1>
+                        <p class="project-kicker">Analog Devices IEEE MCU Hackathon · Two days · 1st Place</p>
+                        <h1 class="project-title">Built a Basic CPU to process PID Control</h1>
                         <div class="hackathon-intro">
                             <p><strong>Goal</strong> of the hackathon was to design and build a custom CPU from the ground up, from its instruction set and datapath to its Verilog implementation, simulation and FPGA synthesis.</p>
                             <p>Once we understood the basics of CPU architecture, we developed the narrative of designing it for PID control.</p>
@@ -1473,6 +1760,6 @@
         </figure>
     </dialog>
 
-    <script src="js/main.js?v=20260819-6"></script>
+    <script src="js/main.js?v=20260904-1"></script>
 </body>
 </html>
