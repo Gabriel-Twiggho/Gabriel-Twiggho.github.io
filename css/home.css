@@ -200,6 +200,11 @@ a.project-card {
     text-decoration: none;
 }
 
+/* Keep unpublished project cards hidden even though card links use display:block. */
+.project-card[hidden] {
+    display: none !important;
+}
+
 a.project-card:hover {
     text-decoration: none;
 }
