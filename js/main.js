@@ -20,7 +20,7 @@ const LEGACY_PAGE_ALIASES = {
 const DARK_PAGES = new Set(['swarm-tracking', 'ai-robot']);
 // Draft projects remain editable on local previews but are hidden and
 // unroutable on the published site until removed from this set.
-const DRAFT_PAGES = new Set(['search-and-rescue']);
+const DRAFT_PAGES = new Set();
 const SHOW_DRAFT_PAGES = (
     window.location.protocol === 'file:' ||
     ['localhost', '127.0.0.1', '0.0.0.0'].includes(window.location.hostname)
