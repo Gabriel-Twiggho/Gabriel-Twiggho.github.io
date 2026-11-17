@@ -9,11 +9,15 @@ The site has an Apple-inspired modern editorial feel: calm, precise, spacious, a
 The portfolio has two related modes:
 
 - **Home and research projects:** bright, quiet, and minimal.
-- **Systems projects (Swarm Tracking and ROS 2 Rover):** immersive dark presentations, with the rover using a restrained warm copper accent.
+- **Systems projects (Swarm Tracking, ROS 2 Rover and Search & Rescue):** immersive dark presentations with restrained project-specific accents.
 
 The Portable Vacuum Chamber page stays in the light mode, using cool neutral metal tones, image-led layouts, and a wider editorial canvas for its engineering workflow.
 
+Search & Rescue uses a charcoal palette (`#111214` / `#191b1e`) with a soft copper accent (`#d79a78`). Give its ROSbot introduction a full-width opening, with the project summary below. The entrance plays once; sensor callouts fade in early, follow video media time, and settle on an annotated final pose. On mobile, move sensor controls below the video. Identify internal sensors and calculated quantities accurately. Provide a static annotated pose for reduced motion or unavailable playback, and an entrance poster while loading. Play the entrance once whenever the visitor enters SAR from another page, including Home; scrolling within SAR must not restart it. Do not include replay or show-sensors buttons. Anchor sensor leader lines to the rendered label text and update their origins after resizing or font loading. Architecture diagrams should distinguish team coordination from local autonomy, show assignment and feedback directions, and label logical roles separately from physical hosting. Keep planning photos secondary to the diagram and development results distinct from official competition results.
+
 ## Foundations
+
+The Search & Rescue page uses five shared type sizes: metadata, body, subheading, section heading and page title, defined by its `--sar-type-*` tokens. Keep the rover opening free of a platform banner; place the Husarion ROSbot and Webots context in the introduction below it, with no replay control below the scene. Autonomy photos overlap horizontally as white cards with visible offset edges and an image count, with the selected photo fully contained. These stacks advance every three seconds while visible, pausing during hover, keyboard focus or full-screen viewing; reduced-motion users switch cards manually. Keep the architecture in one compact top-down panel: aerial inputs and coordination, assignment and feedback, both rover controllers, then their shared local pipeline.
 
 Use the global CSS custom properties in `css/base.css` and project-level custom properties in `css/project-themes.css` rather than introducing one-off colours or fonts.
 
@@ -47,7 +51,7 @@ The Portable Vacuum Chamber established the editorial language now shared by eve
 
 - Every project section uses `page project-page` plus either `project-page--light` or `project-page--dark`.
 - Use the light mode for research, analysis, and image-led engineering projects. Task Scheduling, CO2 Prediction, and the Portable Vacuum Chamber are the current references.
-- Reserve the dark mode for immersive systems projects where it supports the subject. Swarm Tracking and the ROS 2 Rover are the current references.
+- Reserve the dark mode for immersive systems projects where it supports the subject. Swarm Tracking, the ROS 2 Rover and Search & Rescue are the current references.
 - A project may have its own restrained accent colour, but it must keep the shared typefaces, heading hierarchy, spacing rhythm, square geometry, and interaction patterns.
 
 ### Editorial header
@@ -107,6 +111,8 @@ Motion should support hierarchy, never call attention to itself:
 
 ## Content style
 
+Use direct, descriptive section titles that name the engineering work or results. Avoid slogans, hooks, rhetorical contrasts and newspaper-style headlines; apply the same plain wording to supporting headings and captions.
+
 - Lead with what was built, the technical problem, and evidence of the work.
 - Use clear, direct language and short paragraphs. Avoid marketing clichés and inflated claims.
 - Describe delivered capabilities accurately. If a page is intended to showcase completed work only, omit unfinished scope rather than framing it as a feature.
@@ -138,6 +144,7 @@ Use these canonical project hashes in all new links:
 | ROS 2 rover | `#ai-robot` |
 | Portable vacuum chamber | `#portable-vacuum-chamber` |
 | Thermal vacuum chamber control | `#thermal-vacuum-control` |
+| Search & rescue rovers | `#search-and-rescue` |
 | PID processor hackathon | `#pid-processor-hackathon` |
 
 Legacy `#project1` through `#project4` links are supported in `js/main.js`. Do not remove that compatibility without migrating existing public links. New project IDs should be descriptive, lowercase, and hyphenated.

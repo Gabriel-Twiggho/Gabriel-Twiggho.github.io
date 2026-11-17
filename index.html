@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="css/base.css?v=20260810-2">
     <link rel="stylesheet" href="css/home.css?v=20260904-1">
     <link rel="stylesheet" href="css/projects.css?v=20260810-2">
-    <link rel="stylesheet" href="css/project-themes.css?v=20260901-2">
+    <link rel="stylesheet" href="css/project-themes.css?v=20261117-1">
 </head>
 <body>
     <nav>
@@ -1406,7 +1406,7 @@
         </section>
 
         <!-- IEEE Search & Rescue Competition -->
-        <section id="search-and-rescue" class="page project-page project-page--light">
+        <section id="search-and-rescue" class="page project-page project-page--dark">
             <nav class="project-nav" data-project="search-and-rescue" aria-label="Search and rescue project sections">
                 <a href="#sar-overview" class="project-nav-item active" data-section="sar-overview">
                     <span class="project-nav-line"></span>
@@ -1419,6 +1419,10 @@
                 <a href="#sar-autonomy" class="project-nav-item" data-section="sar-autonomy">
                     <span class="project-nav-line"></span>
                     <span class="project-nav-text">Autonomy Stack</span>
+                </a>
+                <a href="#sar-live-autonomy" class="project-nav-item" data-section="sar-live-autonomy">
+                    <span class="project-nav-line"></span>
+                    <span class="project-nav-text">Live autonomy</span>
                 </a>
                 <a href="#sar-architecture" class="project-nav-item" data-section="sar-architecture">
                     <span class="project-nav-line"></span>
@@ -1439,31 +1443,59 @@
             </nav>
 
             <div class="sar-page project-shell">
-                <div class="sar-inner project-inner">
-                    <header class="sar-header project-editorial-header project-header" id="sar-overview">
-                        <p class="project-kicker">IEEE Search &amp; Rescue Competition · Autonomous robotics</p>
-                        <h1 class="project-title">Autonomous Search &amp; Rescue Rover System</h1>
-                        <p class="sar-intro">The competition began with prerecorded drone footage of an indoor environment. From that input, a map and victim coordinates had to be generated so two autonomous rovers could navigate the environment and reach each victim.</p>
-                        <p class="sar-role"><strong>My role</strong> began with the rover motion controller and expanded into local mapping, obstacle awareness, victim-handling logic, architecture redesign, drive-model calibration and final tuning.</p>
-                        <a class="sar-button" href="https://github.com/IEEE-SMCS/2026-ieee-smcs-competition-phase-1" target="_blank" rel="noopener noreferrer">View competition repository <span aria-hidden="true">↗</span></a>
+                <div class="sar-opening" id="sar-overview">
+                    <header class="sar-header project-header">
+                        <p class="project-kicker">IEEE Search &amp; Rescue · Team Wolf Brigade · Phase 1</p>
+                        <h1 class="project-title">Autonomous Search &amp; Rescue</h1>
                     </header>
 
-                    <figure class="sar-hero project-media">
-                        <p class="sar-video-label"><span aria-hidden="true">●</span> Looping video · watch both SAR robots move through the map</p>
-                        <img src="Pictures/SAR/large_world.gif" alt="Autonomous search and rescue rovers navigating the large simulated competition environment" decoding="async">
-                        <figcaption class="project-caption">Final autonomous rover system navigating the large competition test environment.</figcaption>
-                    </figure>
+                    <section class="sar-showcase is-ready" aria-label="Explore the ROSbot sensors" data-sar-showcase>
+                        <div class="sar-robot-stage">
+                            <div class="sar-robot-scene">
+                                <div class="sar-robot-footage">
+                                    <video class="sar-robot-video" muted playsinline preload="none" poster="Pictures/SAR/rosbot-entrance-poster.jpg" data-src="videos/sar-rosbot-smooth.web.mp4" aria-hidden="true"></video>
+                                </div>
+                                <svg class="sar-sensor-lines" viewBox="0 0 1000 416.667" fill="none" aria-hidden="true">
+                                    <defs><marker id="sar-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1 7 4 1 7" /></marker></defs>
+                                    <g data-sar-line="camera" class="is-selected"><path d="M240 60 H340 L556 55 H575" marker-end="url(#sar-arrow)" /><circle cx="580" cy="55" r="5" /></g>
+                                    <g data-sar-line="lidar"><path d="M785 65 H700 L645 134 H567" marker-end="url(#sar-arrow)" /><circle cx="555" cy="134" r="5" /></g>
+                                    <g data-sar-line="proximity"><path d="M240 285 H340 L427 217 H446" marker-end="url(#sar-arrow)" /><circle cx="451" cy="217" r="5" /></g>
+                                    <g data-sar-line="imu" class="sar-internal-sensor"><path d="M785 205 H715 L656 203" marker-end="url(#sar-arrow)" /><circle cx="644" cy="205" r="5" /></g>
+                                    <g data-sar-line="odometry"><path d="M785 340 H704 L622 274" marker-end="url(#sar-arrow)" /><circle cx="613" cy="267" r="5" /></g>
+                                </svg>
+                            </div>
+                            <div class="sar-sensor-labels" role="group" aria-label="Sensor details">
+                                <button class="sar-sensor sar-sensor--camera" type="button" data-sar-sensor="camera" aria-pressed="true" aria-controls="sar-sensor-detail"><span class="sar-sensor-index">01</span><span><strong>RGB-D camera</strong><small>Colour + depth</small></span></button>
+                                <button class="sar-sensor sar-sensor--lidar" type="button" data-sar-sensor="lidar" aria-pressed="false" aria-controls="sar-sensor-detail"><span class="sar-sensor-index">02</span><span><strong>LiDAR</strong><small>Local surroundings</small></span></button>
+                                <button class="sar-sensor sar-sensor--proximity" type="button" data-sar-sensor="proximity" aria-pressed="false" aria-controls="sar-sensor-detail"><span class="sar-sensor-index">03</span><span><strong>IR proximity</strong><small>Near-field obstacles</small></span></button>
+                                <button class="sar-sensor sar-sensor--imu" type="button" data-sar-sensor="imu" aria-pressed="false" aria-controls="sar-sensor-detail"><span class="sar-sensor-index">04</span><span><strong>IMU</strong><small>Internal · body orientation</small></span></button>
+                                <button class="sar-sensor sar-sensor--odometry" type="button" data-sar-sensor="odometry" aria-pressed="false" aria-controls="sar-sensor-detail"><span class="sar-sensor-index">05</span><span><strong>Wheel encoders</strong><small>Motion → odometry</small></span></button>
+                            </div>
+                        </div>
+                        <div class="sar-sensor-detail" id="sar-sensor-detail" aria-live="polite" aria-atomic="true">
+                            <p class="sar-detail-label">01 / Perception</p>
+                            <p class="sar-detail-copy">The RGB camera identifies potential victims. Depth estimates their distance so the rover can approach and confirm them on the ground.</p>
+                        </div>
+                        <p class="sar-showcase-caption">Select a sensor to explore its role. The IMU is inside the chassis; odometry combines wheel rotation and compass heading. <a href="https://www.cyberbotics.com/doc/guide/rosbot?version=R2023a" target="_blank" rel="noopener noreferrer">ROSbot model reference ↗</a></p>
+                    </section>
+                    <p class="sar-scroll-cue">Project details <span aria-hidden="true">↓</span></p>
+                </div>
 
+                <div class="sar-inner project-inner">
+                    <div class="sar-project-brief">
+                        <p class="sar-intro">Two ROSbots navigating unfamiliar indoor spaces, adapting to obstacles and confirming victims on the ground. Developed and tested in Webots simulation.</p>
+                        <a class="sar-button" href="https://github.com/Gabriel-Twiggho/IEEE_2026_Phase_1_Wolf_Brigade_Submission" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span></a>
+                    </div>
                     <section class="sar-section project-section" id="sar-objective">
                         <div class="sar-section-heading">
                             <p class="sar-eyebrow">Competition objective</p>
-                            <h2 class="project-section-title">Turn an aerial survey into a coordinated rescue mission</h2>
-                            <p>The overall workflow connected two distinct problems: extracting the environment from the recorded flyover, then using that information to coordinate two ground vehicles.</p>
+                            <h2 class="project-section-title">Autonomous navigation and victim confirmation</h2>
+                            <p>The mission began with prerecorded drone footage. Aerial perception supplied a map and likely victim locations; the two rovers then had to navigate the simulated environment and verify each victim at close range.</p>
                         </div>
                         <div class="sar-objective-layout">
                             <figure class="sar-framed-media sar-objective-media project-media">
-                                <img src="Pictures/SAR/project%20objective%20showing%20sample%20small%20map%20and%20drone%20map%20we%20need%20to%20make.png" alt="Competition example showing the small simulated environment and the map produced from drone footage" loading="lazy" decoding="async">
-                                <figcaption class="project-caption">A sample competition environment beside the map and victim information supplied to the rover system.</figcaption>
+                                <img src="Pictures/SAR/competition-world-topdown.png" alt="Top-down view of the small Webots competition world, showing rooms, furniture and victim locations" loading="lazy" decoding="async">
+                                <figcaption class="project-caption">Top-down view of the small Webots competition world.</figcaption>
                             </figure>
                             <div class="sar-objective-flow" aria-label="Competition workflow">
                                 <div><span>01</span><strong>Drone footage</strong></div>
@@ -1472,32 +1504,37 @@
                                 <span class="sar-flow-arrow" aria-hidden="true">→</span>
                                 <div><span>03</span><strong>Two autonomous rovers</strong></div>
                                 <span class="sar-flow-arrow" aria-hidden="true">→</span>
-                                <div><span>04</span><strong>Reach each victim</strong></div>
+                                <div><span>04</span><strong>Confirm within 1 m</strong></div>
                             </div>
-                            <p class="sar-accuracy-note"><strong>Collaboration boundary:</strong> my work focused on the rover system that consumed the generated map and victim coordinates. I worked closely with Krish, a master’s robotics student who led much of the drone-footage extraction and also helped across the wider project; we regularly sense-checked decisions and bounced ideas off each other.</p>
+                            <div class="sar-contributions">
+                                <p><strong>My focus</strong> — rover autonomy, from the first motion controller to mapping, perception, calibration and system integration.</p>
+                                <p><strong>Krish’s focus</strong> — aerial extraction, using SegFormer for walls and an aerial YOLO model for likely victim locations.</p>
+                                <p class="sar-contributions-together">We worked closely across the project, testing ideas and redesigning the system together.</p>
+                            </div>
                         </div>
                     </section>
 
                     <section class="sar-section project-section" id="sar-autonomy">
                         <div class="sar-section-heading">
-                            <p class="sar-eyebrow">Building the autonomy stack</p>
-                            <h2 class="project-section-title">Movement first. Environmental understanding next.</h2>
+                            <p class="sar-eyebrow">Autonomy stack</p>
+                            <h2 class="project-section-title">Rover controller development</h2>
                             <p>The controller was built in layers so each capability could be understood and tested before it became a dependency for the next.</p>
+                            <p class="sar-gallery-hint">Hover or tap a photo to bring it forward. Select the front image to view full screen.</p>
                         </div>
 
                         <div class="sar-stage-list">
                             <article class="sar-stage-card">
                                 <div class="sar-stage-gallery sar-stage-gallery--two">
-                                    <figure class="sar-stage-media project-media">
+                                    <figure class="sar-stage-media project-media" data-card-label="Controller layers">
                                         <img src="Pictures/SAR/initial_layer_objectives_first_month.png" alt="Initial rover-controller whiteboard breaking the task into odometry, positioning, motion and waypoint layers" loading="lazy" decoding="async">
                                     </figure>
-                                    <figure class="sar-stage-media project-media">
+                                    <figure class="sar-stage-media project-media" data-card-label="Drive-model test">
                                         <img src="Pictures/SAR/first%20implemented%20drive%20model.png" alt="Early Webots drive-model test comparing the rover path with its estimated path" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                                 <div class="sar-stage-copy">
                                     <span>01 · Motion foundation</span>
-                                    <h3>Given a path, make the rover follow it reliably.</h3>
+                                    <h3>Odometry and waypoint control</h3>
                                     <p>I developed the original rover controller through wheel odometry, world-position estimation, linear and angular control, and waypoint navigation.</p>
                                     <p class="sar-stage-chain">Wheel odometry → World position → Motion control → Waypoints</p>
                                 </div>
@@ -1505,19 +1542,19 @@
 
                             <article class="sar-stage-card">
                                 <div class="sar-stage-gallery sar-stage-gallery--three">
-                                    <figure class="sar-stage-media project-media">
+                                    <figure class="sar-stage-media project-media" data-card-label="Expanded layers">
                                         <img src="Pictures/SAR/expanded%20layer%20objectives%20month%20two.png" alt="Whiteboard showing the expanded mapping, planning, replanning and obstacle-awareness layers" loading="lazy" decoding="async">
                                     </figure>
-                                    <figure class="sar-stage-media project-media">
+                                    <figure class="sar-stage-media project-media" data-card-label="Implementation checklist">
                                         <img src="Pictures/SAR/implemented%20layers%20month%20two.png" alt="Whiteboard checklist of implemented autonomy layers including mapping, planning and recovery" loading="lazy" decoding="async">
                                     </figure>
-                                    <figure class="sar-stage-media project-media">
-                                        <img src="Pictures/SAR/SAR%20rover%20victim%20overview.png" alt="Two simulated rovers using vision and depth information to approach a victim" loading="lazy" decoding="async">
+                                    <figure class="sar-stage-media project-media" data-card-label="Depth-camera mapping">
+                                        <img src="Pictures/SAR/Dcam_mapping.png" alt="Depth-camera mapping view with detected obstacles highlighted in red" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                                 <div class="sar-stage-copy">
                                     <span>02 · Expanded autonomy</span>
-                                    <h3>From waypoint following to reacting to the environment.</h3>
+                                    <h3>Local mapping, planning and perception</h3>
                                     <p>I expanded the system with “SLAM-lite” local mapping from LiDAR, depth and IR, plus obstacle awareness and path planning. RGB identified potential victims while depth supported distance checks, close-together victims and already-found cases.</p>
                                     <p class="sar-stage-chain">Local mapping → Obstacle awareness → Planning → Victim handling</p>
                                 </div>
@@ -1525,56 +1562,136 @@
 
                             <article class="sar-stage-card sar-stage-card--system">
                                 <div class="sar-stage-gallery sar-stage-gallery--two sar-stage-gallery--diagrams">
-                                    <figure class="sar-stage-media project-media">
+                                    <figure class="sar-stage-media project-media" data-card-label="Team coordinator">
                                         <img src="Pictures/SAR/final%20architecture%20of%20controller%20third%20month.png" alt="Final coordinator workflow for the integrated two-rover system" loading="lazy" decoding="async">
                                     </figure>
-                                    <figure class="sar-stage-media project-media">
+                                    <figure class="sar-stage-media project-media" data-card-label="Rover workflow">
                                         <img src="Pictures/SAR/final%20architecture%20of%20rosbots%20third%20month.png" alt="Final individual rover workflow covering mapping, planning, motion and victim approach" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                                 <div class="sar-stage-copy">
                                     <span>03 · Complete system</span>
-                                    <h3>Integrate the layers into one coordinated mission.</h3>
+                                    <h3>Multi-rover system integration</h3>
                                     <p>The final workflows separated mission-level coordination from each rover’s local autonomy, making the complete behaviour easier to trace, tune and validate.</p>
                                 </div>
                             </article>
                         </div>
                     </section>
 
+                    <section class="sar-section project-section" id="sar-live-autonomy">
+                        <div class="sar-section-heading">
+                            <p class="sar-eyebrow">Navigation and perception</p>
+                            <h2 class="project-section-title">Obstacle avoidance and victim detection</h2>
+                            <p>The rover used local sensing to detect obstacles absent from the aerial map, recover from failed routes and confirm potential victims.</p>
+                        </div>
+                        <div class="sar-live-layout">
+                            <div class="sar-live-evidence">
+                                <figure class="sar-framed-media project-media">
+                                    <img src="Pictures/SAR/live-occupancy-replanning.png" alt="Local occupancy map showing inflated obstacles and a replanned route around a blocked area" loading="lazy" decoding="async">
+                                    <figcaption class="project-caption">Local occupancy map with obstacle inflation and a replanned route.</figcaption>
+                                </figure>
+                                <figure class="sar-framed-media project-media">
+                                    <img src="Pictures/SAR/ground-victim-confirmation.png" alt="Ground camera identifying a victim beneath a table during the rover's approach" loading="lazy" decoding="async">
+                                    <figcaption class="project-caption">Ground-camera detection used to confirm a potential victim.</figcaption>
+                                </figure>
+                            </div>
+                            <ol class="sar-behaviour-list">
+                                <li><span>01</span><div><h3>Local route replanning</h3><p>Local sensing updates occupancy as the robot moves. Obstacle inflation makes room for its footprint, and replanning responds when the original route is blocked.</p></div></li>
+                                <li><span>02</span><div><h3>Safety and recovery</h3><p>Depth and IR flag nearby hazards. The safety layer slows, stops or retries; terrain awareness detects tilt, pauses unreliable LiDAR and compensates depth sensing.</p></div></li>
+                                <li><span>03</span><div><h3>Victim verification</h3><p>If the target is not visible on arrival, the rover searches through a full turn. A ground detection and depth check guide the approach, with a report sent within one metre.</p></div></li>
+                            </ol>
+                        </div>
+                        <div class="sar-source-links" aria-label="Explore the autonomy implementation">
+                            <span>Implementation source code</span>
+                            <a href="https://github.com/Gabriel-Twiggho/IEEE_2026_Phase_1_Wolf_Brigade_Submission/blob/main/robot/sensing.py" target="_blank" rel="noopener noreferrer">Sensing &amp; odometry ↗</a>
+                            <a href="https://github.com/Gabriel-Twiggho/IEEE_2026_Phase_1_Wolf_Brigade_Submission/blob/main/robot/planning/live_replanner.py" target="_blank" rel="noopener noreferrer">Live replanning ↗</a>
+                            <a href="https://github.com/Gabriel-Twiggho/IEEE_2026_Phase_1_Wolf_Brigade_Submission/blob/main/robot/victim_id.py" target="_blank" rel="noopener noreferrer">Victim verification ↗</a>
+                        </div>
+                    </section>
+
                     <section class="sar-section project-section" id="sar-architecture">
                         <div class="sar-section-heading">
                             <p class="sar-eyebrow">Architecture redesign</p>
-                            <h2 class="project-section-title">When the system grew, the structure had to grow with it</h2>
-                            <p>As functionality accumulated, the implementation reached roughly 9,000 lines and became increasingly difficult to reason about. We stepped away from the code and redesigned the system around clearer ownership and data flow.</p>
+                            <h2 class="project-section-title">Coordinator and rover architecture</h2>
+                            <p>Aerial observations feed a team coordinator. Each rover follows its assignment, adapts to obstacles and verifies potential victims on the ground.</p>
                         </div>
 
-                        <div class="sar-architecture-story">
-                            <figure class="sar-framed-media sar-architecture-diagram project-media">
-                                <img src="Pictures/SAR/simple%20diagram%20of%20what%20we%20were%20aiming%20for%20in%20new%20architecture%20third%20month.png" alt="Concept diagram showing a coordinator supervising two rovers with local autonomy" loading="lazy" decoding="async">
-                                <figcaption class="project-caption">The organising idea: one coordinator, two rovers, clear local responsibilities.</figcaption>
-                            </figure>
-                            <figure class="sar-framed-media sar-planning-photo project-media">
-                                <img src="Pictures/SAR/me%20and%20krish%20planning%20our%20final%20architecture%203.png" alt="Gabriel and Krish planning the final rover architecture at a whiteboard" loading="lazy" decoding="async">
-                                <figcaption class="project-caption">Krish and me mapping the rover and coordinator workflows before returning to implementation.</figcaption>
-                            </figure>
+                        <figure class="sar-system-diagram" aria-labelledby="sar-diagram-caption">
+                            <figcaption class="sar-eyebrow" id="sar-diagram-caption">Mission data flow</figcaption>
+                            <div class="sar-mission-flow">
+                                <div class="sar-system-inputs">
+                                    <strong>Aerial survey</strong>
+                                    <p>Wall map · Estimated victim locations · Drone path</p>
+                                </div>
+                                <svg class="sar-input-connector" width="16" height="28" viewBox="0 0 16 28" fill="none" aria-hidden="true">
+                                    <path d="M8 0v25m-4-4 4 4 4-4" />
+                                </svg>
+                                <div class="sar-team-coordinator">
+                                    <div>
+                                        <p class="sar-eyebrow">Team coordination</p>
+                                        <h3>Coordinator</h3>
+                                        <p>Allocates victims and plans routes for both rovers.</p>
+                                    </div>
+                                    <span class="sar-coordinator-host">Runs on Rover 1</span>
+                                </div>
+                                <div class="sar-robot-pair">
+                                    <div>
+                                        <svg class="sar-rover-connector" width="32" height="44" viewBox="0 0 32 44" fill="none" aria-hidden="true">
+                                            <defs>
+                                                <g id="sar-exchange-arrows">
+                                                    <path class="sar-assignment" d="M8 0v40m-4-4 4 4 4-4" />
+                                                    <path class="sar-feedback" d="M24 44V4m-4 4 4-4 4 4" />
+                                                </g>
+                                            </defs>
+                                            <use href="#sar-exchange-arrows" />
+                                        </svg>
+                                        <div class="sar-robot-controller"><h3>Rover 1</h3><p>Local controller</p></div>
+                                    </div>
+                                    <div>
+                                        <svg class="sar-rover-connector" width="32" height="44" viewBox="0 0 32 44" fill="none" aria-hidden="true"><use href="#sar-exchange-arrows" /></svg>
+                                        <div class="sar-robot-controller"><h3>Rover 2</h3><p>Local controller</p></div>
+                                    </div>
+                                </div>
+                                <ul class="sar-exchange-key">
+                                    <li><span class="sar-assignment" aria-hidden="true">↓</span><div><strong>Assignments to each rover</strong><p>Target and planned route</p></div></li>
+                                    <li><span class="sar-feedback" aria-hidden="true">↑</span><div><strong>Feedback to the coordinator</strong><p>Pose, progress, victim detections and failures</p></div></li>
+                                </ul>
+                            </div>
+                            <div class="sar-local-stack">
+                                <h3>Autonomy on each rover</h3>
+                                <ol class="sar-control-flow">
+                                    <li><strong>Sense</strong><small>Estimate pose and detect obstacles</small></li>
+                                    <li><strong>Map</strong><small>Update local occupancy</small></li>
+                                    <li><strong>Plan</strong><small>Reroute around obstacles</small></li>
+                                    <li><strong>Drive</strong><small>Send wheel commands</small></li>
+                                </ol>
+                                <div class="sar-local-branches">
+                                    <p><strong>Victim confirmation</strong><span>RGB and depth guide the approach and verify detections.</span></p>
+                                    <p><strong>Safety</strong><span>Depth, IR and tilt readings can slow or stop the rover.</span></p>
+                                </div>
+                            </div>
+                        </figure>
+                        <div class="sar-source-links" aria-label="Architecture source">
+                            <span>Architecture source code</span>
+                            <a href="https://github.com/Gabriel-Twiggho/IEEE_2026_Phase_1_Wolf_Brigade_Submission/tree/main/coordinator" target="_blank" rel="noopener noreferrer">Team coordination ↗</a>
+                            <a href="https://github.com/Gabriel-Twiggho/IEEE_2026_Phase_1_Wolf_Brigade_Submission/blob/main/robot/mission.py" target="_blank" rel="noopener noreferrer">Rover mission controller ↗</a>
                         </div>
 
-                        <div class="sar-architecture-map" aria-label="Redesigned rover architecture">
-                            <div class="sar-coordinator-node">
-                                <span>Mission layer</span>
-                                <strong>Coordinator</strong>
-                                <p>Assignment and coordination between rovers</p>
+                        <div class="sar-redesign-context">
+                            <div class="sar-redesign-copy">
+                                <p class="sar-eyebrow">Design process</p>
+                                <h3>Separating coordination from rover control</h3>
+                                <p>As the implementation approached 9,000 lines, Krish and I reviewed how responsibilities were divided between the coordinator and rover controllers. Separating team decisions from each rover’s control loop made behaviour easier to trace, tune and validate.</p>
                             </div>
-                            <div class="sar-architecture-branch" aria-hidden="true"></div>
-                            <div class="sar-rover-node">
-                                <span>Local autonomy</span>
-                                <strong>Rover 1</strong>
-                                <p>Mapping → Planning → Motion → Victim approach</p>
-                            </div>
-                            <div class="sar-rover-node">
-                                <span>Local autonomy</span>
-                                <strong>Rover 2</strong>
-                                <p>Mapping → Planning → Motion → Victim approach</p>
+                            <div class="sar-design-record">
+                                <figure class="sar-framed-media project-media">
+                                    <img src="Pictures/SAR/me%20and%20krish%20planning%20our%20final%20architecture%203.png" alt="Gabriel and Krish planning the rover and coordinator responsibilities at a whiteboard" loading="lazy" decoding="async">
+                                    <figcaption class="project-caption">Whiteboard planning of coordinator and rover responsibilities.</figcaption>
+                                </figure>
+                                <figure class="sar-framed-media sar-design-sketch project-media">
+                                    <img src="Pictures/SAR/simple%20diagram%20of%20what%20we%20were%20aiming%20for%20in%20new%20architecture%20third%20month.png" alt="Early whiteboard sketch separating team coordination from local rover modules" loading="lazy" decoding="async">
+                                    <figcaption class="project-caption">The original sketch that informed the redesign.</figcaption>
+                                </figure>
                             </div>
                         </div>
                     </section>
@@ -1582,7 +1699,7 @@
                     <section class="sar-section project-section" id="sar-calibration">
                         <div class="sar-section-heading">
                             <p class="sar-eyebrow">Motion-model calibration</p>
-                            <h2 class="project-section-title">Correcting the model with measured behaviour</h2>
+                            <h2 class="project-section-title">Skid-steer model calibration</h2>
                             <p>The rover behaved more like a skid-steer platform than an ideal differential-drive robot. Slip and drift meant the predicted trajectory gradually separated from the rover’s actual path.</p>
                         </div>
 
@@ -1604,14 +1721,33 @@
                             </figure>
                         </div>
                         <p class="sar-method-line">Observe error → Controlled motion tests → Estimate parameters → Correct the model → Validate</p>
+                        <p class="sar-calibration-note">The calibrated model kept the wheel radius at <strong>0.043 m</strong> and used an effective track width of <strong>0.271 m</strong> to account for skid-steer behaviour.</p>
                     </section>
 
                     <section class="sar-section project-section" id="sar-validation">
                         <div class="sar-section-heading">
-                            <p class="sar-eyebrow">Final validation</p>
-                            <h2 class="project-section-title">One system, three environments</h2>
+                            <p class="sar-eyebrow">Development validation</p>
+                            <h2 class="project-section-title">Simulation test results</h2>
                             <p>We centralised shared parameters—including lookahead values, sensor ranges and update frequencies—then tuned the rover system until it repeatedly completed the small, medium and large test environments across multiple iterations.</p>
                         </div>
+
+                        <div class="sar-results-summary" aria-label="Recorded development results">
+                            <div><strong>3 / 3</strong><span>worlds completed</span></div>
+                            <div><strong>13</strong><span>victims found in total</span></div>
+                            <div><strong>133.0 <small>s</small></strong><span>mean completion time</span></div>
+                        </div>
+                        <div class="sar-results-table-wrap">
+                            <table class="sar-results-table">
+                                <caption>Recorded Phase 1 development runs</caption>
+                                <thead><tr><th scope="col">World</th><th scope="col">Victims found</th><th scope="col">Time</th><th scope="col">Score</th></tr></thead>
+                                <tbody>
+                                    <tr><th scope="row">Small</th><td>4</td><td>115.6 s</td><td>0.872</td></tr>
+                                    <tr><th scope="row">Medium</th><td>4</td><td>164.4 s</td><td>0.681</td></tr>
+                                    <tr><th scope="row">Large</th><td>5</td><td>119.1 s</td><td>0.763</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="sar-results-note">All three recorded runs finished within 180 seconds. Development results from our Phase 1 pitch and <a href="https://github.com/Gabriel-Twiggho/IEEE_2026_Phase_1_Wolf_Brigade_Submission#test-world-results" target="_blank" rel="noopener noreferrer">submission repository</a>; these are individual test runs, not official competition rankings or a multi-run benchmark.</p>
 
                         <div class="sar-validation-grid">
                             <figure class="sar-world-card project-media">
@@ -1635,12 +1771,12 @@
                     <section class="sar-section sar-lessons project-section" id="sar-lessons">
                         <div class="sar-section-heading">
                             <p class="sar-eyebrow">Takeaways</p>
-                            <h2 class="project-section-title">Build autonomy layer by layer</h2>
+                            <h2 class="project-section-title">Engineering lessons</h2>
                         </div>
                         <div class="sar-lessons-grid">
                             <div class="sar-lesson-copy">
                                 <p>The project gave me a repeatable workflow for autonomous robotics: understand the sensing and actuation first, establish reliable motion and odometry, then add mapping, higher-level behaviour and integration.</p>
-                                <p>It also made the value of architecture tangible. The early structure helped us learn quickly; the redesign made the larger system easier to trace, tune and validate.</p>
+                                <p>Separating coordination from local control made the integrated system easier to debug, tune and validate.</p>
                                 <p class="sar-layer-line">Sensors &amp; actuators → Motion → Odometry → Mapping → Behaviour → Integration</p>
                             </div>
                             <div class="sar-skill-stack" aria-label="Search and rescue project skills">
@@ -1667,7 +1803,7 @@
 
             <footer class="sar-footer project-footer">
                 <div class="container">
-                    <h3>Let's Connect</h3>
+                    <h3>Contact</h3>
                     <div class="footer-links">
                         <a href="mailto:gabrieljyth@gmail.com">Email</a>
                         <a href="https://github.com/Gabriel-Twiggho" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -1810,6 +1946,6 @@
         </figure>
     </dialog>
 
-    <script src="js/main.js?v=20261114-sar-live"></script>
+    <script src="js/main.js?v=20261117-1"></script>
 </body>
 </html>
