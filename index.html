@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="css/base.css?v=20260810-2">
     <link rel="stylesheet" href="css/home.css?v=20260904-1">
     <link rel="stylesheet" href="css/projects.css?v=20260810-2">
-    <link rel="stylesheet" href="css/project-themes.css?v=20261117-1">
+    <link rel="stylesheet" href="css/project-themes.css?v=20261117-2">
 </head>
 <body>
     <nav>
@@ -1478,7 +1478,6 @@
                         </div>
                         <p class="sar-showcase-caption">Select a sensor to explore its role. The IMU is inside the chassis; odometry combines wheel rotation and compass heading. <a href="https://www.cyberbotics.com/doc/guide/rosbot?version=R2023a" target="_blank" rel="noopener noreferrer">ROSbot model reference ↗</a></p>
                     </section>
-                    <p class="sar-scroll-cue">Project details <span aria-hidden="true">↓</span></p>
                 </div>
 
                 <div class="sar-inner project-inner">
@@ -1497,15 +1496,12 @@
                                 <img src="Pictures/SAR/competition-world-topdown.png" alt="Top-down view of the small Webots competition world, showing rooms, furniture and victim locations" loading="lazy" decoding="async">
                                 <figcaption class="project-caption">Top-down view of the small Webots competition world.</figcaption>
                             </figure>
-                            <div class="sar-objective-flow" aria-label="Competition workflow">
-                                <div><span>01</span><strong>Drone footage</strong></div>
-                                <span class="sar-flow-arrow" aria-hidden="true">→</span>
-                                <div><span>02</span><strong>Map + victim coordinates</strong></div>
-                                <span class="sar-flow-arrow" aria-hidden="true">→</span>
-                                <div><span>03</span><strong>Two autonomous rovers</strong></div>
-                                <span class="sar-flow-arrow" aria-hidden="true">→</span>
-                                <div><span>04</span><strong>Confirm within 1 m</strong></div>
-                            </div>
+                            <ol class="sar-objective-flow" role="list" aria-label="Competition workflow">
+                                <li><span>Drone footage</span><span class="sar-flow-arrow" aria-hidden="true">→</span></li>
+                                <li><span>Map and victim coordinates</span><span class="sar-flow-arrow" aria-hidden="true">→</span></li>
+                                <li><span>Two autonomous rovers</span><span class="sar-flow-arrow" aria-hidden="true">→</span></li>
+                                <li>Confirm within 1 m</li>
+                            </ol>
                             <div class="sar-contributions">
                                 <p><strong>My focus</strong> — rover autonomy, from the first motion controller to mapping, perception, calibration and system integration.</p>
                                 <p><strong>Krish’s focus</strong> — aerial extraction, using SegFormer for walls and an aerial YOLO model for likely victim locations.</p>
@@ -1595,11 +1591,11 @@
                                     <figcaption class="project-caption">Ground-camera detection used to confirm a potential victim.</figcaption>
                                 </figure>
                             </div>
-                            <ol class="sar-behaviour-list">
-                                <li><span>01</span><div><h3>Local route replanning</h3><p>Local sensing updates occupancy as the robot moves. Obstacle inflation makes room for its footprint, and replanning responds when the original route is blocked.</p></div></li>
-                                <li><span>02</span><div><h3>Safety and recovery</h3><p>Depth and IR flag nearby hazards. The safety layer slows, stops or retries; terrain awareness detects tilt, pauses unreliable LiDAR and compensates depth sensing.</p></div></li>
-                                <li><span>03</span><div><h3>Victim verification</h3><p>If the target is not visible on arrival, the rover searches through a full turn. A ground detection and depth check guide the approach, with a report sent within one metre.</p></div></li>
-                            </ol>
+                            <ul class="sar-behaviour-list" role="list">
+                                <li><h3>Local route replanning</h3><p>Local sensing updates occupancy as the robot moves. Obstacle inflation makes room for its footprint, and replanning responds when the original route is blocked.</p></li>
+                                <li><h3>Safety and recovery</h3><p>Depth and IR flag nearby hazards. The safety layer slows, stops or retries. Terrain awareness detects tilt, pauses unreliable LiDAR and compensates depth sensing.</p></li>
+                                <li><h3>Victim verification</h3><p>If the target is not visible on arrival, the rover searches through a full turn. A ground detection and depth check guide the approach, with a report sent within one metre.</p></li>
+                            </ul>
                         </div>
                         <div class="sar-source-links" aria-label="Explore the autonomy implementation">
                             <span>Implementation source code</span>
@@ -1628,7 +1624,6 @@
                                 </svg>
                                 <div class="sar-team-coordinator">
                                     <div>
-                                        <p class="sar-eyebrow">Team coordination</p>
                                         <h3>Coordinator</h3>
                                         <p>Allocates victims and plans routes for both rovers.</p>
                                     </div>
@@ -1705,22 +1700,21 @@
 
                         <div class="sar-calibration-grid">
                             <figure class="sar-calibration-card project-media">
-                                <div class="sar-card-label"><span>01</span> Observe the error</div>
+                                <p class="sar-card-label">Before calibration</p>
                                 <img src="Pictures/SAR/Validating_diffdrive_model_before_we_implemented_model.png" alt="Before-calibration plot showing the estimated drive path diverging from the actual rover trajectory" loading="lazy" decoding="async">
                                 <figcaption class="project-caption">The ideal model diverged substantially from the measured route.</figcaption>
                             </figure>
                             <figure class="sar-calibration-card project-media">
-                                <div class="sar-card-label"><span>02</span> Run controlled tests</div>
+                                <p class="sar-card-label">Controlled tests</p>
                                 <img src="Pictures/SAR/testing%20diff%20drive%20model.png" alt="Webots controlled-turn test used to compare the planned and predicted drive-model motion" loading="lazy" decoding="async">
                                 <figcaption class="project-caption">Controlled movements exposed the effective wheelbase and turning behaviour.</figcaption>
                             </figure>
                             <figure class="sar-calibration-card project-media">
-                                <div class="sar-card-label"><span>03</span> Validate the correction</div>
+                                <p class="sar-card-label">After calibration</p>
                                 <img src="Pictures/SAR/Validating_diffdrive_model_after_we_implemented_model.png" alt="After-calibration plot showing predicted and actual rover trajectories closely aligned" loading="lazy" decoding="async">
                                 <figcaption class="project-caption">After calibration, predicted and actual trajectories aligned far more closely.</figcaption>
                             </figure>
                         </div>
-                        <p class="sar-method-line">Observe error → Controlled motion tests → Estimate parameters → Correct the model → Validate</p>
                         <p class="sar-calibration-note">The calibrated model kept the wheel radius at <strong>0.043 m</strong> and used an effective track width of <strong>0.271 m</strong> to account for skid-steer behaviour.</p>
                     </section>
 
@@ -1751,19 +1745,16 @@
 
                         <div class="sar-validation-grid">
                             <figure class="sar-world-card project-media">
-                                <p class="sar-video-label"><span aria-hidden="true">●</span> Looping video · track both robots</p>
                                 <img src="Pictures/SAR/small_world.gif" alt="Autonomous rover system completing the small search and rescue test environment" loading="lazy" decoding="async">
-                                <figcaption><span>01</span><strong>Small world</strong></figcaption>
+                                <figcaption>Small world</figcaption>
                             </figure>
                             <figure class="sar-world-card project-media">
-                                <p class="sar-video-label"><span aria-hidden="true">●</span> Looping video · track both robots</p>
                                 <img src="Pictures/SAR/medium_world.gif" alt="Autonomous rover system completing the medium search and rescue test environment" loading="lazy" decoding="async">
-                                <figcaption><span>02</span><strong>Medium world</strong></figcaption>
+                                <figcaption>Medium world</figcaption>
                             </figure>
                             <figure class="sar-world-card project-media">
-                                <p class="sar-video-label"><span aria-hidden="true">●</span> Looping video · track both robots</p>
                                 <img src="Pictures/SAR/large_world.gif" alt="Autonomous rover system completing the large search and rescue test environment" loading="lazy" decoding="async">
-                                <figcaption><span>03</span><strong>Large world</strong></figcaption>
+                                <figcaption>Large world</figcaption>
                             </figure>
                         </div>
                     </section>
@@ -1779,23 +1770,23 @@
                                 <p>Separating coordination from local control made the integrated system easier to debug, tune and validate.</p>
                                 <p class="sar-layer-line">Sensors &amp; actuators → Motion → Odometry → Mapping → Behaviour → Integration</p>
                             </div>
-                            <div class="sar-skill-stack" aria-label="Search and rescue project skills">
-                                <span>Python</span>
-                                <span>Webots</span>
-                                <span>Autonomous Robotics</span>
-                                <span>Robot Motion Control</span>
-                                <span>PID Control</span>
-                                <span>Odometry</span>
-                                <span>Differential / Skid-Steer</span>
-                                <span>LiDAR</span>
-                                <span>Depth Cameras</span>
-                                <span>Computer Vision</span>
-                                <span>SLAM-lite</span>
-                                <span>Path Planning</span>
-                                <span>Multi-Robot Systems</span>
-                                <span>Software Architecture</span>
-                                <span>Testing &amp; Validation</span>
-                            </div>
+                            <ul class="sar-skill-stack" role="list" aria-label="Search and rescue project skills">
+                                <li>Python</li>
+                                <li>Webots</li>
+                                <li>Autonomous robotics</li>
+                                <li>Robot motion control</li>
+                                <li>PID control</li>
+                                <li>Odometry</li>
+                                <li>Differential / skid-steer</li>
+                                <li>LiDAR</li>
+                                <li>Depth cameras</li>
+                                <li>Computer vision</li>
+                                <li>SLAM-lite</li>
+                                <li>Path planning</li>
+                                <li>Multi-robot systems</li>
+                                <li>Software architecture</li>
+                                <li>Testing &amp; validation</li>
+                            </ul>
                         </div>
                     </section>
                 </div>
